@@ -1149,7 +1149,7 @@ const APX={f_iron:[7.89,98.37],f_sn:[7.912,98.379],f_circ:[7.85,98.34],f_splash:
  hl4:[7.946,98.283],hl5:[7.95,98.283],hl6:[7.947,98.284],mq4:[8.0,98.301],w2:[7.95,98.283],w3:[7.9495,98.2835],w4:[7.951,98.2845],w5:[7.888,98.302],w6:[7.8935,98.2985],w7:[7.889,98.301],w8:[8.085,98.31],w9:[8.0005,98.3045],w10:[8.0005,98.3043],w11:[8.004,98.304],w12:[7.997,98.297],w13:[7.996,98.296],w14:[8.002,98.31],w15:[8.003,98.32],w16:[7.892,98.299],w17:[7.8935,98.2965],w18:[7.894,98.295],w19:[7.892,98.298],w20:[7.846,98.301],w21:[7.840,98.295],w22:[7.822,98.299],w23:[7.845,98.302],w24:[7.826,98.301],w25:[7.821,98.296],w26:[7.822,98.3],w27:[7.775,98.325],w28:[7.79,98.33],w29:[7.775,98.326],w30:[8.035,98.335]};
 function placeBtns(key,o){let lat=o.lat,lng=o.lng,ap=false;if(lat==null&&APX[key]){[lat,lng]=APX[key];ap=true}
  PLX[key]={n:o.n||o.name,en:o.en||o.q||o.name||o.n,th:o.th,addr:o.addr,lat,lng,ap};
- return `<button class="act pri" data-pmap="${key}">🗺️ На карте</button><button class="act" data-ptx="${key}">🚕 Таксисту</button><button class="act look" data-look="${key}">📷 Как выглядит</button>`}
+ return `<button class="act pri" data-pmap="${key}">🗺️ На карте Google</button><button class="act" data-ptx="${key}">🚕 Таксисту</button><button class="act look" data-look="${key}">📷 Как выглядит</button>`}
 const I={
  leaf:'<path d="M12 3c1.6 3.6 1.6 8.4 0 12.6-1.6-4.2-1.6-9 0-12.6z"/><path d="M12 15.6C9.6 12.6 6.3 10.5 2.5 9.8c2.2 3.6 5.4 5.4 9.5 5.8z"/><path d="M12 15.6c2.4-3 5.7-5.1 9.5-5.8-2.2 3.6-5.4 5.4-9.5 5.8z"/><path d="M12 15.6c-2.8-1-5.6-.7-8.4 1 2.8 1 5.6.7 8.4-1zM12 15.6c2.8-1 5.6-.7 8.4 1-2.8 1-5.6.7-8.4-1z"/><path d="M12 15.6V21"/>',
  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 3l.7 1.6L19.3 5l-1.6.7L17 7.3l-.7-1.6L14.7 5l1.6-.4z"/>',
@@ -2400,7 +2400,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v21';
+const SWV='kamala-v22';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2719,7 +2719,10 @@ function islandMap(p){const d=hav(HOTEL,p);closeSheet();
  <button class="act pri" style="margin-top:14px;padding:14px 22px;font-size:17px" id="isletx">🚕 Показать таксисту</button>`);
  document.getElementById('isletx').onclick=()=>taxiCard(p);
  getPos(me=>{if(!me||hav(me,HOTEL)>60000)return;const sv=full.querySelector('svg');if(!sv)return;sv.insertAdjacentHTML('beforeend',`<circle cx="${X(me.lng)}" cy="${Y(me.lat)}" r="7" fill="#1fa36b" stroke="#fff" stroke-width="3"/><text x="${X(me.lng)}" y="${+Y(me.lat)+20}" font-size="11" font-weight="800" text-anchor="middle" fill="#0f1b2d" font-family="Manrope,Arial">🟢 вы</text>`)})}
-function plxMap(key){const p=PLX[key];if(!p)return;if(p.lat==null){taxiCard(p);return}
+function gmapsUrl(p){const far=p.lat!=null?hav(HOTEL,p)>1500:true;const dest=(p.lat!=null&&!p.ap)?`${p.lat},${p.lng}`:encodeURIComponent((p.en||p.n)+(/phuket|bangkok/i.test(p.en||'')?'':', Phuket'));return `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=${far?'driving':'walking'}`}
+function plxMap(key){const p=PLX[key];if(!p)return;
+ if(navigator.onLine!==false){closeSheet();const w=window.open(gmapsUrl(p),'_blank');if(!w)location.href=gmapsUrl(p);return}
+ toast('Нет интернета — показываю нашу карту');if(p.lat==null){taxiCard(p);return}
  if(inMap(p))routeTo(p,(p.ap?'≈ ':'')+p.n);else islandMap(p)}
 document.addEventListener('click',e=>{let b=e.target.closest('[data-pmap]');if(b){plxMap(b.dataset.pmap);return}
  b=e.target.closest('[data-ptx]');if(b){const p=PLX[b.dataset.ptx];if(p){closeSheet();taxiCard(p.n===HOTEL_TAXI.n?HOTEL_TAXI:p)}}});

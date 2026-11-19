@@ -744,6 +744,12 @@ html{background:var(--ivory,#f7f3ec);height:100%}
 .hcard{margin:10px auto;width:150px;height:200px;border-radius:22px;background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.12);display:grid;place-items:center;font-size:96px;font-weight:900;color:#2b2140}
 .four{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;background:#1c7ed6;padding:8px;border-radius:18px}.four button{aspect-ratio:1;border-radius:50%;background:#e7f5ff;font-size:28px;padding:0;display:grid;place-items:center}
 .croc{text-align:center;transition:transform .2s}.cface{font-size:120px;line-height:1}.teeth{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:6px}.teeth button{height:64px;border-radius:14px;background:#fff;font-size:36px;box-shadow:0 4px 0 rgba(0,0,0,.12)}.teeth button:disabled{background:#2b8a3e;box-shadow:none}.croc.bite{animation:bite .4s 2}@keyframes bite{30%{transform:scale(1.15) rotate(-6deg)}60%{transform:scale(1.15) rotate(6deg)}}
+.flynext{background:linear-gradient(135deg,#1c7ed6,#4dabf7);color:#fff;border-radius:22px;padding:14px 16px;margin:12px 0;text-align:center}.flynext small{display:block;font-weight:700;opacity:.9}.flynext b{display:block;font-size:30px;margin:4px 0}.flynext i{font-style:normal;font-size:13px;opacity:.9}
+.tkt{background:#fff;border-radius:20px;padding:12px 14px;margin-bottom:10px;box-shadow:0 2px 10px rgba(15,27,45,.08)}.fc-h{display:flex;justify-content:space-between;font-size:15px}.fc-h span{color:#7b8699;font-weight:700}
+.fc-r{display:flex;align-items:center;justify-content:space-between;margin:8px 0}.fc-r>div:not(.fc-pl){display:flex;flex-direction:column}.fc-r>div:last-child{text-align:right}.fc-r small{font-size:12px;color:#7b8699}.fc-r b{font-size:30px}.fc-r i{font-style:normal;font-size:12px;color:#1c7ed6;font-weight:700}.fc-pl{font-size:26px}.tkt p{margin:0;font-size:13px;color:#5b6577}
+.tline{display:grid;gap:2px;background:#fff;border-radius:18px;padding:6px 12px}.tline>div{display:grid;grid-template-columns:62px 28px 1fr;align-items:start;padding:7px 0;border-bottom:1px dashed #e9ecef}.tline>div:last-child{border:0}.tline b{font-size:15px;color:#1c7ed6}.tline span{font-size:18px}.tline p{margin:0;font-size:14px;line-height:1.35}
+.pickup{background:#fff4e6;border-radius:18px;padding:12px;margin-bottom:8px;display:flex;flex-direction:column;gap:8px}.pickup label{font-weight:800;font-size:15px}.pickup small{display:block;font-weight:500;font-size:12px;color:#7b8699}.pickup input{font:inherit;font-size:20px;padding:10px 12px;border-radius:12px;border:2px solid #ffc078;text-align:center}
+.cklist{display:grid;gap:6px}.cklist label{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:14px;padding:10px 12px;font-size:14px;line-height:1.35}.cklist input{width:22px;height:22px;flex:none;accent-color:#2f9e44}.cklist input:checked+span{text-decoration:line-through;opacity:.55}
 </style>
 </head>
 <body>
@@ -928,6 +934,7 @@ html{background:var(--ivory,#f7f3ec);height:100%}
     </section>
 
     <section class="view" id="v-gen"><div id="genbody"></div></section>
+    <section class="view" id="v-fly"><div id="flybody"></div></section>
     <section class="view" id="v-cal"><div id="calbody"></div></section>
 
     <section class="view" id="v-halal">
@@ -1189,6 +1196,7 @@ const I={
  men:'<circle cx="12" cy="6" r="3"/><path d="M8 21v-7l-2-1V10a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v3l-2 1v7"/>',
  women:'<circle cx="12" cy="6" r="3"/><path d="M12 9l-4 8h8z"/><path d="M10 17v4M14 17v4"/>',
  game:'<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="16" cy="11.5" r="1"/><circle cx="18" cy="13.5" r="1"/>',
+ plane:'<path d="M10.5 21l1.5-1v-5.5l8 2.5v-2l-8-5V4.5a1.5 1.5 0 0 0-3 0V10l-8 5v2l8-2.5V20l1.5 1z"/>',
  cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="8" cy="15" r="1.2"/><circle cx="12" cy="15" r="1.2"/><circle cx="16" cy="15" r="1.2"/>',
  wave:'<path d="M2 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M2 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><circle cx="16" cy="7" r="3"/>',
  leaf:'<path d="M12 3c1.6 3.6 1.6 8.4 0 12.6-1.6-4.2-1.6-9 0-12.6z"/><path d="M12 15.6C9.6 12.6 6.3 10.5 2.5 9.8c2.2 3.6 5.4 5.4 9.5 5.8z"/><path d="M12 15.6c2.4-3 5.7-5.1 9.5-5.8-2.2 3.6-5.4 5.4-9.5 5.8z"/><path d="M12 15.6c-2.8-1-5.6-.7-8.4 1 2.8 1 5.6.7 8.4-1zM12 15.6c2.8-1 5.6-.7 8.4 1-2.8 1-5.6.7-8.4-1z"/><path d="M12 15.6V21"/>',
@@ -1314,9 +1322,9 @@ const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок'
 
 /* ---------- tabs / router ---------- */
 const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
-const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain','gen','cal'];
+const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain','gen','cal','fly'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
-function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k==='cal')setTimeout(renderCal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
+function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k==='cal')setTimeout(renderCal,0);if(k==='fly')setTimeout(renderFly,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
  if(push){try{if(history.state&&history.state.ov)history.replaceState({v:k},'','#'+k);else if(location.hash.slice(1)!==k)history.pushState({v:k},'','#'+k)}catch(e){try{location.hash=k}catch(_){}}}
@@ -1651,7 +1659,7 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   const s=td?(on?'Открыто сейчас':'Сегодня '+p.h.f+'–'+p.h.t):'Сегодня выходной · '+nextOpen(p,t);
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
-const TILES=[['rhome','Дорога в отель','route','#d6453d'],['cal','Календарь','cal','#e8590c'],['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
+const TILES=[['rhome','Дорога в отель','route','#d6453d'],['fly','Наш рейс','plane','#1c7ed6'],['cal','Календарь','cal','#e8590c'],['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
 document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${g==='kz'?'<img src="img/kz-flag.svg" class="tflag" alt="Флаг Казахстана">':ic(i)}</span>${n}</button>`).join('');
 document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
@@ -1668,6 +1676,7 @@ sosBtn.onclick=()=>{sheet.innerHTML=`<div class="grab"></div>
   <button class="act" data-go="sos:kids-sec">${ic('kids')}Карточки детей</button>
   <a class="act" href="tel:1155" data-copy="1155">Туристическая полиция · 1155</a>
   <a class="act" href="tel:1669" data-copy="1669">Скорая помощь · 1669</a>
+  <a class="act" href="https://wa.me/908505490707" target="_blank">💬 Туроператор ANEX · WhatsApp</a>
  </div><div class="way">  <div class="way-h"><span>🧭</span><div><b>Как дойти до отеля</b><small>Работает без интернета</small></div></div>  <svg class="waysvg" viewBox="0 0 360 240" aria-label="Схема: как дойти от пляжа до отеля"><rect width="360" height="240" rx="18" fill="#f6efe2"/><path d="M0 18 Q0 0 18 0 H72 V240 H18 Q0 240 0 222Z" fill="#9fd3de"/><g stroke="#fff" stroke-width="2" fill="none" opacity=".7"><path d="M10 40 q8 -6 16 0 t16 0 t16 0"/><path d="M10 110 q8 -6 16 0 t16 0 t16 0"/><path d="M10 180 q8 -6 16 0 t16 0 t16 0"/></g><rect x="72" width="26" height="240" fill="#ecd6a6"/><rect x="206" width="32" height="240" fill="#c9c3b6"/><path d="M222 6 V234" stroke="#fff" stroke-width="2.5" stroke-dasharray="10 9"/><text x="36" y="226" text-anchor="middle" font-size="12" font-weight="800" fill="#1f5f6c">МОРЕ</text><text x="222" y="20" text-anchor="middle" font-size="10" font-weight="800" fill="#5b5446" transform="rotate(90 222 20)" dx="40" dy="4">БОЛЬШАЯ ДОРОГА</text><text x="85" y="72" text-anchor="middle" font-size="26">🧒</text><text x="85" y="92" text-anchor="middle" font-size="10" font-weight="800" fill="#7a5a1f">ТЫ ТУТ</text><path d="M104 62 H196" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/><path d="M190 54 L202 62 L190 70" fill="none" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="150" y="50" text-anchor="middle" font-size="22">⛱️</text><text x="150" y="84" text-anchor="middle" font-size="10" font-weight="800" fill="#5b4a2f">Café del Mar</text><text x="150" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="#8a7a5a">5 минут</text><path d="M240 62 H262" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/><circle cx="300" cy="58" r="32" fill="#fff" stroke="#b8935a" stroke-width="3"/><text x="300" y="70" text-anchor="middle" font-size="32">🏨</text><text x="300" y="106" text-anchor="middle" font-size="11" font-weight="900" fill="#0f1b2d">НАШ ОТЕЛЬ</text><text x="290" y="150" text-anchor="middle" font-size="26">🎡</text><text x="290" y="168" text-anchor="middle" font-size="10" font-weight="800" fill="#7a2f4a">Carnival Magic</text><text x="290" y="200" text-anchor="middle" font-size="26">🐘</text><text x="290" y="218" text-anchor="middle" font-size="10" font-weight="800" fill="#4a2f7a">FantaSea</text><text x="160" y="196" text-anchor="middle" font-size="24">🛒</text><text x="160" y="216" text-anchor="middle" font-size="10" font-weight="800" fill="#2f4f8a">Центр · Big C</text><path d="M186 200 Q202 200 210 186" stroke="#2f6fde" stroke-width="3" fill="none" stroke-dasharray="2 7" stroke-linecap="round"/><path d="M248 228 V96" stroke="#2f6fde" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 8"/><path d="M241 104 L248 92 L255 104" fill="none" stroke="#2f6fde" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>  <button class="say" data-say="way" style="margin:12px 0 4px"><span class="sp">🔊</span><span><b>Послушать дорогу</b><small>Нажми — тебе расскажут</small></span><span class="eq3"><i></i><i></i><i></i></span></button>  <ol class="steps">    <li><span>🌊</span><p>Встань <b>спиной к морю</b>.</p></li>    <li><span>🚶</span><p>Иди <b>прямо</b>. Мимо больших зонтиков. Это <b>5 минут</b>.</p></li>    <li><span>🚦</span><p>Видишь <b>большую дорогу</b>? <b>Стой!</b> Переходи только <b>со взрослым</b>.</p></li>    <li><span>🏨</span><p>Наш отель — <b>сразу за дорогой</b>. Рядом парк с огоньками <b>Carnival Magic</b> 🎡.</p></li>    <li><span>🙋</span><p>Не видишь отель? <b>Стой на месте.</b> Покажи взрослому в форме карточку <b>«Я потерялся»</b>.</p></li>  </ol>  <div class="way-note"><span>🛒</span><p>Ты у магазина <b>Big C</b>? Иди по большой дороге <b>к слону FantaSea</b> 🐘. Отель — <b>после</b> FantaSea и Carnival Magic.</p></div>  <button class="act pri wide" data-offc="kid" style="width:100%;margin-top:10px;padding:16px;font-size:16px">🧒 Открыть «Я потерялся»</button></div><p class="phone-line">Кнопка «Проложить путь» работает с интернетом. Без интернета — смотрите картинку выше.</p>`;
  sheet.classList.add('on');scrim.classList.add('on')};
 sheet.addEventListener('click',e=>{if(e.target.closest('[data-taxi]')){closeSheet();showFull(`<div class="big" style="font-size:34px">โรงแรม เดอะ มาริน ภูเก็ต กมลา</div><div class="tr">ซอยกมลา 12, กมลา, กะทู้, ภูเก็ต</div><div class="ru" style="margin-top:16px">The Marin Phuket Kamala Beach<br>111/1 Moo 3, Soi Kamala 12, Kamala, Kathu</div><div class="ru" style="margin-top:10px;color:var(--red);font-size:22px">+66 80 532 5695</div>`)}
@@ -2558,7 +2567,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v30';
+const SWV='kamala-v32';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -3046,34 +3055,82 @@ function renderGen(){const G=GEN[genNow],el=document.getElementById('genbody');i
  G.g.map(([t,arr])=>`<div class="sec">${t}</div>`+arr.map(([e,nm,ar,d,q])=>{const id='g'+genNow[0]+(n++);return `<div class="hli"><div class="hl-t"><b>${e} ${nm}</b><small>📍 ${ar}</small><p>${d}</p></div><div class="hl-a">${placeBtns(id,{n:nm,en:q})}</div></div>`}).join('')).join('')+
  `<p class="foot">Цены и часы меняются — уточняйте на месте или по кнопке «Как выглядит».</p>`}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-gen]');if(b){genNow=b.dataset.gen;renderGen();document.querySelector('.views').scrollTop=0}});
-/* ---------- ✈️ Поездка 26 ноября — 5 декабря ---------- */
+/* ---------- ✈️ Поездка 27 ноября — 5 декабря (вылет в ночь на 27-е) ---------- */
 const TRIP={a:[2026,10,26],b:[2026,11,5]};
 const TRIPDAYS=[
- ['2026-11-26','Прилёт ✈️','Отдохните с дороги: пляж Камала и закат у моря. Купите SIM‑карту в аэропорту.'],
- ['2026-11-27','Пятница','Вечером — Fun Friday на Boat Avenue в Банг Тао: рынок, еда, музыка.'],
- ['2026-11-28','Суббота','Рынок Нака в Пхукет‑тауне (выходные) — сувениры и уличная еда.'],
- ['2026-11-29','Воскресенье','Последний день фуд‑фестиваля PHOODIE. Вечером — воскресная улица Lard Yai в Старом городе.'],
+ ['2026-11-26','Вылет из Алматы ✈️','Вечером — в аэропорт Алматы. Рейс VSV 5202 в 00:55 (ночь на 27‑е). Регистрация с 21:55, закрывается в 23:55. Онлайн‑регистрации нет — только в аэропорту.'],
+ ['2026-11-27','Прилёт · пятница','Прилёт в 10:25 по Пхукету. Групповой трансфер ANEX до отеля. Заселение, бассейн, отдых. Вечером — рынок Камалы рядом (до 21:00).'],
+ ['2026-11-28','Суббота','Днём — PHOODIE Meet в Limelight (с 16:00) и рынок Нака. Вечером рядом с отелем открыт Carnival Magic.'],
+ ['2026-11-29','Воскресенье','Воскресная улица Lard Yai в Старом городе. Вечером рядом с отелем — шоу FantaSea.'],
  ['2026-11-30','Понедельник','Хороший день для острова: Пхи‑Пхи или Пханг‑Нга — в будни меньше людей.'],
  ['2026-12-01','Вторник','День в аквапарке или Большой Будда и Ват Чалонг утром, пока не жарко.'],
- ['2026-12-02','Среда','Пляжи Сурин и Лаем Синг, вечером Café del Mar на закате.'],
+ ['2026-12-02','Среда','Пляжи Сурин и Лаем Синг. Вечером снова открыт Carnival Magic.'],
  ['2026-12-03','Четверг','Шопинг: Central Phuket или Jungceylon, детские игровые центры.'],
- ['2026-12-04','Пятница','Последний полный день: мыс Промтеп на закате, сувениры, соберите чемоданы.'],
- ['2026-12-05','Вылет · День отца 🇹🇭','Национальный праздник: жёлтые украшения, церемонии со свечами. Банки закрыты (кроме ТЦ), возможны ограничения на алкоголь. Около этих дней у пляжа Ката стартует парусная регата King’s Cup. Выезжайте в аэропорт заранее — праздничные пробки.']];
-function tripState(){const t=bkk(),d0=new Date(t.getFullYear(),t.getMonth(),t.getDate());const A=new Date(...TRIP.a),B=new Date(...TRIP.b);const day=Math.round((d0-A)/864e5)+1,total=Math.round((B-A)/864e5)+1;
- if(d0<A)return{k:'before',n:Math.round((A-d0)/864e5),total};if(d0>B)return{k:'after',total};return{k:'during',day,total,left:total-day}}
-function renderTrip(){const el=document.getElementById('tripban');if(!el)return;const s=tripState();
- const txt=s.k==='before'?[`✈️ До Пхукета ${s.n} ${s.n%10===1&&s.n%100!==11?'день':(s.n%10>=2&&s.n%10<=4&&(s.n%100<10||s.n%100>=20))?'дня':'дней'}`,'26 ноября — 5 декабря · 10 дней на море']:s.k==='during'?(s.left===0?['🧳 Сегодня вылет','Проверьте паспорта, билеты и детские вещи']:[`🌴 День ${s.day} из ${s.total}`,`Осталось ${s.left} ${s.left===1?'день':s.left<5?'дня':'дней'} · до 5 декабря`]):['💛 Спасибо за поездку!','Пхукет ждёт вас снова'];
+ ['2026-12-04','Пятница','Последний полный день: мыс Промтеп на закате, сувениры. Соберите чемоданы и уточните у гида ANEX время трансфера.'],
+ ['2026-12-05','Домой · День отца 🇹🇭','Рейс VSV 5203 в 13:55, регистрация закрывается в 12:55. Время выезда группового трансфера сообщит ANEX — обычно за несколько часов до вылета. Сегодня в Таиланде праздник: возможны пробки.']];
+function tripState(){const t=bkk(),d0=new Date(t.getFullYear(),t.getMonth(),t.getDate());const D=new Date(2026,10,26),A=new Date(2026,10,27),B=new Date(2026,11,5);const total=Math.round((B-A)/864e5)+1,day=Math.round((d0-A)/864e5)+1;
+ if(d0<D)return{k:'before',n:Math.round((D-d0)/864e5),total};if(+d0===+D)return{k:'fly',total};if(d0>B)return{k:'after',total};if(+d0===+B)return{k:'home',total};return{k:'during',day,total,left:total-day}}
+function renderTrip(){const el=document.getElementById('tripban');if(!el)return;const s=tripState(),pl=n=>n%10===1&&n%100!==11?'день':(n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?'дня':'дней';
+ const txt=s.k==='before'?[`✈️ До вылета ${s.n} ${pl(s.n)}`,'Рейс в ночь с 26 на 27 ноября · 00:55 из Алматы']:s.k==='fly'?['🧳 Сегодня ночью вылет','VSV 5202 в 00:55 · регистрация с 21:55']:s.k==='home'?['🧳 Сегодня домой','Вылет 13:55 · регистрация до 12:55']:s.k==='during'?[`🌴 День ${s.day} из ${s.total}`,`Осталось ${s.left} ${pl(s.left)} · вылет 5 декабря в 13:55`]:['💛 Спасибо за поездку!','Пхукет ждёт вас снова'];
  el.innerHTML=`<span class="kbe">📅</span><span class="kt"><b>${txt[0]}</b><small>${txt[1]}</small></span><span class="ar">›</span>`}
 function tripSheet(){const s=tripState(),t=bkk(),today=`${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
- sheet.innerHTML=`<div class="grab"></div><div class="sh-head"><div class="sh-ic" style="--c:#e8590c;font-size:26px">📅</div><div class="sh-t"><h2>Наша поездка</h2><p>26 ноября — 5 декабря 2026 · 10 дней</p></div></div>
+ sheet.innerHTML=`<div class="grab"></div><div class="sh-head"><div class="sh-ic" style="--c:#e8590c;font-size:26px">📅</div><div class="sh-t"><h2>Наша поездка</h2><p>27 ноября — 5 декабря 2026 · вылет в ночь на 27‑е</p></div></div>
  <div class="tripdays">${TRIPDAYS.map(([d,t2,x],i)=>{const dt=new Date(d+'T00:00:00');return `<div class="tday ${d===today?'now':''} ${d<today?'past':''}"><div class="tnum"><b>${dt.getDate()}</b><small>${['вс','пн','вт','ср','чт','пт','сб'][dt.getDay()]}</small></div><div><b>День ${i+1} · ${t2}</b><p>${x}</p></div></div>`}).join('')}</div>
  <p class="phone-line">Это подсказки, а не обязательный план. Погоду на каждый день смотрите в «Море сегодня».</p>`;
  sheet.classList.add('on');scrim.classList.add('on')}
-document.addEventListener('click',e=>{if(e.target.closest('#tripban'))go('cal')});
+document.addEventListener('click',e=>{if(e.target.closest('#tripban'))go('fly')});
 renderTrip();setInterval(renderTrip,60000);
+/* ---------- ✈️ Наш рейс: таймеры, план, чек‑лист, напоминания ---------- */
+const UT=(y,mo,d,h,mi,tz)=>Date.UTC(y,mo,d,h-tz,mi);
+const FLT={
+ out:{no:'VSV 5202',fr:'Алматы (ALA)',to:'Пхукет (HKT)',d:'27 ноября',dep:UT(2026,10,27,0,55,5),arr:UT(2026,10,27,10,25,7),ci:UT(2026,10,26,21,55,5),cc:UT(2026,10,26,23,55,5)},
+ back:{no:'VSV 5203',fr:'Пхукет (HKT)',to:'Алматы (ALA)',d:'5 декабря',dep:UT(2026,11,5,13,55,7),arr:UT(2026,11,5,19,40,5),ci:UT(2026,11,5,10,55,7),cc:UT(2026,11,5,12,55,7)}};
+const ANEXTEL='+908505490707';
+function pickupTs(){const v=LS.get('pickup','');const m=/^(\d{1,2})[:.](\d{2})$/.exec(v);return m?UT(2026,11,5,+m[1],+m[2],7):null}
+function flyMiles(){const a=[[FLT.out.ci,'Открытие регистрации в Алматы','🛄'],[FLT.out.cc,'Регистрация закрывается (Алматы)','⛔'],[FLT.out.dep,'Вылет VSV 5202','🛫'],[FLT.out.arr,'Посадка на Пхукете','🛬'],[UT(2026,11,5,12,0,7),'Выезд из номера (до 12:00)','🔑'],[FLT.back.ci,'Открытие регистрации на Пхукете','🛄'],[FLT.back.cc,'Регистрация закрывается (Пхукет)','⛔'],[FLT.back.dep,'Вылет VSV 5203 домой','🛫'],[FLT.back.arr,'Посадка в Алматы','🏠']];const p=pickupTs();if(p)a.push([p,'Трансфер ANEX от отеля','🚌']);return a.sort((x,y)=>x[0]-y[0])}
+const fmtT=(ts,tz)=>{const d=new Date(ts+tz*3600e3);return pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())};
+function cdTxt(ms){if(ms<=0)return 'сейчас';const m=Math.floor(ms/6e4),d=Math.floor(m/1440),h=Math.floor(m%1440/60),mi=m%60;return (d?d+' д ':'')+(d||h?h+' ч ':'')+mi+' мин'}
+const FLYCK=[['tdac','📝 TDAC — электронная карта прибытия на каждого (с 24 ноября)'],['pass','🛂 Загранпаспорта всех, включая малыша'],['tick','🎫 Билеты и ваучер — скриншоты в телефоне'],['ins','🩺 Страховка'],['cash','💵 Наличные и карты'],['pwr','🔋 Пауэрбанк и зарядки — только в ручную кладь'],['med','💊 Детские лекарства — в ручную кладь'],['kid','🍼 Еда, вода, памперсы, сменная одежда для детей в самолёт'],['swim','🩱 Купальники в ручную кладь (заселение обычно с 14:00)'],['app','📲 Этот сайт на экране «Домой» и «Скачать всё» для офлайна']];
+const BACKCK=[['safe','🔐 Пусто ли в сейфе в номере'],['bpass','🛂 Паспорта всех у себя'],['bchg','🔌 Зарядки из розеток'],['bpick','🚌 Время трансфера ANEX уточнено'],['bliq','🧴 Жидкости в ручной клади до 100 мл'],['bbaht','💱 Остатки батов потрачены или обменяны']];
+function renderFly(){const el=document.getElementById('flybody');if(!el)return;const now=Date.now(),M=flyMiles(),nx=M.find(m=>m[0]>now);const ck=LS.get('flyck',{});const pk=LS.get('pickup','');
+ const card=(f,tzA,tzB,lbA,lbB)=>`<div class="tkt"><div class="fc-h"><b>${f.no}</b><span>${f.d}</span></div><div class="fc-r"><div><small>${f.fr}</small><b>${fmtT(f.dep,tzA)}</b><i>${lbA}</i></div><div class="fc-pl">✈️</div><div><small>${f.to}</small><b>${fmtT(f.arr,tzB)}</b><i>${lbB}</i></div></div><p>Регистрация ${fmtT(f.ci,tzA)}–${fmtT(f.cc,tzA)} · только в аэропорту · багаж 23 кг + ручная 5 кг</p></div>`;
+ el.innerHTML=`<div class="chhero" style="--c:#1c7ed6"><span>✈️</span><div><h2>Наш рейс</h2><p>SCAT · чартер · время везде местное</p></div></div>
+ ${nx?`<div class="flynext"><small>Следующее: ${nx[2]} ${nx[1]}</small><b id="flycd">${cdTxt(nx[0]-now)}</b><i>${fmtT(nx[0],5)} по Алматы · ${fmtT(nx[0],7)} по Пхукету</i></div>`:'<div class="flynext"><b>С возвращением домой! 💛</b></div>'}
+ <div class="sec">Билеты</div>${card(FLT.out,5,7,'по Алматы','по Пхукету')}${card(FLT.back,7,5,'по Пхукету','по Алматы')}
+ <p class="foot">На Пхукете время на 2 часа больше, чем в Алматы. Расписание чартеров меняется — проверьте рейс за сутки до вылета.</p>
+ <div class="sec">26 ноября — дорога туда (время Алматы)</div>
+ <div class="tline">${[['20:30','🚗','Выезжайте в аэропорт с запасом: ночью бывают пробки и очереди'],['21:55','🛄','Открывается регистрация. Онлайн‑регистрации на чартере нет'],['23:55','⛔','Регистрация закрывается — опоздавших не пускают'],['~00:15','🚶','Посадка обычно начинается за 40–60 минут до вылета'],['00:55','🛫','Вылет VSV 5202'],['10:25','🛬','Прилёт на Пхукет (время Пхукета). Паспортный контроль: QR‑код TDAC'],['~11:30','🚌','Групповой трансфер ANEX: ищите представителя ANEX'],['14:00','🔑','Заселение в отеле обычно с 14:00']].map(r=>`<div><b>${r[0]}</b><span>${r[1]}</span><p>${r[2]}</p></div>`).join('')}</div>
+ <div class="sec">5 декабря — домой (время Пхукета)</div>
+ <div class="pickup"><label>🚌 Время трансфера ANEX от отеля<small>Узнайте у гида или в чате ANEX и впишите — появится таймер</small></label><input id="pkin" inputmode="numeric" placeholder="например 09:30" value="${pk}"></div>
+ <div class="tline">${[['07:00','🍳','Завтрак, последние вещи в чемодан'],[pk||'??:??','🚌','Трансфер ANEX от отеля — будьте в лобби за 10 минут'],['10:55','🛄','Открывается регистрация в аэропорту Пхукета'],['12:00','🔑','Расчётный час в отеле (если трансфер позже — сдайте номер и оставьте вещи на ресепшене)'],['12:55','⛔','Регистрация закрывается'],['~13:15','🚶','Посадка обычно за 40–60 минут'],['13:55','🛫','Вылет VSV 5203'],['19:40','🏠','Посадка в Алматы (время Алматы)']].sort((a,b)=>pk?a[0].replace(/[^\d:]/g,'').padStart(5,'0').localeCompare(b[0].replace(/[^\d:]/g,'').padStart(5,'0')):0).map(r=>`<div><b>${r[0]}</b><span>${r[1]}</span><p>${r[2]}</p></div>`).join('')}</div>
+ <div class="sec">Перед вылетом туда</div><div class="cklist">${FLYCK.map(([k,t])=>`<label><input type="checkbox" data-ck="${k}" ${ck[k]?'checked':''}><span>${t}</span></label>`).join('')}</div>
+ <a class="act pri" href="https://tdac.immigration.go.th/" target="_blank" style="display:block;text-align:center;margin:8px 0">📝 Заполнить TDAC (официальный сайт)</a>
+ <p class="foot">TDAC — бесплатная электронная карта прибытия, её заполняют на каждого путешественника не раньше чем за 3 дня до прилёта (для прилёта 27 ноября — с 24 ноября). Платных «посредников» не используйте.</p>
+ <div class="sec">Перед вылетом домой</div><div class="cklist">${BACKCK.map(([k,t])=>`<label><input type="checkbox" data-ck="${k}" ${ck[k]?'checked':''}><span>${t}</span></label>`).join('')}</div>
+ <div class="sec">Помощь</div>
+ <div class="acts" style="grid-template-columns:1fr 1fr"><a class="act pri" href="https://wa.me/908505490707" target="_blank">💬 ANEX WhatsApp</a><a class="act" href="tel:${ANEXTEL}">📞 ANEX горячая линия</a></div>
+ <div class="acts" style="grid-template-columns:1fr 1fr;margin-top:8px"><button class="act" data-pmap="air_hkt">🗺️ Аэропорт Пхукета</button><button class="act" data-pmap="air_ala">🗺️ Аэропорт Алматы</button></div>
+ <div class="sec">Напоминания всем на телефоны</div>
+ <p class="kp" style="text-align:left;font-weight:600">Через семейный чат: придёт уведомление «Пора выезжать», «Регистрация закрывается» и т.д. Сервис принимает напоминания максимум на 3 дня вперёд, поэтому нажмите сейчас и ещё раз 3–4 декабря. Достаточно одного телефона.</p>
+ <button class="gbig" id="flyrem" style="background:#1c7ed6">🔔 Поставить напоминания</button><div class="gmsg" id="flyremm" style="font-size:14px"></div>
+ <p class="foot">Данные из билета и ваучера. Имена и паспорта на сайт не выложены — он открыт по ссылке.</p>`;
+ PLX.air_hkt={n:'Аэропорт Пхукета',en:'Phuket International Airport',lat:8.1132,lng:98.3169};PLX.air_ala={n:'Аэропорт Алматы',en:'Almaty International Airport',lat:43.3521,lng:77.0405}}
+const REMS=[[UT(2026,10,24,10,0,5),'📝 Заполните TDAC','Карта прибытия в Таиланд — на каждого, включая детей. Ссылка в разделе «Наш рейс»'],[UT(2026,10,26,12,0,5),'✈️ Сегодня ночью вылет!','VSV 5202 в 00:55. Паспорта, QR‑коды TDAC, зарядки, детские вещи'],[UT(2026,10,26,20,30,5),'🚗 Пора выезжать в аэропорт','Регистрация с 21:55 до 23:55. Онлайн‑регистрации нет'],[UT(2026,10,26,23,10,5),'⛔ Регистрация закрывается в 23:55!','Если ещё не зарегистрировались — срочно к стойке'],[UT(2026,11,4,18,0,7),'🧳 Завтра домой','Уточните у ANEX время трансфера, соберите чемоданы, проверьте сейф'],[UT(2026,11,5,7,30,7),'🏠 Сегодня вылет 13:55','Паспорта, сейф, зарядки. Регистрация до 12:55'],[UT(2026,11,5,11,45,7),'⛔ Регистрация закрывается в 12:55','Вы уже в аэропорту?']];
+function flyRemind(){const m=document.getElementById('flyremm');if(!CH.topic){m.textContent='Сначала войдите в семейный чат (вкладка «Чат») — напоминания идут через него.';return}
+ const now=Date.now(),done=LS.get('remsent',[]),todo=REMS.filter(r=>r[0]>now+6e4&&r[0]-now<70*3600e3&&!done.includes(r[0]));const later=REMS.filter(r=>r[0]-now>=70*3600e3).length;
+ if(navigator.onLine===false){m.textContent='Нужен интернет';return}
+ Promise.all(todo.map(r=>fetch('https://ntfy.sh/',{method:'POST',body:JSON.stringify({topic:ntTopic(),title:r[1],message:r[2],priority:5,tags:['airplane'],delay:String(Math.floor(r[0]/1000)),click:location.origin+location.pathname+'#fly'})}).then(x=>{if(x.ok)done.push(r[0]);return x.ok}).catch(()=>false))).then(rs=>{LS.set('remsent',done);const ok=rs.filter(Boolean).length;
+  m.textContent=(ok?`✅ Поставлено напоминаний: ${ok}. `:'Сейчас ставить нечего. ')+(later?`Ещё ${later} — слишком далеко, нажмите снова ближе к дате.`:'Все напоминания стоят.')})}
+document.addEventListener('click',e=>{if(e.target.id==='flyrem')flyRemind()});
+document.addEventListener('change',e=>{const c=e.target.closest('[data-ck]');if(c){const ck=LS.get('flyck',{});ck[c.dataset.ck]=c.checked;LS.set('flyck',ck)}if(e.target.id==='pkin'){const v=e.target.value.trim().replace('.',':');if(v&&!/^\d{1,2}:\d{2}$/.test(v)){toast('Впишите время как 09:30');return}LS.set('pickup',v?v.padStart(5,'0'):'');renderFly()}});
+setInterval(()=>{const c=document.getElementById('flycd');if(c&&document.getElementById('v-fly').classList.contains('on')){const n=flyMiles().find(m=>m[0]>Date.now());if(n)c.textContent=cdTxt(n[0]-Date.now());else renderFly()}},20000);
 /* ---------- 📆 Календарь поездки ---------- */
 // d: дни недели (0=вс) или даты 'YYYY-MM-DD'; k:1 — подходит детям
+const FLY={sf:'SCAT',b:'багаж 23 кг + ручная кладь 5 кг',hot:'+908505490707'};
 const CALEV=[
+ {d:['2026-11-26'],ic:'✈️',t:'Вылет VSV 5202 Алматы → Пхукет',tm:'00:55 (ночь на 27‑е) · прилёт 10:25 по Пхукету',p:'Аэропорт Алматы (ALA)',x:'Авиакомпания SCAT, чартер. Регистрация с 21:55 до 23:55 — только в аэропорту, нужен загранпаспорт. Багаж 23 кг + ручная кладь 5 кг. Уточните расписание за сутки до вылета.',q:'Almaty International Airport'},
+ {d:['2026-11-27'],ic:'🚌',t:'Прилёт и трансфер в отель',tm:'10:25 · заселение обычно с 14:00',p:'Аэропорт Пхукета (HKT) → The Marin',x:'Групповой трансфер ANEX: ищите представителя ANEX в зале прилёта. Если что‑то не так — горячая линия ANEX (кнопка ниже).',ax:1},
+ {d:['2026-12-05'],ic:'✈️',t:'Вылет VSV 5203 Пхукет → Алматы',tm:'13:55 · прилёт 19:40 по Алматы',p:'Аэропорт Пхукета (HKT)',x:'Регистрация с 10:55 до 12:55. Групповой трансфер ANEX из отеля — время уточните у гида или на горячей линии накануне. Завтрак, выезд из номера до 12:00.',q:'Phuket International Airport',ax:1},
  {d:[1,2,4,5],ic:'🛍️',t:'Рынок Камалы',tm:'14:00–21:00',p:'Камала, рядом с отелем',x:'Ближайший к нам рынок: фрукты, еда, сувениры, одежда.',k:1,q:'Kamala Night Market Phuket'},
  {d:[2,5,0],ic:'🐘',t:'Phuket FantaSea — шоу',tm:'парк с 17:30 · шоу 21:00',p:'Камала, 5 минут от отеля',x:'Большое шоу со слонами, акробатами и буфетом. Около 70 минут. Билеты от ~1 600 ฿.',k:1,q:'Phuket FantaSea'},
  {d:[1,3,6],ic:'🎠',t:'Carnival Magic — парк огней',tm:'17:30–23:30 · парад ~20:30–21:00',p:'Камала, рядом с FantaSea',x:'Светящийся парк, ярмарка, речной парад. Детям очень нравится. От ~1 900 ฿.',k:1,q:'Carnival Magic Phuket'},
@@ -3089,25 +3146,25 @@ const CALEV=[
  {d:[3,4,5],ic:'🎸',t:'Indy Market',tm:'16:00–22:30',p:'Пхукет‑таун, Limelight',x:'Молодёжный рынок с музыкой и едой.',q:'Phuket Indy Market'},
  {d:[2,5],ic:'🛕',t:'Рынок у храма Карон',tm:'16:00–22:00',p:'Карон',x:'Семейный рынок у храма, много еды.',k:1,q:'Karon Temple Market'},
  {d:[0,1,2,3,4,5,6],ic:'🌃',t:'Рынки Патонга',tm:'Banzaan до полуночи · Malin Plaza 11:00–00:00',p:'Патонг',x:'Работают каждый день. Bangla Night Market 18:00–02:00 — шумная улица, не для детей.',q:'Banzaan Fresh Market Patong'},
- {d:['2026-11-26','2026-11-27'],ic:'🍽️',t:'PHOODIE — фуд‑фестиваль',tm:'по 27 ноября',p:'Рестораны по всему острову',x:'Фестиваль 50 ресторанов и баров: ужины от шефов, коктейли.'},
+ {d:['2026-11-27'],ic:'🍽️',t:'PHOODIE — фуд‑фестиваль',tm:'по 27 ноября',p:'Рестораны по всему острову',x:'Фестиваль 50 ресторанов и баров: ужины от шефов, коктейли.'},
  {d:['2026-11-28'],ic:'🍽️',t:'PHOODIE Meet — фуд‑маркет',tm:'16:00–22:00',p:'Limelight Mall, Пхукет‑таун',x:'Все рестораны фестиваля собираются в один большой маркет.',k:1,q:'Limelight Avenue Phuket'},
  {d:['2026-11-29'],ic:'🏆',t:'PHOODIE — гала и награды',tm:'вечер',p:'InterContinental, Камала',x:'Финал фуд‑фестиваля, совсем рядом с нами.',q:'InterContinental Phuket Resort Kamala'},
- {d:['2026-11-26'],ic:'🪷',t:'Лой Кратонг был 24 ноября',tm:'',p:'',x:'Праздник фонариков прошёл за 2 дня до прилёта. В отелях ещё могут стоять украшения.'},
+ {d:['2026-11-27'],ic:'🪷',t:'Лой Кратонг был 24 ноября',tm:'',p:'',x:'Праздник фонариков прошёл за 2 дня до прилёта. В отелях ещё могут стоять украшения.'},
  {d:['2026-12-05'],ic:'💛',t:'День отца — нац. праздник',tm:'весь день',p:'Вся страна',x:'Жёлтые украшения, вечерние церемонии со свечами. Банки и госучреждения закрыты, возможны ограничения на алкоголь.',k:1},
  {d:['2026-12-05'],ic:'⛵',t:'Регата King’s Cup',tm:'даты уточняются',p:'Пляж Ката',x:'Крупнейшая парусная регата Азии. Разные источники называют 1–7 или 5–12 декабря.',k:1,q:'Kata Beach Phuket'}];
-let calSel=null,calKids=false;
+let calSel=null,calKids=false;const ANEXB='<a class="act" href="https://wa.me/908505490707" target="_blank">💬 ANEX в WhatsApp</a><a class="act" href="tel:+908505490707">📞 ANEX +90 850 549 07 07</a>';
 function calDays(){const r=[];for(let i=0;i<10;i++){const d=new Date(2026,10,26+i);r.push(d)}return r}
 const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-function calFor(d){const k=ymd(d),w=d.getDay();return CALEV.filter(e=>e.d.includes(k)||e.d.includes(w)).filter(e=>!calKids||e.k).sort((a,b)=>(typeof b.d[0]==='string')-(typeof a.d[0]==='string'))}
+function calFor(d){const k=ymd(d),w=d.getDay();return CALEV.filter(e=>e.d.includes(k)||(k!=='2026-11-26'&&e.d.includes(w))).filter(e=>!calKids||e.k).sort((a,b)=>(typeof b.d[0]==='string')-(typeof a.d[0]==='string'))}
 function renderCal(){const el=document.getElementById('calbody');if(!el)return;const days=calDays(),t=bkk(),today=ymd(t);
  if(!calSel)calSel=days.some(d=>ymd(d)===today)?today:ymd(days[0]);
  const sd=days.find(d=>ymd(d)===calSel)||days[0],idx=days.indexOf(sd),ev=calFor(sd),tip=TRIPDAYS[idx];
  const WD=['вс','пн','вт','ср','чт','пт','сб'];
- el.innerHTML=`<div class="chhero" style="--c:#e8590c"><span>📆</span><div><h2>Календарь поездки</h2><p>26 ноября — 5 декабря 2026 · нажмите на дату</p></div></div>
+ el.innerHTML=`<div class="chhero" style="--c:#e8590c"><span>📆</span><div><h2>Календарь поездки</h2><p>Вылет 27 ноября 00:55 · домой 5 декабря · нажмите на дату</p></div></div>
  <div class="calg">${days.map((d,i)=>{const k=ymd(d),sp=CALEV.some(e=>e.d.includes(k));return `<button class="cald ${k===calSel?'on':''} ${k===today?'today':''} ${k<today?'past':''} ${d.getDay()%6===0?'we':''}" data-cal="${k}"><small>${WD[d.getDay()]}</small><b>${d.getDate()}</b><i>${d.getMonth()===10?'ноя':'дек'}</i>${sp?'<em></em>':''}</button>`}).join('')}</div>
  <div class="wsort"><button class="${!calKids?'on':''}" data-calk="0">Всё</button><button class="${calKids?'on':''}" data-calk="1">👶 С детьми</button></div>
- <div class="caltip"><b>День ${idx+1} · ${sd.getDate()} ${sd.getMonth()===10?'ноября':'декабря'}, ${DFULL[sd.getDay()].toLowerCase()}</b><p>💡 ${tip[2]}</p></div>
- ${ev.length?ev.map((e,i)=>`<div class="hli${typeof e.d[0]==='string'?' calsp':''}"><div class="hl-t"><b>${e.ic} ${e.t}${e.k?' <span class="kidb">👶</span>':''}</b>${e.tm?`<small>🕒 ${e.tm}</small>`:''}${e.p?`<small>📍 ${e.p}</small>`:''}<p>${e.x}</p></div>${e.q?`<div class="hl-a">${placeBtns('cal'+calSel+i,{n:e.t,en:e.q})}</div>`:''}</div>`).join(''):'<p class="foot">На этот день событий не найдено.</p>'}
+ <div class="caltip"><b>${idx?'День '+idx:'Вылет'} · ${sd.getDate()} ${sd.getMonth()===10?'ноября':'декабря'}, ${DFULL[sd.getDay()].toLowerCase()}</b><p>💡 ${tip[2]}</p></div>
+ ${ev.length?ev.map((e,i)=>`<div class="hli${typeof e.d[0]==='string'?' calsp':''}"><div class="hl-t"><b>${e.ic} ${e.t}${e.k?' <span class="kidb">👶</span>':''}</b>${e.tm?`<small>🕒 ${e.tm}</small>`:''}${e.p?`<small>📍 ${e.p}</small>`:''}<p>${e.x}</p></div>${e.q||e.ax?`<div class="hl-a">${e.q?placeBtns('cal'+calSel+i,{n:e.t,en:e.q}):''}${e.ax?ANEXB:''}</div>`:''}</div>`).join(''):'<p class="foot">На этот день событий не найдено.</p>'}
  <p class="foot">Расписание по открытым источникам на ноябрь 2026. В праздники часы могут меняться — уточняйте на месте.</p>`}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-cal]');if(b){calSel=b.dataset.cal;renderCal();return}const k=e.target.closest('[data-calk]');if(k){calKids=k.dataset.calk==='1';renderCal()}});
 /* ---------- ↻ потянуть вниз — обновить ---------- */

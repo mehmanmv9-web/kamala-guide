@@ -754,6 +754,7 @@ html{background:var(--ivory,#f7f3ec);height:100%}
 .arrsvg{width:100%;height:auto;background:#fff;border-radius:18px;margin-bottom:8px}
 .sheet{visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}.sheet.on{visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s}
 html.vpfix .app{bottom:auto!important;height:var(--apph)!important}
+.hclocks{position:relative}.hfact{position:absolute;top:calc(100% + 8px);right:0;width:min(180px,calc(100vw - 212px));text-align:left;font:600 11px/1.3 inherit;color:#fff;background:rgba(15,27,45,.28);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:14px;padding:7px 10px;display:block;cursor:pointer;animation:factin .6s}.hfact small{display:block;font-size:10px;font-weight:800;color:#ffd43b;margin-bottom:2px;letter-spacing:.3px}@keyframes factin{from{opacity:0;transform:translateY(-4px)}}
 </style>
 </head>
 <body>
@@ -804,7 +805,7 @@ html.vpfix .app{bottom:auto!important;height:var(--apph)!important}
         <div class="hz">
           <div class="hz-row">
             <div class="sawas"><svg viewBox="0 0 24 24" fill="currentColor"><g id="plm"><ellipse cx="12" cy="6" rx="3.2" ry="5.2"/></g><use href="#plm" transform="rotate(72 12 12)"/><use href="#plm" transform="rotate(144 12 12)"/><use href="#plm" transform="rotate(216 12 12)"/><use href="#plm" transform="rotate(288 12 12)"/><circle cx="12" cy="12" r="2" fill="#f3a64a"/></svg>สวัสดี · Sawasdee</div>
-            <div class="hclocks"><div class="hclock"><b id="hclk">--:--</b><span id="hday">Пхукет</span></div><div class="hclock kz"><b id="aclk">--:--</b><span id="aday">Алматы</span></div></div>
+            <div class="hclocks"><div class="hclock"><b id="hclk">--:--</b><span id="hday">Пхукет</span></div><div class="hclock kz"><b id="aclk">--:--</b><span id="aday">Алматы</span></div><button class="hfact" id="hfact" aria-label="Интересный факт"></button></div>
           </div>
           <p class="hello" id="hello">Добро пожаловать</p>
           <h1>Kamala<br>Beach</h1>
@@ -2571,7 +2572,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v36';
+const SWV='kamala-v38';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -3084,6 +3085,10 @@ function tripSheet(){const s=tripState(),t=bkk(),today=`${t.getFullYear()}-${pad
  sheet.classList.add('on');scrim.classList.add('on')}
 document.addEventListener('click',e=>{if(e.target.closest('#tripban'))go('fly')});
 renderTrip();setInterval(renderTrip,60000);
+/* ---------- 💡 Факт каждые 2 часа ---------- */
+const FACTS=['Таиланд — единственная страна в регионе, которая никогда не была колонией.','Пхукет — самый большой остров Таиланда.','Слон — символ Таиланда. 13 марта здесь празднуют День слона 🐘','Тайцы здороваются жестом «вай»: ладони вместе, лёгкий поклон 🙏','Голову в Таиланде считают священной — детей незнакомых людей по голове не гладят.','По буддийскому календарю сейчас в Таиланде 2569 год!','«Спасибо» по‑тайски: женщины говорят «кхоп кхун кха», мужчины — «кхоп кхун кхрап».','В тайском алфавите 44 согласные буквы.','Дуриан — «король фруктов». Из‑за запаха его не пускают в отели!','Любимый тайский десерт — манго с клейким рисом и кокосовым молоком 🥭','Раньше Пхукет богател на добыче олова и на каучуке.','Старый город Пхукета — это яркие сино‑португальские домики.','Большой Будда на Пхукете высотой 45 метров и сделан из белого мрамора.','На Камале много мусульман — поэтому рядом есть мечети и халяльная еда.','Морские черепахи откладывают яйца на пляже Май Кхао на севере Пхукета 🐢','Вода в Андаманском море почти круглый год тёплая — около 28–30°.','Длиннохвостая лодка — это лодка с мотором от машины на длинном шесте.','На Пхукете время на 2 часа больше, чем в Алматы.','Наш самолёт летит из Алматы до Пхукета около 7,5 часов ✈️','Тайцы едят ложкой, а вилкой только подталкивают еду на ложку 🥄','Палочками в Таиланде едят в основном лапшу.','«Сабай‑сабай» — по‑тайски «спокойно, расслабленно». Это девиз тайцев 😌','5 декабря — день рождения короля Рамы IX и День отца в Таиланде 💛','Муай‑тай называют «искусством восьми конечностей»: кулаки, локти, колени и ноги.','В Таиланде, как и в Англии, ездят по левой стороне дороги.','Сиамские кошки родом из Таиланда — Сиам это старое название страны 🐈','Таиланд — один из крупнейших в мире продавцов риса 🍚','«Поесть» по‑тайски — «кин кхао», буквально «съесть рис».','Геккона в номере тайцы считают к удаче — к тому же он ест комаров 🦎','Белые цветы франжипани (лилавади) пахнут сладко и растут почти у каждого отеля 🌸','В Таиланде 3 сезона: жаркий, дождливый и прохладный. У нас — начало сухого ☀️','На острове Пхи‑Пхи Лей снимали фильм «Пляж» с Леонардо Ди Каприо 🎬','«Остров Джеймса Бонда» в заливе Пханг‑Нга прославился после фильма 1974 года.','На всех тайских деньгах портрет короля — на монету нельзя наступать ногой.','Женщинам нельзя касаться буддийских монахов — даже передавать им вещи из рук в руки.','Тук‑тук на Пхукете — это маленький цветной грузовичок, торгуйтесь до посадки 🛺','Кокос пьют прямо из ореха трубочкой, а потом ложкой едят мягкую мякоть 🥥','На тайском флаге 5 полос: красный — народ, белый — религия, синий — король.','Флаг Казахстана: солнце, орёл‑беркут и национальный узор на голубом небе 🇰🇿','Обезьяны на смотровых площадках Пхукета любят воровать еду и очки — держите крепко! 🐒'];
+let factOff=0;function renderFact(){const el=document.getElementById('hfact');if(!el)return;const i=(Math.floor(Date.now()/72e5)+factOff)%FACTS.length;el.innerHTML=`<small>💡 Знаете ли вы?</small>${FACTS[i]}`}
+document.addEventListener('click',e=>{if(e.target.closest('#hfact')){factOff++;renderFact()}});renderFact();setInterval(()=>{factOff=0;renderFact()},6e5);
 /* ---------- ✈️ Наш рейс: таймеры, план, чек‑лист, напоминания ---------- */
 const UT=(y,mo,d,h,mi,tz)=>Date.UTC(y,mo,d,h-tz,mi);
 const FLT={

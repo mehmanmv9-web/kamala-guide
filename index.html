@@ -409,6 +409,46 @@ a{color:inherit}
 .fcard-num div{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:16px;padding:12px 16px;border:1px solid var(--line)}
 .fcard-num b{font-size:30px;font-weight:800;color:var(--red);white-space:nowrap}
 .fcard-num span{font-size:14px;font-weight:700;color:var(--ink2);text-align:right}
+
+/* v5: way + крупнее */
+.way{border-radius:26px;background:#fff;border:2px solid #f0e2c8;padding:14px;margin-top:4px;box-shadow:0 8px 22px rgba(15,27,45,.06)}
+.sheet .way{margin-top:16px}
+.way-h{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.way-h>span{font-size:34px}
+.way-h b{display:block;font-size:20px;font-weight:900}
+.way-h small{font-size:13px;font-weight:700;color:var(--green)}
+.waysvg{width:100%;height:auto;display:block;border-radius:18px}
+.steps{list-style:none;margin:10px 0 0;padding:0;counter-reset:st}
+.steps li{display:flex;gap:12px;align-items:center;padding:11px 4px;border-top:1px dashed #eadfca}
+.steps li:first-child{border-top:0}
+.steps li span{flex:none;width:52px;height:52px;border-radius:16px;background:#fff6e8;display:grid;place-items:center;font-size:30px;position:relative}
+.steps li span:after{counter-increment:st;content:counter(st);position:absolute;top:-6px;left:-6px;width:22px;height:22px;border-radius:50%;background:#e0567f;color:#fff;font:900 12px/22px Manrope,system-ui,sans-serif;text-align:center}
+.steps li p{margin:0;font-size:17.5px;line-height:1.4;color:var(--ink);font-weight:600}
+.way-note{display:flex;gap:12px;align-items:center;margin-top:10px;padding:12px;border-radius:18px;background:#eef4ff}
+.way-note span{font-size:30px}
+.way-note p{margin:0;font-size:16px;line-height:1.4;color:#1d3a6e;font-weight:600}
+.ez{list-style:none;margin:0;padding:0}
+.ez li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line);margin:0}
+.ez li:first-child{border-top:0}
+.ez li span{font-size:26px;flex:none;line-height:1.1}
+.ez li p{margin:0;font-size:16.5px;line-height:1.45;color:var(--ink)}
+.big-sub{font-size:15.5px!important;color:var(--ink2)!important}
+.netb{font-size:14px!important}
+/* чуть крупнее везде */
+.sub{font-size:15px}
+.desc{font-size:16px}
+.card p,.card li{font-size:15.5px}
+.rule p{font-size:15px}.rule b{font-size:16px}
+.it b{font-size:16px}.it span{font-size:13.5px}
+.fb b{font-size:16.5px}.fm{font-size:12.5px}
+.kzi p{font-size:15px}.kzi b{font-size:16.5px}
+.ph .ru{font-size:15.5px}.ph .th{font-size:16px}
+.chk{font-size:15px}
+.tiprow{font-size:15px}
+.tipnow p{font-size:14.5px}
+.wx-note{font-size:13.5px}
+.tile{font-size:13px}
+.tabs .tab{font-size:10px}
 </style>
 </head>
 <body>
@@ -419,7 +459,7 @@ a{color:inherit}
       <div class="clock"><b id="clk">--:--</b><span id="clkd">Пхукет</span></div>
     </div>
     <div class="today" id="today"></div>
-    <div class="netb">📴 Нет интернета — приложение работает, кроме маршрутов Google Maps</div>
+    <div class="netb">📴 Нет интернета. Приложение всё равно работает 👍</div>
   </header>
 
   <main class="views">
@@ -590,12 +630,48 @@ a{color:inherit}
         <div class="row2"><a class="act" href="tel:1669" data-copy="1669">Позвонить 1669</a></div>
       </div>
       <div class="grid2" id="sosnums"></div>
-      <div class="sec">Без интернета</div>
-      <div class="card"><ul>
-        <li><b>Приложение работает без связи</b>, если страница уже открыта: карта, номера, разговорник, карточки детей, калькулятор, озвучка. Не закрывайте вкладку перед выходом из отеля.</li><li><b>Установите как приложение:</b> iPhone — Safari → «Поделиться» → «На экран Домой»; Android — Chrome → «⋮» → «Установить приложение». После первого открытия с интернетом гид работает полностью без интернета.</li>
-        <li><b>Скачайте офлайн‑карту Пхукета в Google Maps</b> ещё в отеле: аватар → «Офлайн‑карты» → «Выбрать карту» → выделите Пхукет → «Скачать». GPS работает без интернета, и Google Maps поведёт до отеля.</li>
-        <li>Сохраните отель в Google Maps («Сохранить» → «Избранное») и сделайте скриншот карточки для таксиста и карточек детей.</li>
-        <li>Ориентир: отель рядом с FantaSea и Carnival Magic, это северная часть Камалы. Их знает каждый водитель.</li>
+      <div class="sec">Как дойти до отеля</div>
+<div class="way">
+  <div class="way-h"><span>🧭</span><div><b>Как дойти до отеля</b><small>Работает без интернета</small></div></div>
+  <svg class="waysvg" viewBox="0 0 360 240" aria-label="Схема: как дойти от пляжа до отеля">
+<rect width="360" height="240" rx="18" fill="#f6efe2"/>
+<path d="M0 18 Q0 0 18 0 H72 V240 H18 Q0 240 0 222Z" fill="#9fd3de"/>
+<g stroke="#fff" stroke-width="2" fill="none" opacity=".7"><path d="M10 40 q8 -6 16 0 t16 0 t16 0"/><path d="M10 110 q8 -6 16 0 t16 0 t16 0"/><path d="M10 180 q8 -6 16 0 t16 0 t16 0"/></g>
+<rect x="72" width="26" height="240" fill="#ecd6a6"/>
+<rect x="206" width="32" height="240" fill="#c9c3b6"/><path d="M222 6 V234" stroke="#fff" stroke-width="2.5" stroke-dasharray="10 9"/>
+<text x="36" y="226" text-anchor="middle" font-size="12" font-weight="800" fill="#1f5f6c">МОРЕ</text>
+<text x="222" y="20" text-anchor="middle" font-size="10" font-weight="800" fill="#5b5446" transform="rotate(90 222 20)" dx="40" dy="4">БОЛЬШАЯ ДОРОГА</text>
+<text x="85" y="72" text-anchor="middle" font-size="26">🧒</text>
+<text x="85" y="92" text-anchor="middle" font-size="10" font-weight="800" fill="#7a5a1f">ТЫ ТУТ</text>
+<path d="M104 62 H196" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/><path d="M190 54 L202 62 L190 70" fill="none" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="150" y="50" text-anchor="middle" font-size="22">⛱️</text><text x="150" y="84" text-anchor="middle" font-size="10" font-weight="800" fill="#5b4a2f">Café del Mar</text>
+<text x="150" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="#8a7a5a">5 минут</text>
+<path d="M240 62 H262" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/>
+<circle cx="300" cy="58" r="32" fill="#fff" stroke="#b8935a" stroke-width="3"/><text x="300" y="70" text-anchor="middle" font-size="32">🏨</text>
+<text x="300" y="106" text-anchor="middle" font-size="11" font-weight="900" fill="#0f1b2d">НАШ ОТЕЛЬ</text>
+<text x="290" y="150" text-anchor="middle" font-size="26">🎡</text><text x="290" y="168" text-anchor="middle" font-size="10" font-weight="800" fill="#7a2f4a">Carnival Magic</text>
+<text x="290" y="200" text-anchor="middle" font-size="26">🐘</text><text x="290" y="218" text-anchor="middle" font-size="10" font-weight="800" fill="#4a2f7a">FantaSea</text>
+<text x="160" y="196" text-anchor="middle" font-size="24">🛒</text><text x="160" y="216" text-anchor="middle" font-size="10" font-weight="800" fill="#2f4f8a">Центр · Big C</text>
+<path d="M186 200 Q202 200 210 186" stroke="#2f6fde" stroke-width="3" fill="none" stroke-dasharray="2 7" stroke-linecap="round"/>
+<path d="M248 228 V96" stroke="#2f6fde" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 8"/><path d="M241 104 L248 92 L255 104" fill="none" stroke="#2f6fde" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+  <button class="say" data-say="way" style="margin:12px 0 4px"><span class="sp">🔊</span><span><b>Послушать дорогу</b><small>Нажми — тебе расскажут</small></span><span class="eq3"><i></i><i></i><i></i></span></button>
+  <ol class="steps">
+    <li><span>🌊</span><p>Встань <b>спиной к морю</b>.</p></li>
+    <li><span>🚶</span><p>Иди <b>прямо</b>. Мимо больших зонтиков. Это <b>5 минут</b>.</p></li>
+    <li><span>🚦</span><p>Видишь <b>большую дорогу</b>? <b>Стой!</b> Переходи только <b>со взрослым</b>.</p></li>
+    <li><span>🏨</span><p>Наш отель — <b>сразу за дорогой</b>. Рядом парк с огоньками <b>Carnival Magic</b> 🎡.</p></li>
+    <li><span>🙋</span><p>Не видишь отель? <b>Стой на месте.</b> Покажи взрослому в форме карточку <b>«Я потерялся»</b>.</p></li>
+  </ol>
+  <div class="way-note"><span>🛒</span><p>Ты у магазина <b>Big C</b>? Иди по большой дороге <b>к слону FantaSea</b> 🐘. Отель — <b>после</b> FantaSea и Carnival Magic.</p></div>
+  <button class="act pri wide" data-offc="kid" style="width:100%;margin-top:10px;padding:16px;font-size:16px">🧒 Открыть «Я потерялся»</button>
+</div>
+      <div class="sec">Нет интернета?</div>
+      <div class="card big-txt"><ul class="ez">
+        <li><span>✅</span><p><b>Приложение работает.</b> Карта, номера, переводчик — всё есть.</p></li>
+        <li><span>📲</span><p><b>Поставьте иконку на экран.</b> iPhone: Safari → «Поделиться» → «На экран Домой». Android: «⋮» → «Установить».</p></li>
+        <li><span>🗺️</span><p><b>Скачайте карту Пхукета в Google Maps</b> заранее, в отеле. Тогда она будет вести даже без интернета.</p></li>
+        <li><span>📸</span><p><b>Сделайте скриншоты</b> карточек ниже. Они будут в галерее.</p></li>
       </ul></div>
       <div class="sec">Карточка для таксиста</div>
       <div class="card taxi">
@@ -607,14 +683,14 @@ a{color:inherit}
           <a class="act" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=7.960592,98.285965">Маршрут</a>
         </div>
       </div>
-      <div class="sec">Офлайн‑набор · сохраните скриншотом</div>
+      <div class="sec">Картинки на телефон</div>
       <div class="offgrid">
         <button class="act" data-offc="taxi"><span>🚕</span>Адрес для таксиста</button>
         <button class="act" data-offc="kid"><span>🧒</span>«Я потерялся»</button>
         <button class="act" data-offc="nums"><span>🆘</span>Экстренные номера</button>
       </div>
       <div class="row2" style="margin-top:8px"><a class="act" href="img/1-adres-dlya-taksista.png" download>⬇️ Такси</a><a class="act" href="img/2-ya-poteryalsya.png" download>⬇️ Ребёнок</a><a class="act" href="img/3-ekstrennye-nomera.png" download>⬇️ Номера</a><a class="act" href="img/4-karta-kamala.png" download>⬇️ Карта</a></div>
-      <p class="sub" style="margin:10px 2px 0">Откройте карточку и сделайте скриншот — она останется в галерее телефона и откроется даже без интернета. Детям поставьте «Я потерялся» на экран блокировки.</p>
+      <p class="sub big-sub" style="margin:10px 2px 0">Нажмите ⬇️ и сохраните картинку. Она будет в галерее — даже без интернета. Детям поставьте «Я потерялся» на экран телефона.</p>
       <div class="sec" id="kids-sec">Карточки детей — если ребёнок потерялся</div>
       <p class="sub" style="margin-bottom:12px">Заполните на каждого ребёнка. В нужный момент откройте карточку на весь экран и покажите спасателю, охране или полиции — там текст на тайском и английском. Данные хранятся только на этом телефоне; сделайте скриншот карточки на всякий случай.</p>
       <div id="kidlist"></div>
@@ -681,21 +757,21 @@ a{color:inherit}
         <li><b>Детские кресла</b> в такси почти не встречаются — заранее закажите трансфер через отель.</li>
       </ul></div>
 
-            <div class="sec">Без интернета</div>
-      <div class="card"><ul>
-        <li><b>Приложение работает без связи</b>, если страница уже открыта: карта, номера, разговорник, карточки детей, калькулятор, озвучка. Не закрывайте вкладку перед выходом из отеля.</li><li><b>Установите как приложение:</b> iPhone — Safari → «Поделиться» → «На экран Домой»; Android — Chrome → «⋮» → «Установить приложение». После первого открытия с интернетом гид работает полностью без интернета.</li>
-        <li><b>Скачайте офлайн‑карту Пхукета в Google Maps</b> ещё в отеле: аватар → «Офлайн‑карты» → «Выбрать карту» → выделите Пхукет → «Скачать». GPS работает без интернета, и Google Maps поведёт до отеля.</li>
-        <li>Сохраните отель в Google Maps («Сохранить» → «Избранное») и сделайте скриншот карточки для таксиста и карточек детей.</li>
-        <li>Ориентир: отель рядом с FantaSea и Carnival Magic, это северная часть Камалы. Их знает каждый водитель.</li>
+            <div class="sec">Нет интернета?</div>
+      <div class="card big-txt"><ul class="ez">
+        <li><span>✅</span><p><b>Приложение работает.</b> Карта, номера, переводчик — всё есть.</p></li>
+        <li><span>📲</span><p><b>Поставьте иконку на экран.</b> iPhone: Safari → «Поделиться» → «На экран Домой». Android: «⋮» → «Установить».</p></li>
+        <li><span>🗺️</span><p><b>Скачайте карту Пхукета в Google Maps</b> заранее, в отеле.</p></li>
+        <li><span>🧭</span><p><b>Как дойти до отеля</b> — смотрите в разделе SOS.</p></li>
       </ul></div>
-      <div class="sec">Офлайн‑набор · сохраните скриншотом</div>
+      <div class="sec">Картинки на телефон</div>
       <div class="offgrid">
         <button class="act" data-offc="taxi"><span>🚕</span>Адрес для таксиста</button>
         <button class="act" data-offc="kid"><span>🧒</span>«Я потерялся»</button>
         <button class="act" data-offc="nums"><span>🆘</span>Экстренные номера</button>
       </div>
       <div class="row2" style="margin-top:8px"><a class="act" href="img/1-adres-dlya-taksista.png" download>⬇️ Такси</a><a class="act" href="img/2-ya-poteryalsya.png" download>⬇️ Ребёнок</a><a class="act" href="img/3-ekstrennye-nomera.png" download>⬇️ Номера</a><a class="act" href="img/4-karta-kamala.png" download>⬇️ Карта</a></div>
-      <p class="sub" style="margin:10px 2px 0">Откройте карточку и сделайте скриншот — она останется в галерее телефона и откроется даже без интернета. Детям поставьте «Я потерялся» на экран блокировки.</p>
+      <p class="sub big-sub" style="margin:10px 2px 0">Нажмите ⬇️ и сохраните картинку. Она будет в галерее — даже без интернета. Детям поставьте «Я потерялся» на экран телефона.</p>
       <div class="sec">Как пользоваться</div>
       <div class="card"><ul>
         <li>Добавьте страницу на экран «Домой»: в Safari «Поделиться → На экран Домой», в Chrome «⋮ → Добавить на главный экран».</li>
@@ -1224,7 +1300,7 @@ sosBtn.onclick=()=>{sheet.innerHTML=`<div class="grab"></div>
   <button class="act" data-go="sos:kids-sec">${ic('kids')}Карточки детей</button>
   <a class="act" href="tel:1155" data-copy="1155">Туристическая полиция · 1155</a>
   <a class="act" href="tel:1669" data-copy="1669">Скорая помощь · 1669</a>
- </div><div class="warn" style="margin-top:14px"><b>Нет интернета?</b> Отель — в северной части Камалы, рядом с парками <b>FantaSea</b> и <b>Carnival Magic</b>: их знает любой водитель и прохожий. От пляжа идите от моря вглубь ≈ 300 м к главной дороге, отель — на Soi Kamala 12, на восточной стороне главной дороги, чуть южнее Novotel и InterContinental. Покажите таксисту адрес на тайском (кнопка выше).</div><p class="phone-line">Google Maps сам определит, где вы сейчас, и построит пеший маршрут. Без интернета маршрут работает, только если заранее скачана офлайн‑карта Пхукета в Google Maps.</p>`;
+ </div><div class="way">  <div class="way-h"><span>🧭</span><div><b>Как дойти до отеля</b><small>Работает без интернета</small></div></div>  <svg class="waysvg" viewBox="0 0 360 240" aria-label="Схема: как дойти от пляжа до отеля"><rect width="360" height="240" rx="18" fill="#f6efe2"/><path d="M0 18 Q0 0 18 0 H72 V240 H18 Q0 240 0 222Z" fill="#9fd3de"/><g stroke="#fff" stroke-width="2" fill="none" opacity=".7"><path d="M10 40 q8 -6 16 0 t16 0 t16 0"/><path d="M10 110 q8 -6 16 0 t16 0 t16 0"/><path d="M10 180 q8 -6 16 0 t16 0 t16 0"/></g><rect x="72" width="26" height="240" fill="#ecd6a6"/><rect x="206" width="32" height="240" fill="#c9c3b6"/><path d="M222 6 V234" stroke="#fff" stroke-width="2.5" stroke-dasharray="10 9"/><text x="36" y="226" text-anchor="middle" font-size="12" font-weight="800" fill="#1f5f6c">МОРЕ</text><text x="222" y="20" text-anchor="middle" font-size="10" font-weight="800" fill="#5b5446" transform="rotate(90 222 20)" dx="40" dy="4">БОЛЬШАЯ ДОРОГА</text><text x="85" y="72" text-anchor="middle" font-size="26">🧒</text><text x="85" y="92" text-anchor="middle" font-size="10" font-weight="800" fill="#7a5a1f">ТЫ ТУТ</text><path d="M104 62 H196" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/><path d="M190 54 L202 62 L190 70" fill="none" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="150" y="50" text-anchor="middle" font-size="22">⛱️</text><text x="150" y="84" text-anchor="middle" font-size="10" font-weight="800" fill="#5b4a2f">Café del Mar</text><text x="150" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="#8a7a5a">5 минут</text><path d="M240 62 H262" stroke="#e0567f" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 9"/><circle cx="300" cy="58" r="32" fill="#fff" stroke="#b8935a" stroke-width="3"/><text x="300" y="70" text-anchor="middle" font-size="32">🏨</text><text x="300" y="106" text-anchor="middle" font-size="11" font-weight="900" fill="#0f1b2d">НАШ ОТЕЛЬ</text><text x="290" y="150" text-anchor="middle" font-size="26">🎡</text><text x="290" y="168" text-anchor="middle" font-size="10" font-weight="800" fill="#7a2f4a">Carnival Magic</text><text x="290" y="200" text-anchor="middle" font-size="26">🐘</text><text x="290" y="218" text-anchor="middle" font-size="10" font-weight="800" fill="#4a2f7a">FantaSea</text><text x="160" y="196" text-anchor="middle" font-size="24">🛒</text><text x="160" y="216" text-anchor="middle" font-size="10" font-weight="800" fill="#2f4f8a">Центр · Big C</text><path d="M186 200 Q202 200 210 186" stroke="#2f6fde" stroke-width="3" fill="none" stroke-dasharray="2 7" stroke-linecap="round"/><path d="M248 228 V96" stroke="#2f6fde" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 8"/><path d="M241 104 L248 92 L255 104" fill="none" stroke="#2f6fde" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>  <button class="say" data-say="way" style="margin:12px 0 4px"><span class="sp">🔊</span><span><b>Послушать дорогу</b><small>Нажми — тебе расскажут</small></span><span class="eq3"><i></i><i></i><i></i></span></button>  <ol class="steps">    <li><span>🌊</span><p>Встань <b>спиной к морю</b>.</p></li>    <li><span>🚶</span><p>Иди <b>прямо</b>. Мимо больших зонтиков. Это <b>5 минут</b>.</p></li>    <li><span>🚦</span><p>Видишь <b>большую дорогу</b>? <b>Стой!</b> Переходи только <b>со взрослым</b>.</p></li>    <li><span>🏨</span><p>Наш отель — <b>сразу за дорогой</b>. Рядом парк с огоньками <b>Carnival Magic</b> 🎡.</p></li>    <li><span>🙋</span><p>Не видишь отель? <b>Стой на месте.</b> Покажи взрослому в форме карточку <b>«Я потерялся»</b>.</p></li>  </ol>  <div class="way-note"><span>🛒</span><p>Ты у магазина <b>Big C</b>? Иди по большой дороге <b>к слону FantaSea</b> 🐘. Отель — <b>после</b> FantaSea и Carnival Magic.</p></div>  <button class="act pri wide" data-offc="kid" style="width:100%;margin-top:10px;padding:16px;font-size:16px">🧒 Открыть «Я потерялся»</button></div><p class="phone-line">Кнопка «Проложить путь» работает с интернетом. Без интернета — смотрите картинку выше.</p>`;
  sheet.classList.add('on');scrim.classList.add('on')};
 sheet.addEventListener('click',e=>{if(e.target.closest('[data-taxi]')){closeSheet();showFull(`<div class="big" style="font-size:34px">โรงแรม เดอะ มาริน ภูเก็ต กมลา</div><div class="tr">ซอยกมลา 12, กมลา, กะทู้, ภูเก็ต</div><div class="ru" style="margin-top:16px">The Marin Phuket Kamala Beach<br>111/1 Moo 3, Soi Kamala 12, Kamala, Kathu</div><div class="ru" style="margin-top:10px;color:var(--red);font-size:22px">+66 80 532 5695</div>`)}
  if(e.target.closest('[data-go]'))closeSheet()});
@@ -1414,6 +1490,7 @@ function sayRu(text,btn){if(sayBtn===btn&&btn){stopSay();return}stopSay();sayBtn
 const SAY={
  sos:'Привет! Послушай, что делать, если ты потерялся. Первое: не бойся и стой на месте, так тебя быстрее найдут. Второе: никуда не уходи с незнакомыми людьми. Третье: найди взрослого в форме — спасателя на пляже, охранника в магазине или полицейского. Или подойди к маме с детьми. Покажи им свою карточку в телефоне или скажи по‑английски: ай эм лост. Это значит: я потерялся. Наш отель называется Зе Марин. Он рядом с большим сказочным парком ФантаСи. Номер скорой помощи: один, шесть, шесть, девять. Туристическая полиция: один, один, пять, пять. А взрослые могут нажать красную кнопку SOS, и телефон покажет дорогу до отеля.',
  hotel:'Наш отель называется Зе Марин Пхукет. Он находится на пляже Камала. До моря примерно триста метров, это пять минут пешком. Заселяемся в два часа дня, а выезжаем до двенадцати часов. В отеле есть бассейны, детский клуб и бесплатный автобус до пляжа. Совсем рядом большие вечерние парки ФантаСи и Карнавал Мэджик. Если что‑то случилось, позвоните на ресепшен — зелёная кнопка в приложении. Ресепшен работает круглосуточно.',
+ way:'Как дойти до отеля. Первое: встань спиной к морю. Второе: иди прямо, мимо больших зонтиков. Это пять минут. Третье: видишь большую дорогу? Стой! Переходи дорогу только со взрослым. Четвёртое: наш отель сразу за дорогой. Рядом парк с огоньками Карнавал Мэджик. Пятое: если не видишь отель — стой на месте и покажи взрослому в форме карточку «Я потерялся». А если ты у магазина Биг Си — иди по большой дороге к слону ФантаСи. Отель будет после него.',
  rules:'Важные правила в Таиланде. Первое: электронные сигареты и вейпы запрещены полностью, даже везти их с собой нельзя. За это очень большой штраф. Второе: на пляжах курить нельзя. Третье: в храм приходим в одежде, которая закрывает плечи и колени, а обувь снимаем. Четвёртое: нельзя трогать людей за голову, даже детей. Пятое: нельзя увозить домой ракушки, кораллы и песок. Шестое: не кормим обезьян и не гладим бездомных собак. И самое главное для детей: с одиннадцати до трёх часов дня солнце очень сильное. В это время играем в тени, пьём много воды и не забываем крем от солнца.'};
 document.addEventListener('click',e=>{const b=e.target.closest('[data-say]');if(!b)return;const k=b.dataset.say;
  let text=SAY[k];if(k.startsWith('fun:')){const f=FUN.find(x=>x.id===k.slice(4));text=f.n+'. '+f.d+' Время работы: '+f.h.replace(/·/g,',')+'.'}

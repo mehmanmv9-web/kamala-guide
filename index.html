@@ -722,6 +722,9 @@ html{background:var(--ivory,#f7f3ec);height:100%}
 .tripdays{display:grid;gap:8px;margin-top:6px}.tday{display:flex;gap:12px;align-items:flex-start;background:#f7f8fb;border-radius:16px;padding:10px 12px}.tday.now{background:#fff4e6;border:2px solid #f59f00}.tday.past{opacity:.55}
 .tnum{flex:none;width:46px;text-align:center;background:#fff;border-radius:12px;padding:4px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}.tnum b{display:block;font-size:20px}.tnum small{font-size:11px;color:#7b8699}.tday b{font-size:15px}.tday p{margin:3px 0 0;font-size:14px;line-height:1.35}
 #tripban .kbe{font-size:30px;flex:none;width:58px;text-align:center}
+#ptr{white-space:nowrap;position:absolute;top:calc(var(--safe-t,0px) + 6px);left:50%;z-index:60;transform:translate(-50%,-80px);display:flex;align-items:center;gap:8px;background:#fff;color:#0f1b2d;border-radius:30px;padding:8px 14px 8px 8px;box-shadow:0 6px 20px rgba(15,27,45,.22);font:600 13px/1 inherit;pointer-events:none;opacity:0;transition:opacity .15s}
+#ptr.on{opacity:1}#ptr:not(.on){transition:transform .25s,opacity .2s}#ptr i{font-style:normal;font-size:20px;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#e7f5ff;color:#1c7ed6}
+#ptr.ready i{background:#1c7ed6;color:#fff}#ptr.load i{animation:ptrs .7s linear infinite;background:#1c7ed6;color:#fff}@keyframes ptrs{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
@@ -2417,7 +2420,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v26';
+const SWV='kamala-v27';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2930,6 +2933,16 @@ function tripSheet(){const s=tripState(),t=bkk(),today=`${t.getFullYear()}-${pad
  sheet.classList.add('on');scrim.classList.add('on')}
 document.addEventListener('click',e=>{if(e.target.closest('#tripban'))tripSheet()});
 renderTrip();setInterval(renderTrip,60000);
+/* ---------- ↻ потянуть вниз — обновить ---------- */
+(function(){const ind=document.createElement('div');ind.id='ptr';ind.innerHTML='<i>↻</i><span>Потяните, чтобы обновить</span>';document.getElementById('app').appendChild(ind);
+ let y0=null,dy=0,el=null;const MAX=90;
+ const skip=t=>t.closest('#v-map,#v-chat,.sheet,.full,.kst,input,textarea,.hscroll,svg')||document.querySelector('.sheet.on');
+ document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const v=e.target.closest('.view');if(!v||skip(e.target)||v.scrollTop>0){y0=null;return}el=v;y0=e.touches[0].clientY;dy=0},{passive:true});
+ document.addEventListener('touchmove',e=>{if(y0==null)return;if(el.scrollTop>0){y0=null;ind.className='';return}dy=e.touches[0].clientY-y0;if(dy<=0){ind.className='';ind.style.transform='';return}const d=Math.min(dy*.5,MAX);ind.className='on'+(d>=MAX*.75?' ready':'');ind.style.transform=`translate(-50%,${d}px)`;ind.querySelector('i').style.transform=`rotate(${d*4}deg)`;ind.querySelector('span').textContent=d>=MAX*.75?'Отпустите — обновим':'Потяните, чтобы обновить'},{passive:true});
+ const end=()=>{if(y0==null)return;y0=null;if(ind.classList.contains('ready')){ind.className='on load';ind.querySelector('span').textContent='Обновляем…';doRefresh()}else{ind.className='';ind.style.transform=''}};
+ document.addEventListener('touchend',end);document.addEventListener('touchcancel',end);
+ async function doRefresh(){try{if(navigator.onLine&&navigator.serviceWorker){const r=await navigator.serviceWorker.getRegistration();if(r)await Promise.race([r.update(),new Promise(s=>setTimeout(s,2500))])}}catch(e){}setTimeout(()=>location.reload(),300)}
+})();
 /* ---------- init ---------- */
 renderChips();applyFilter();renderList();renderWeek();todayStrip();tick();
 

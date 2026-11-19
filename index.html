@@ -750,6 +750,8 @@ html{background:var(--ivory,#f7f3ec);height:100%}
 .tline{display:grid;gap:2px;background:#fff;border-radius:18px;padding:6px 12px}.tline>div{display:grid;grid-template-columns:62px 28px 1fr;align-items:start;padding:7px 0;border-bottom:1px dashed #e9ecef}.tline>div:last-child{border:0}.tline b{font-size:15px;color:#1c7ed6}.tline span{font-size:18px}.tline p{margin:0;font-size:14px;line-height:1.35}
 .pickup{background:#fff4e6;border-radius:18px;padding:12px;margin-bottom:8px;display:flex;flex-direction:column;gap:8px}.pickup label{font-weight:800;font-size:15px}.pickup small{display:block;font-weight:500;font-size:12px;color:#7b8699}.pickup input{font:inherit;font-size:20px;padding:10px 12px;border-radius:12px;border:2px solid #ffc078;text-align:center}
 .cklist{display:grid;gap:6px}.cklist label{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:14px;padding:10px 12px;font-size:14px;line-height:1.35}.cklist input{width:22px;height:22px;flex:none;accent-color:#2f9e44}.cklist input:checked+span{text-decoration:line-through;opacity:.55}
+.steps{display:grid;gap:8px}.stp{display:flex;gap:12px;background:#fff;border-radius:16px;padding:10px 12px;box-shadow:0 1px 6px rgba(15,27,45,.06)}.sn{flex:none;width:44px;text-align:center}.sn b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#1c7ed6;color:#fff;font-size:13px}.sn span{display:block;font-size:22px;margin-top:2px}.stp>div:last-child>b{font-size:15px}.stp p{margin:3px 0 0;font-size:14px;line-height:1.4}
+.arrsvg{width:100%;height:auto;background:#fff;border-radius:18px;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -2567,7 +2569,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v33';
+const SWV='kamala-v34';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -3092,6 +3094,20 @@ const fmtT=(ts,tz)=>{const d=new Date(ts+tz*3600e3);return pad(d.getUTCHours())+
 function cdTxt(ms){if(ms<=0)return 'сейчас';const m=Math.floor(ms/6e4),d=Math.floor(m/1440),h=Math.floor(m%1440/60),mi=m%60;return (d?d+' д ':'')+(d||h?h+' ч ':'')+mi+' мин'}
 const FLYCK=[['tdac','📝 TDAC — электронная карта прибытия на каждого (с 24 ноября)'],['pass','🛂 Загранпаспорта всех, включая малыша'],['tick','🎫 Билеты и ваучер — скриншоты в телефоне'],['ins','🩺 Страховка'],['cash','💵 Наличные и карты'],['pwr','🔋 Пауэрбанк и зарядки — только в ручную кладь'],['med','💊 Детские лекарства — в ручную кладь'],['kid','🍼 Еда, вода, памперсы, сменная одежда для детей в самолёт'],['swim','🩱 Купальники в ручную кладь (заселение обычно с 14:00)'],['app','📲 Этот сайт на экране «Домой» и «Скачать всё» для офлайна']];
 const BACKCK=[['safe','🔐 Пусто ли в сейфе в номере'],['bpass','🛂 Паспорта всех у себя'],['bchg','🔌 Зарядки из розеток'],['bpick','🚌 Время трансфера ANEX уточнено'],['bliq','🧴 Жидкости в ручной клади до 100 мл'],['bbaht','💱 Остатки батов потрачены или обменяны']];
+const ARRSTEPS=[['✈️','Выход из самолёта','Идите за толпой по табличкам <b>Arrival / Immigration</b>. Туалет есть по пути — сводите детей до очереди.'],
+ ['🛂','Паспортный контроль','Держите в руках паспорта и QR‑коды TDAC всех членов семьи. <b>С младенцем можно в приоритетную очередь (Priority Lane)</b> — она для пассажиров с младенцами, беременных и 70+.'],
+ ['🧳','Багаж — ленты 1–5','Сразу после паспортного контроля. Номер ленты для рейса <b>VSV 5202</b> смотрите на экранах. Если багаж потерялся — стойка AOTGA у ленты №1.'],
+ ['🟢','Таможня — зелёный коридор','Если нечего декларировать — зелёный коридор. Красный — для товаров к декларации.'],
+ ['🚪','Выход в зал прилёта','1‑й этаж международного терминала. Тут же стойки SIM‑карт и обмен денег (в аэропорту курс хуже — меняйте немного).'],
+ ['🧑‍💼','Ищите ANEX','Обычно представитель туроператора стоит сразу на выходе в зал прилёта с табличкой ANEX и списками. Назовите фамилию и отель <b>The Marin Phuket</b>. Он посадит в автобус группового трансфера.'],
+ ['🚌','Автобус до отеля','Ехать ≈ 30–40 минут, автобус может заезжать в другие отели. Держитесь все 3 семьи вместе, пересчитайте детей и чемоданы.']];
+const DEPSTEPS=[['🚌','Трансфер ANEX от отеля','Время скажет гид. Будьте в лобби за 10 минут, номер сдан, сейф пуст.'],
+ ['🏢','Международный терминал, 3‑й этаж — вылет','Стойки регистрации по рейсу VSV 5203 — на экранах. Регистрация с 10:55 до 12:55.'],
+ ['🛂','Паспортный контроль и досмотр','Жидкости до 100 мл, пауэрбанки — только в ручной клади. С младенцем снова можно в приоритетную очередь.'],
+ ['🚪','Выход на посадку','Номер выхода — на посадочном и на табло. Посадка обычно за 40–60 минут до вылета.']];
+function stepsHTML(a){return `<div class="steps">${a.map((s,i)=>`<div class="stp"><div class="sn"><b>${i+1}</b><span>${s[0]}</span></div><div><b>${s[1]}</b><p>${s[2]}</p></div></div>`).join('')}</div>`}
+const ARRSVG=`<svg class="arrsvg" viewBox="0 0 360 120" aria-label="Схема прилёта"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 8 4 0 8z" fill="#1c7ed6"/></marker></defs>
+${[['✈️','Самолёт'],['🛂','Паспорт'],['🧳','Ленты 1–5'],['🟢','Таможня'],['🧑‍💼','ANEX'],['🚌','Автобус']].map((x,i)=>{const cx=30+i*60;return `<g><circle cx="${cx}" cy="48" r="24" fill="#e7f5ff" stroke="#1c7ed6" stroke-width="2"/><text x="${cx}" y="56" font-size="22" text-anchor="middle">${x[0]}</text><text x="${cx}" y="95" font-size="11" font-weight="700" text-anchor="middle" fill="#0f1b2d">${x[1]}</text>${i<5?`<line x1="${cx+26}" y1="48" x2="${cx+33}" y2="48" stroke="#1c7ed6" stroke-width="2.5" marker-end="url(#ah)"/>`:''}</g>`}).join('')}</svg>`;
 function renderFly(){const el=document.getElementById('flybody');if(!el)return;const now=Date.now(),M=flyMiles(),nx=M.find(m=>m[0]>now);const ck=LS.get('flyck',{});const pk=LS.get('pickup','');
  const card=(f,tzA,tzB,lbA,lbB)=>`<div class="tkt"><div class="fc-h"><b>${f.no}</b><span>${f.d}</span></div><div class="fc-r"><div><small>${f.fr}</small><b>${fmtT(f.dep,tzA)}</b><i>${lbA}</i></div><div class="fc-pl">✈️</div><div><small>${f.to}</small><b>${fmtT(f.arr,tzB)}</b><i>${lbB}</i></div></div><p>Регистрация ${fmtT(f.ci,tzA)}–${fmtT(f.cc,tzA)} · только в аэропорту · багаж 23 кг + ручная 5 кг</p></div>`;
  el.innerHTML=`<div class="chhero" style="--c:#1c7ed6"><span>✈️</span><div><h2>Наш рейс</h2><p>Все 3 семьи — один рейс и один отель · время местное</p></div></div>
@@ -3100,9 +3116,13 @@ function renderFly(){const el=document.getElementById('flybody');if(!el)return;c
  <p class="foot">На Пхукете время на 2 часа больше, чем в Алматы. Расписание чартеров меняется — проверьте рейс за сутки до вылета.</p>
  <div class="sec">26 ноября — дорога туда (время Алматы)</div>
  <div class="tline">${[['20:30','🚗','Выезжайте в аэропорт с запасом: ночью бывают пробки и очереди'],['21:30','👨‍👩‍👧‍👦','Все 3 семьи встречаются в аэропорту — договоритесь о месте в чате'],['21:55','🛄','Открывается регистрация. Онлайн‑регистрации на чартере нет'],['23:55','⛔','Регистрация закрывается — опоздавших не пускают'],['~00:15','🚶','Посадка обычно начинается за 40–60 минут до вылета'],['00:55','🛫','Вылет VSV 5202'],['10:25','🛬','Прилёт на Пхукет (время Пхукета). Паспортный контроль: QR‑код TDAC'],['~11:30','🚌','Групповой трансфер ANEX: ищите представителя ANEX'],['14:00','🔑','Заселение в отеле обычно с 14:00']].map(r=>`<div><b>${r[0]}</b><span>${r[1]}</span><p>${r[2]}</p></div>`).join('')}</div>
+ <div class="sec">🛬 Аэропорт Пхукета: как пройти</div>${ARRSVG}${stepsHTML(ARRSTEPS)}
+ <div class="acts" style="grid-template-columns:1fr 1fr;margin:8px 0">${placeBtns('air_hkt2',{n:'Аэропорт Пхукета',en:'Phuket International Airport',lat:8.1132,lng:98.3169}).replace(/<button class="act" data-ptx[^>]*>.*?<\/button>/,'')}</div>
+ <p class="foot">Где именно стоит представитель ANEX, туроператор может уточнить в день прилёта. Не нашли за 10–15 минут — пишите в WhatsApp ANEX (кнопка ниже) и стойте у выхода, не уходите с детьми далеко.</p>
  <div class="sec">5 декабря — домой (время Пхукета)</div>
  <div class="pickup"><label>🚌 Время трансфера ANEX от отеля<small>Узнайте у гида или в чате ANEX и впишите — появится таймер</small></label><input id="pkin" inputmode="numeric" placeholder="например 09:30" value="${pk}"></div>
  <div class="tline">${[['07:00','🍳','Завтрак, последние вещи в чемодан'],[pk||'??:??','🚌','Трансфер ANEX от отеля — все 3 семьи в лобби за 10 минут, пересчитайте детей'],['10:55','🛄','Открывается регистрация в аэропорту Пхукета'],['12:00','🔑','Расчётный час в отеле (если трансфер позже — сдайте номер и оставьте вещи на ресепшене)'],['12:55','⛔','Регистрация закрывается'],['~13:15','🚶','Посадка обычно за 40–60 минут'],['13:55','🛫','Вылет VSV 5203'],['19:40','🏠','Посадка в Алматы (время Алматы)']].sort((a,b)=>pk?a[0].replace(/[^\d:]/g,'').padStart(5,'0').localeCompare(b[0].replace(/[^\d:]/g,'').padStart(5,'0')):0).map(r=>`<div><b>${r[0]}</b><span>${r[1]}</span><p>${r[2]}</p></div>`).join('')}</div>
+ <div class="sec">🛫 В аэропорту на обратном пути</div>${stepsHTML(DEPSTEPS)}
  <div class="sec">Перед вылетом туда</div><div class="cklist">${FLYCK.map(([k,t])=>`<label><input type="checkbox" data-ck="${k}" ${ck[k]?'checked':''}><span>${t}</span></label>`).join('')}</div>
  <a class="act pri" href="https://tdac.immigration.go.th/" target="_blank" style="display:block;text-align:center;margin:8px 0">📝 Заполнить TDAC (официальный сайт)</a>
  <p class="foot">TDAC — бесплатная электронная карта прибытия, её заполняют на каждого путешественника не раньше чем за 3 дня до прилёта (для прилёта 27 ноября — с 24 ноября). Платных «посредников» не используйте.</p>

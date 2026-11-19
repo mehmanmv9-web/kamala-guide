@@ -725,6 +725,14 @@ html{background:var(--ivory,#f7f3ec);height:100%}
 #ptr{white-space:nowrap;position:absolute;top:calc(var(--safe-t,0px) + 6px);left:50%;z-index:60;transform:translate(-50%,-80px);display:flex;align-items:center;gap:8px;background:#fff;color:#0f1b2d;border-radius:30px;padding:8px 14px 8px 8px;box-shadow:0 6px 20px rgba(15,27,45,.22);font:600 13px/1 inherit;pointer-events:none;opacity:0;transition:opacity .15s}
 #ptr.on{opacity:1}#ptr:not(.on){transition:transform .25s,opacity .2s}#ptr i{font-style:normal;font-size:20px;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#e7f5ff;color:#1c7ed6}
 #ptr.ready i{background:#1c7ed6;color:#fff}#ptr.load i{animation:ptrs .7s linear infinite;background:#1c7ed6;color:#fff}@keyframes ptrs{to{transform:rotate(360deg)}}
+.calg{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:12px 0}
+.cald{position:relative;border:0;background:#fff;border-radius:16px;padding:7px 0 8px;display:flex;flex-direction:column;align-items:center;gap:1px;box-shadow:0 2px 8px rgba(15,27,45,.08);font:inherit;color:#0f1b2d;cursor:pointer}
+.cald small{font-size:11px;color:#7b8699;text-transform:uppercase;font-weight:700}.cald b{font-size:22px;line-height:1.1}.cald i{font-style:normal;font-size:11px;color:#7b8699}
+.cald.we small{color:#e8590c}.cald.past{opacity:.5}.cald.today{box-shadow:0 0 0 2px #f59f00}
+.cald.on{background:linear-gradient(140deg,#e8590c,#f59f00);color:#fff;transform:translateY(-2px)}.cald.on small,.cald.on i{color:#fff}
+.cald em{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#e0567f}.cald.on em{background:#fff}
+.caltip{background:#fff4e6;border-radius:16px;padding:10px 13px;margin:10px 0}.caltip b{font-size:15px}.caltip p{margin:4px 0 0;font-size:14px;line-height:1.35}
+.hli.calsp{border:2px solid #f59f00}.kidb{font-size:13px}
 </style>
 </head>
 <body>
@@ -909,6 +917,7 @@ html{background:var(--ivory,#f7f3ec);height:100%}
     </section>
 
     <section class="view" id="v-gen"><div id="genbody"></div></section>
+    <section class="view" id="v-cal"><div id="calbody"></div></section>
 
     <section class="view" id="v-halal">
       <h2 class="h">🕌 Халяль и намаз</h2><p class="sub">Время азана, мечети и халяльная еда — с дорогой прямо на нашей карте</p>
@@ -1168,6 +1177,7 @@ const I={
  men:'<circle cx="12" cy="6" r="3"/><path d="M8 21v-7l-2-1V10a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v3l-2 1v7"/>',
  women:'<circle cx="12" cy="6" r="3"/><path d="M12 9l-4 8h8z"/><path d="M10 17v4M14 17v4"/>',
  game:'<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="16" cy="11.5" r="1"/><circle cx="18" cy="13.5" r="1"/>',
+ cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="8" cy="15" r="1.2"/><circle cx="12" cy="15" r="1.2"/><circle cx="16" cy="15" r="1.2"/>',
  wave:'<path d="M2 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M2 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><circle cx="16" cy="7" r="3"/>',
  leaf:'<path d="M12 3c1.6 3.6 1.6 8.4 0 12.6-1.6-4.2-1.6-9 0-12.6z"/><path d="M12 15.6C9.6 12.6 6.3 10.5 2.5 9.8c2.2 3.6 5.4 5.4 9.5 5.8z"/><path d="M12 15.6c2.4-3 5.7-5.1 9.5-5.8-2.2 3.6-5.4 5.4-9.5 5.8z"/><path d="M12 15.6c-2.8-1-5.6-.7-8.4 1 2.8 1 5.6.7 8.4-1zM12 15.6c2.8-1 5.6-.7 8.4 1-2.8 1-5.6.7-8.4-1z"/><path d="M12 15.6V21"/>',
  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 3l.7 1.6L19.3 5l-1.6.7L17 7.3l-.7-1.6L14.7 5l1.6-.4z"/>',
@@ -1292,9 +1302,9 @@ const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок'
 
 /* ---------- tabs / router ---------- */
 const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
-const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain','gen'];
+const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain','gen','cal'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
-function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
+function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k==='cal')setTimeout(renderCal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
  if(push){try{if(history.state&&history.state.ov)history.replaceState({v:k},'','#'+k);else if(location.hash.slice(1)!==k)history.pushState({v:k},'','#'+k)}catch(e){try{location.hash=k}catch(_){}}}
@@ -1629,7 +1639,7 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   const s=td?(on?'Открыто сейчас':'Сегодня '+p.h.f+'–'+p.h.t):'Сегодня выходной · '+nextOpen(p,t);
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
-const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
+const TILES=[['cal','Календарь','cal','#e8590c'],['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
 document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${g==='kz'?'<img src="img/kz-flag.svg" class="tflag" alt="Флаг Казахстана">':ic(i)}</span>${n}</button>`).join('');
 document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
@@ -2420,7 +2430,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v27';
+const SWV='kamala-v28';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2931,8 +2941,47 @@ function tripSheet(){const s=tripState(),t=bkk(),today=`${t.getFullYear()}-${pad
  <div class="tripdays">${TRIPDAYS.map(([d,t2,x],i)=>{const dt=new Date(d+'T00:00:00');return `<div class="tday ${d===today?'now':''} ${d<today?'past':''}"><div class="tnum"><b>${dt.getDate()}</b><small>${['вс','пн','вт','ср','чт','пт','сб'][dt.getDay()]}</small></div><div><b>День ${i+1} · ${t2}</b><p>${x}</p></div></div>`}).join('')}</div>
  <p class="phone-line">Это подсказки, а не обязательный план. Погоду на каждый день смотрите в «Море сегодня».</p>`;
  sheet.classList.add('on');scrim.classList.add('on')}
-document.addEventListener('click',e=>{if(e.target.closest('#tripban'))tripSheet()});
+document.addEventListener('click',e=>{if(e.target.closest('#tripban'))go('cal')});
 renderTrip();setInterval(renderTrip,60000);
+/* ---------- 📆 Календарь поездки ---------- */
+// d: дни недели (0=вс) или даты 'YYYY-MM-DD'; k:1 — подходит детям
+const CALEV=[
+ {d:[1,2,4,5],ic:'🛍️',t:'Рынок Камалы',tm:'14:00–21:00',p:'Камала, рядом с отелем',x:'Ближайший к нам рынок: фрукты, еда, сувениры, одежда.',k:1,q:'Kamala Night Market Phuket'},
+ {d:[2,5,0],ic:'🐘',t:'Phuket FantaSea — шоу',tm:'парк с 17:30 · шоу 21:00',p:'Камала, 5 минут от отеля',x:'Большое шоу со слонами, акробатами и буфетом. Около 70 минут. Билеты от ~1 600 ฿.',k:1,q:'Phuket FantaSea'},
+ {d:[1,3,6],ic:'🎠',t:'Carnival Magic — парк огней',tm:'17:30–23:30 · парад ~20:30–21:00',p:'Камала, рядом с FantaSea',x:'Светящийся парк, ярмарка, речной парад. Детям очень нравится. От ~1 900 ฿.',k:1,q:'Carnival Magic Phuket'},
+ {d:[1,3,4,5,6,0],ic:'🏯',t:'Siam Niramit — шоу о Таиланде',tm:'вход с 17:30 · шоу 20:30',p:'Пхукет‑таун (Рассада)',x:'Красочное шоу о культуре Таиланда, ~80 минут. Во вторник выходной.',k:1,q:'Siam Niramit Phuket'},
+ {d:[3,4,5,6,0],ic:'🎪',t:'Цирк Adrenaline Rush',tm:'14:30 и 19:30',p:'Катху',x:'Цирковое шоу ~60 минут. Пн и вт — выходные.',k:1,q:'Adrenaline Rush Circus Phuket'},
+ {d:[0,1,2,3,4,5,6],ic:'💃',t:'Simon Cabaret',tm:'18:00 · 19:30 · 21:00',p:'Патонг',x:'Знаменитое кабаре‑шоу, ~70 минут. Скорее для взрослых.',q:'Simon Cabaret Phuket'},
+ {d:[1,4],ic:'🛍️',t:'Рынок Банг Тао',tm:'пн 16:00–21:00 · чт 14:00–20:00',p:'Банг Тао, 15 минут',x:'Местный рынок с едой и одеждой.',k:1,q:'Bang Tao Night Market'},
+ {d:[5],ic:'🎶',t:'Fun Friday на Boat Avenue',tm:'с 16:00',p:'Банг Тао (Чернг Талай)',x:'Пятничный рынок: уличная еда, живая музыка, дизайнерские вещи.',k:1,q:'Boat Avenue Phuket'},
+ {d:[6],ic:'🌅',t:'Laguna Lifestyle Market',tm:'17:00–22:00',p:'Лагуна, Банг Тао',x:'Субботний вечерний рынок у Лагуны.',k:1,q:'Laguna Phuket'},
+ {d:[6,0],ic:'🧺',t:'Рынок Нака (выходные)',tm:'16:00–22:00',p:'Пхукет‑таун',x:'Один из самых больших рынков: сувениры, одежда, еда.',k:1,q:'Naka Weekend Market Phuket'},
+ {d:[0],ic:'🏮',t:'Lard Yai — воскресная улица',tm:'16:00–22:00',p:'Старый город, Thalang Road',x:'Улицу закрывают для машин: еда, ремёсла, музыка. Лучше приезжать к 16:30–17:00.',k:1,q:'Lard Yai Sunday Walking Street Phuket'},
+ {d:[1,2,3,4,5,6],ic:'🍢',t:'Chillva Market',tm:'17:00–23:00',p:'Пхукет‑таун',x:'Модный рынок в цветных контейнерах, много еды.',q:'Chillva Market Phuket'},
+ {d:[3,4,5],ic:'🎸',t:'Indy Market',tm:'16:00–22:30',p:'Пхукет‑таун, Limelight',x:'Молодёжный рынок с музыкой и едой.',q:'Phuket Indy Market'},
+ {d:[2,5],ic:'🛕',t:'Рынок у храма Карон',tm:'16:00–22:00',p:'Карон',x:'Семейный рынок у храма, много еды.',k:1,q:'Karon Temple Market'},
+ {d:[0,1,2,3,4,5,6],ic:'🌃',t:'Рынки Патонга',tm:'Banzaan до полуночи · Malin Plaza 11:00–00:00',p:'Патонг',x:'Работают каждый день. Bangla Night Market 18:00–02:00 — шумная улица, не для детей.',q:'Banzaan Fresh Market Patong'},
+ {d:['2026-11-26','2026-11-27'],ic:'🍽️',t:'PHOODIE — фуд‑фестиваль',tm:'по 27 ноября',p:'Рестораны по всему острову',x:'Фестиваль 50 ресторанов и баров: ужины от шефов, коктейли.'},
+ {d:['2026-11-28'],ic:'🍽️',t:'PHOODIE Meet — фуд‑маркет',tm:'16:00–22:00',p:'Limelight Mall, Пхукет‑таун',x:'Все рестораны фестиваля собираются в один большой маркет.',k:1,q:'Limelight Avenue Phuket'},
+ {d:['2026-11-29'],ic:'🏆',t:'PHOODIE — гала и награды',tm:'вечер',p:'InterContinental, Камала',x:'Финал фуд‑фестиваля, совсем рядом с нами.',q:'InterContinental Phuket Resort Kamala'},
+ {d:['2026-11-26'],ic:'🪷',t:'Лой Кратонг был 24 ноября',tm:'',p:'',x:'Праздник фонариков прошёл за 2 дня до прилёта. В отелях ещё могут стоять украшения.'},
+ {d:['2026-12-05'],ic:'💛',t:'День отца — нац. праздник',tm:'весь день',p:'Вся страна',x:'Жёлтые украшения, вечерние церемонии со свечами. Банки и госучреждения закрыты, возможны ограничения на алкоголь.',k:1},
+ {d:['2026-12-05'],ic:'⛵',t:'Регата King’s Cup',tm:'даты уточняются',p:'Пляж Ката',x:'Крупнейшая парусная регата Азии. Разные источники называют 1–7 или 5–12 декабря.',k:1,q:'Kata Beach Phuket'}];
+let calSel=null,calKids=false;
+function calDays(){const r=[];for(let i=0;i<10;i++){const d=new Date(2026,10,26+i);r.push(d)}return r}
+const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+function calFor(d){const k=ymd(d),w=d.getDay();return CALEV.filter(e=>e.d.includes(k)||e.d.includes(w)).filter(e=>!calKids||e.k).sort((a,b)=>(typeof b.d[0]==='string')-(typeof a.d[0]==='string'))}
+function renderCal(){const el=document.getElementById('calbody');if(!el)return;const days=calDays(),t=bkk(),today=ymd(t);
+ if(!calSel)calSel=days.some(d=>ymd(d)===today)?today:ymd(days[0]);
+ const sd=days.find(d=>ymd(d)===calSel)||days[0],idx=days.indexOf(sd),ev=calFor(sd),tip=TRIPDAYS[idx];
+ const WD=['вс','пн','вт','ср','чт','пт','сб'];
+ el.innerHTML=`<div class="chhero" style="--c:#e8590c"><span>📆</span><div><h2>Календарь поездки</h2><p>26 ноября — 5 декабря 2026 · нажмите на дату</p></div></div>
+ <div class="calg">${days.map((d,i)=>{const k=ymd(d),sp=CALEV.some(e=>e.d.includes(k));return `<button class="cald ${k===calSel?'on':''} ${k===today?'today':''} ${k<today?'past':''} ${d.getDay()%6===0?'we':''}" data-cal="${k}"><small>${WD[d.getDay()]}</small><b>${d.getDate()}</b><i>${d.getMonth()===10?'ноя':'дек'}</i>${sp?'<em></em>':''}</button>`}).join('')}</div>
+ <div class="wsort"><button class="${!calKids?'on':''}" data-calk="0">Всё</button><button class="${calKids?'on':''}" data-calk="1">👶 С детьми</button></div>
+ <div class="caltip"><b>День ${idx+1} · ${sd.getDate()} ${sd.getMonth()===10?'ноября':'декабря'}, ${DFULL[sd.getDay()].toLowerCase()}</b><p>💡 ${tip[2]}</p></div>
+ ${ev.length?ev.map((e,i)=>`<div class="hli${typeof e.d[0]==='string'?' calsp':''}"><div class="hl-t"><b>${e.ic} ${e.t}${e.k?' <span class="kidb">👶</span>':''}</b>${e.tm?`<small>🕒 ${e.tm}</small>`:''}${e.p?`<small>📍 ${e.p}</small>`:''}<p>${e.x}</p></div>${e.q?`<div class="hl-a">${placeBtns('cal'+calSel+i,{n:e.t,en:e.q})}</div>`:''}</div>`).join(''):'<p class="foot">На этот день событий не найдено.</p>'}
+ <p class="foot">Расписание по открытым источникам на ноябрь 2026. В праздники часы могут меняться — уточняйте на месте.</p>`}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-cal]');if(b){calSel=b.dataset.cal;renderCal();return}const k=e.target.closest('[data-calk]');if(k){calKids=k.dataset.calk==='1';renderCal()}});
 /* ---------- ↻ потянуть вниз — обновить ---------- */
 (function(){const ind=document.createElement('div');ind.id='ptr';ind.innerHTML='<i>↻</i><span>Потяните, чтобы обновить</span>';document.getElementById('app').appendChild(ind);
  let y0=null,dy=0,el=null;const MAX=90;

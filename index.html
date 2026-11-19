@@ -460,6 +460,44 @@ html,body{overflow-x:hidden;overscroll-behavior:none;touch-action:manipulation;w
 svg.scene{overflow:hidden}
 .row2{flex-wrap:wrap}.row2 .act{min-width:0;flex:1 1 60px}.offgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.num{min-width:0;overflow-wrap:anywhere}
 .tiles{gap:8px}.tile{min-width:0;padding:12px 4px 10px;font-size:11.5px!important;text-align:center;hyphens:manual;line-height:1.2}.tile .ti{width:44px;height:44px}
+
+/* chat */
+#v-chat{padding:0;display:flex;flex-direction:column;overflow:hidden!important}
+#v-chat.on{display:flex}
+.app.inchat .fsos{display:none}
+.chhead{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px;border-bottom:1px solid var(--line);background:var(--ivory)}
+.chhead b{display:block;font-size:18px;font-weight:900}
+.chhead small{font-size:12.5px;font-weight:700;color:var(--mute)}
+.chset{width:44px;height:44px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:20px}
+.chlist{flex:1;overflow-y:auto;padding:12px 12px 6px;-webkit-overflow-scrolling:touch}
+.chday{text-align:center;margin:10px 0;font-size:11.5px;font-weight:800;color:var(--mute)}
+.chm{display:flex;gap:8px;align-items:flex-end;margin:6px 0}
+.chm.me{justify-content:flex-end}
+.chm .ava{flex:none;width:34px;height:34px;border-radius:12px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:19px}
+.bub{max-width:78%;padding:9px 12px 6px;border-radius:18px 18px 18px 6px;background:#fff;border:1px solid var(--line);font-size:16px;line-height:1.4;color:var(--ink);overflow-wrap:anywhere}
+.chm.me .bub{background:var(--ink);color:#fff;border-color:var(--ink);border-radius:18px 18px 6px 18px}
+.bub b{display:block;font-size:12.5px;color:#2f6fde;margin-bottom:1px}
+.bub i{display:block;text-align:right;font-style:normal;font-size:10.5px;opacity:.6;margin-top:2px}
+.bub a{color:inherit;font-weight:800}
+.chm.sos .bub{background:#d6453d;color:#fff;border-color:#d6453d;font-weight:800}
+.chm.sos .bub b{color:#ffe2b0}
+.chempty{text-align:center;color:var(--mute);padding:40px 20px}.chempty div{font-size:44px}.chempty b{display:block;color:var(--ink);font-size:17px;margin:6px 0}
+.chquick{display:flex;gap:6px;overflow-x:auto;padding:6px 12px;scrollbar-width:none;touch-action:pan-x}
+.chquick::-webkit-scrollbar{display:none}
+.chquick button{flex:none;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:13.5px;font-weight:700;white-space:nowrap}
+.chquick button[data-qm="sos"]{background:#fde8e6;color:#b5332c;border-color:#f3c3be}
+.chin{display:flex;gap:8px;padding:6px 12px calc(98px + var(--safe-b))}
+.chin input{flex:1;min-width:0;border:1px solid #e3e6ec;border-radius:20px;padding:13px 16px;font:600 16px Manrope,system-ui,sans-serif;outline:none;background:#fff}
+.chsend{flex:none;width:50px;height:50px;border-radius:18px;background:var(--ink);color:var(--gold2);font-size:20px}
+.chsetup{padding:20px 16px calc(110px + var(--safe-b));overflow-y:auto}
+.cs-ic{font-size:54px;text-align:center}
+.lab{display:block;font-size:13px;font-weight:800;color:var(--mute);margin:14px 2px 6px}
+.avas{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.avas button{height:48px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:24px}
+.avas button.on{border:2px solid var(--gold);background:#fff6e8}
+.codebox{margin:16px 0 4px;padding:16px;border-radius:18px;background:#f6f2ea;text-align:center;font:900 26px Manrope,system-ui,sans-serif;letter-spacing:.1em;color:var(--ink)}
+.tab{position:relative}
+.tbadge{position:absolute;top:2px;right:18%;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#e0567f;color:#fff;font-size:10.5px;font-weight:900;display:grid;place-items:center}
 </style>
 </head>
 <body>
@@ -630,6 +668,9 @@ svg.scene{overflow:hidden}
       <div id="kzlist"></div>
       <p class="foot">Часы работы ресторанов — по данным путеводителей на 2026 год; перед поездкой лучше позвонить или проверить в Google Maps.</p>
     </section>
+
+    <!-- CHAT -->
+    <section class="view" id="v-chat"></section>
 
     <!-- SOS -->
     <section class="view" id="v-sos">
@@ -958,10 +999,10 @@ function todayStrip(){const t=bkk();const items=['fs','cm','mkt','bpc','anda'].m
 const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок',bpc:'Клиника',anda:'Аквапарк'}[p.id]||p.name);
 
 /* ---------- tabs / router ---------- */
-const TABS=[['home','Главная','home'],['map','Карта','map'],['tr','Перевод','tr'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
-const EXTRA=['near','kz'];
+const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
+const EXTRA=['near','kz','tr'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
-function go(k,push=true){if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.querySelector('.views').scrollTop=0;
+function go(k,push=true){if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
  if(push){try{history.replaceState(null,'','#'+k)}catch(e){try{location.hash=k}catch(_){}}}
@@ -1568,12 +1609,116 @@ if('serviceWorker' in navigator&&location.protocol.startsWith('http')){window.ad
 let instEv=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();instEv=e;const b=document.getElementById('instbtn');if(b)b.style.display='flex'});
 document.addEventListener('click',e=>{if(e.target.closest('#instbtn')&&instEv){instEv.prompt();instEv=null;e.target.closest('#instbtn').style.display='none'}});
 
+/* ================= ЧАТ ТРЁХ СЕМЕЙ (ntfy.sh + шифрование кодом комнаты) ================= */
+const CH={me:LS.get('ch_me',null),code:LS.get('ch_code',null),msgs:LS.get('ch_msgs',[]),queue:LS.get('ch_q',[]),unread:0,key:null,topic:null,es:null};
+const AVA=['👨','👩','👦','👧','🧒','👶','👴','👵','🧔','👱‍♀️','🐘','🐬'];
+const ABC='ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+const enc=new TextEncoder(),dec=new TextDecoder();
+const b64=u=>btoa(String.fromCharCode(...new Uint8Array(u)));const ub64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+function newCode(){const r=crypto.getRandomValues(new Uint8Array(12));let s='';r.forEach((x,i)=>{s+=ABC[x%ABC.length];if(i%4===3&&i<11)s+='-'});return s}
+const normCode=c=>String(c||'').toUpperCase().replace(/[^A-Z0-9]/g,'').replace(/(.{4})(?=.)/g,'$1-');
+async function setupCrypto(code){const raw=enc.encode('kamala:'+normCode(code));
+ const h=await crypto.subtle.digest('SHA-256',enc.encode('topic:'+normCode(code)));CH.topic='kg-'+[...new Uint8Array(h)].slice(0,12).map(b=>b.toString(16).padStart(2,'0')).join('');
+ const base=await crypto.subtle.importKey('raw',raw,'PBKDF2',false,['deriveKey']);
+ CH.key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:enc.encode('kamala-guide-v1'),iterations:150000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function seal(obj){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},CH.key,enc.encode(JSON.stringify(obj)));return 'e1:'+b64(iv)+':'+b64(ct)}
+async function open_(s){const[v,iv,ct]=s.split(':');if(v!=='e1')return null;const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:ub64(iv)},CH.key,ub64(ct));return JSON.parse(dec.decode(pt))}
+const saveMsgs=()=>{CH.msgs=CH.msgs.slice(-400);LS.set('ch_msgs',CH.msgs)};
+function phTime(ts){const d=new Date(ts*1000+(new Date().getTimezoneOffset()+420)*60000);return pad(d.getHours())+':'+pad(d.getMinutes())}
+function phDay(ts){const d=new Date(ts*1000+(new Date().getTimezoneOffset()+420)*60000);return d.getDate()+' '+['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'][d.getMonth()]}
+function linkify(t){return esc(t).replace(/(https:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">открыть ↗</a>')}
+
+/* ---- UI ---- */
+const chView=document.getElementById('v-chat');
+function chRender(){
+ if(!CH.me||!CH.code){chSetup();return}
+ chView.innerHTML=`<div class="chhead"><div><b>💬 Чат трёх семей</b><small id="chstat">подключаюсь…</small></div><button class="chset" id="chset" aria-label="Настройки">⚙️</button></div>
+ <div class="chlist" id="chlist"></div>
+ <div class="chquick" id="chquick">${[['📍','Я тут (место)','loc'],['🏖️','Мы на пляже'],['🏊','Мы у бассейна'],['🍽️','Идём кушать'],['🏨','Мы в отеле'],['🚕','Едем в отель'],['🆘','Нужна помощь!','sos']].map(([e,t,k])=>`<button data-qm="${k||''}" data-qt="${t}">${e} ${t}</button>`).join('')}</div>
+ <form class="chin" id="chform"><input id="chtext" maxlength="800" placeholder="Сообщение…" autocomplete="off"><button class="chsend" aria-label="Отправить">➤</button></form>`;
+ chList();chStat();
+ document.getElementById('chform').onsubmit=e=>{e.preventDefault();const i=document.getElementById('chtext');const t=i.value.trim();if(!t)return;i.value='';chSend({k:'t',t})};
+ document.getElementById('chquick').onclick=e=>{const b=e.target.closest('[data-qt]');if(!b)return;const k=b.dataset.qm;
+  if(k==='loc')return chLoc();if(k==='sos')return chSend({k:'sos',t:'🆘 Нужна помощь! Позвоните мне.'});chSend({k:'t',t:b.textContent.trim()})};
+ document.getElementById('chset').onclick=chSettings}
+function chList(){const el=document.getElementById('chlist');if(!el)return;let last='';
+ const pending=CH.queue.map(q=>({...q.m,pend:1}));
+ const all=[...CH.msgs,...pending];
+ el.innerHTML=all.length?all.map(m=>{const day=phDay(m.ts);const sep=day!==last?`<div class="chday">${day}</div>`:'';last=day;const mine=m.uid===CH.me.uid;
+  return sep+`<div class="chm ${mine?'me':''} ${m.k==='sos'?'sos':''}">${mine?'':`<span class="ava">${m.a}</span>`}<div class="bub">${mine?'':`<b>${esc(m.n)}</b>`}${m.k==='loc'?`📍 ${esc(m.t)}<br><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=${m.lat},${m.lng}" target="_blank" rel="noopener">Показать на карте ↗</a>`:linkify(m.t)}<i>${m.pend?'⏳ ждёт интернет':phTime(m.ts)}</i></div></div>`}).join('')
+ :`<div class="chempty"><div>👋</div><b>Здесь пока пусто</b><p>Напишите первое сообщение — его увидят все, кто вошёл по вашему коду.</p></div>`;
+ el.scrollTop=el.scrollHeight}
+function chStat(t){const s=document.getElementById('chstat');if(!s)return;s.textContent=t||(navigator.onLine===false?'📴 нет интернета — сообщения отправятся позже':'🟢 на связи · '+CH.me.a+' '+CH.me.n)}
+function chSetup(){const pend=LS.get('ch_join',null);
+ chView.innerHTML=`<div class="chsetup">
+  <div class="cs-ic">💬</div><h2 class="h" style="text-align:center">Чат трёх семей</h2>
+  <p class="sub" style="text-align:center">Пишите друг другу прямо здесь. Без регистрации.</p>
+  <label class="lab">Как вас зовут?</label><input id="cs-n" class="trq" maxlength="20" placeholder="Например: Айгерим" value="${esc(CH.me?.n||'')}">
+  <label class="lab">Выберите значок</label><div class="avas" id="cs-a">${AVA.map((a,i)=>`<button data-av="${a}" class="${(CH.me?.a||AVA[1])===a?'on':''}">${a}</button>`).join('')}</div>
+  <label class="lab">Код комнаты</label><input id="cs-c" class="trq" placeholder="XXXX-XXXX-XXXX" value="${esc(pend||'')}" style="text-transform:uppercase;letter-spacing:.08em">
+  <div class="row2" style="margin-top:12px"><button class="act pri" id="cs-join">Войти по коду</button><button class="act" id="cs-new">✨ Создать новую</button></div>
+  <div class="warn" style="margin-top:16px">👉 <b>Один человек</b> нажимает «Создать новую» и отправляет код или ссылку в WhatsApp. <b>Остальные</b> вводят этот код. Код — как пароль: не показывайте его чужим.</div></div>`;
+ let av=CH.me?.a||AVA[1];
+ document.getElementById('cs-a').onclick=e=>{const b=e.target.closest('[data-av]');if(!b)return;av=b.dataset.av;document.querySelectorAll('#cs-a button').forEach(x=>x.classList.toggle('on',x===b))};
+ const go2=async code=>{const n=document.getElementById('cs-n').value.trim();if(!n){toast('Напишите имя');return}
+  code=normCode(code);if(code.replace(/-/g,'').length!==12){toast('Код — 12 букв и цифр');return}
+  CH.me={n,a:av,uid:CH.me?.uid||b64(crypto.getRandomValues(new Uint8Array(6)))};LS.set('ch_me',CH.me);
+  if(CH.code!==code){CH.msgs=[];saveMsgs()}CH.code=code;LS.set('ch_code',code);LS.set('ch_join',null);await chStart();chRender();
+  if(LS.get('ch_created',null)===code)chSettings()};
+ document.getElementById('cs-join').onclick=()=>go2(document.getElementById('cs-c').value);
+ document.getElementById('cs-new').onclick=()=>{const c=newCode();LS.set('ch_created',c);go2(c)}}
+function chInvite(){return location.origin+location.pathname+'#join-'+CH.code.replace(/-/g,'')}
+function chSettings(){const link=chInvite();const wa='https://wa.me/?text='+encodeURIComponent('Наш семейный чат в Kamala Guide 🌴\nОткройте ссылку и введите своё имя:\n'+link+'\nКод комнаты: '+CH.code);
+ sheet.innerHTML=`<div class="grab"></div><div class="sh-head"><div class="sh-ic" style="--c:#2f6fde;font-size:26px">💬</div><div class="sh-t"><h2>Пригласить в чат</h2><p>Отправьте ссылку или код остальным семьям</p></div></div>
+ <div class="codebox">${CH.code}</div>
+ <div class="acts" style="grid-template-columns:1fr"><a class="act call" href="${wa}" target="_blank" rel="noopener">🟢 Отправить в WhatsApp</a><button class="act" data-copy="${link}">🔗 Копировать ссылку</button><button class="act" data-copy="${CH.code}">🔑 Копировать код</button>
+ <button class="act" id="ch-rename">✏️ Поменять имя или значок</button><button class="act" id="ch-leave" style="color:#b5332c">🚪 Выйти из комнаты</button></div>
+ <p class="phone-line">Сообщения зашифрованы кодом комнаты. Сервер хранит их только 12 часов, а вся история остаётся в телефонах участников. Фото удобнее отправлять в WhatsApp.</p>`;
+ sheet.classList.add('on');scrim.classList.add('on');
+ document.getElementById('ch-rename').onclick=()=>{closeSheet();const c=CH.code;CH.code=null;chSetup();document.getElementById('cs-c').value=c};
+ document.getElementById('ch-leave').onclick=()=>{closeSheet();if(CH.es)CH.es.close();CH.code=null;LS.set('ch_code',null);CH.msgs=[];saveMsgs();chRender()}}
+
+/* ---- сеть ---- */
+async function chStart(){if(!CH.code||!CH.me)return;await setupCrypto(CH.code);if(CH.es)CH.es.close();
+ const since=CH.msgs.length?Math.max(0,CH.msgs[CH.msgs.length-1].ts-60):'all';
+ try{CH.es=new EventSource(`https://ntfy.sh/${CH.topic}/sse?since=${since}`);
+  CH.es.onopen=()=>{chStat();chFlush()};CH.es.onerror=()=>chStat(navigator.onLine===false?null:'🟡 переподключаюсь…');
+  CH.es.onmessage=async ev=>{try{const d=JSON.parse(ev.data);if(d.event!=='message'||!d.message)return;if(CH.msgs.some(m=>m.id===d.id))return;
+   const m=await open_(d.message);if(!m)return;m.id=d.id;m.ts=d.time;
+   CH.queue=CH.queue.filter(q=>q.m.cid!==m.cid);LS.set('ch_q',CH.queue);
+   CH.msgs.push(m);CH.msgs.sort((a,b)=>a.ts-b.ts);saveMsgs();
+   if(m.uid!==CH.me.uid){const onChat=chView.classList.contains('on');if(!onChat){CH.unread++;chBadge()}
+    if(m.k==='sos'){try{navigator.vibrate&&navigator.vibrate([300,150,300,150,600])}catch(e){}toast('🆘 '+m.n+': нужна помощь!')}
+    else{try{navigator.vibrate&&navigator.vibrate(80)}catch(e){}if(!onChat)toast('💬 '+m.n+': '+String(m.t).slice(0,40))}}
+   chList()}catch(e){}}}catch(e){chStat('⚠️ чат недоступен')}}
+async function chSend(p){const m={...p,n:CH.me.n,a:CH.me.a,uid:CH.me.uid,cid:b64(crypto.getRandomValues(new Uint8Array(6))),ts:Math.floor(Date.now()/1000)};
+ CH.queue.push({m});LS.set('ch_q',CH.queue);chList();chFlush()}
+let flushing=false;
+async function chFlush(){if(flushing||!CH.key||navigator.onLine===false)return;flushing=true;
+ try{for(const q of [...CH.queue]){const body=await seal(q.m);const r=await fetch('https://ntfy.sh/'+CH.topic,{method:'POST',body});if(!r.ok)break;
+  if(!CH.es||CH.es.readyState!==1){CH.queue=CH.queue.filter(x=>x!==q);CH.msgs.push({...q.m,id:'local-'+q.m.cid});saveMsgs();LS.set('ch_q',CH.queue)}}}
+ catch(e){}finally{flushing=false;chList()}}
+function chLoc(){if(!navigator.geolocation){toast('Телефон не даёт место');return}toast('Определяю, где вы…');
+ navigator.geolocation.getCurrentPosition(p=>{const lat=p.coords.latitude.toFixed(5),lng=p.coords.longitude.toFixed(5);
+  const d=hav(HOTEL,{lat:+lat,lng:+lng});const txt=d<150?'Я в отеле':`Я тут · ${d<1000?Math.round(d/10)*10+' м':(d/1000).toFixed(1)+' км'} от отеля`;
+  chSend({k:'loc',t:txt,lat,lng})},()=>toast('Разрешите доступ к местоположению'),{enableHighAccuracy:true,timeout:15000,maximumAge:60000})}
+function chBadge(){const t=document.querySelector('.tab[data-tab="chat"]');if(!t)return;let b=t.querySelector('.tbadge');
+ if(CH.unread>0){if(!b){b=document.createElement('span');b.className='tbadge';t.appendChild(b)}b.textContent=CH.unread>9?'9+':CH.unread}else if(b)b.remove()}
+window.addEventListener('online',()=>{chStat();chFlush();if(CH.code&&(!CH.es||CH.es.readyState===2))chStart()});
+window.addEventListener('offline',()=>chStat());
+document.getElementById('tabs').addEventListener('click',e=>{if(e.target.closest('[data-tab="chat"]')){CH.unread=0;chBadge();setTimeout(()=>{const l=document.getElementById('chlist');if(l)l.scrollTop=l.scrollHeight},50)}});
+/* приглашение по ссылке #join-CODE */
+function chCheckJoin(){const m=location.hash.match(/^#join-([A-Za-z0-9]{12})$/);if(!m)return false;const code=normCode(m[1]);
+ if(CH.me&&CH.code===code){go('chat');return true}LS.set('ch_join',code);CH.code=null;go('chat');chRender();return true}
+window.addEventListener('hashchange',chCheckJoin);
+chRender();if(CH.code&&CH.me)chStart();
+
 /* ---------- init ---------- */
 renderChips();applyFilter();renderList();renderWeek();todayStrip();tick();
 
 fill('medlist',p=>p.cat==='med'||p.cat==='pharm');
 setInterval(()=>{tick();todayStrip()},30000);
-go(location.hash.slice(1)||'home',false);
+if(!chCheckJoin())go(location.hash.slice(1)||'home',false);
 requestAnimationFrame(resize);setTimeout(resize,300);
 </script>
 </body>

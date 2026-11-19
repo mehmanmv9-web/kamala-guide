@@ -708,7 +708,6 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
 .lookbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.lookbtns .act{text-align:center;text-decoration:none}
 .hl-a .act,.acts .act{min-width:0}
 @media (display-mode: standalone){
- .app{bottom:auto!important;height:100vh;height:100lvh}
  .tabs{bottom:calc(var(--safe-b) * .5 + 2px)!important}
  .fsos{bottom:calc(84px + var(--safe-b) * .5)!important}
  .toast{bottom:calc(96px + var(--safe-b) * .5)!important}
@@ -754,6 +753,7 @@ html{background:var(--ivory,#f7f3ec);height:100%}
 .steps{display:grid;gap:8px}.stp{display:flex;gap:12px;background:#fff;border-radius:16px;padding:10px 12px;box-shadow:0 1px 6px rgba(15,27,45,.06)}.sn{flex:none;width:44px;text-align:center}.sn b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#1c7ed6;color:#fff;font-size:13px}.sn span{display:block;font-size:22px;margin-top:2px}.stp>div:last-child>b{font-size:15px}.stp p{margin:3px 0 0;font-size:14px;line-height:1.4}
 .arrsvg{width:100%;height:auto;background:#fff;border-radius:18px;margin-bottom:8px}
 .sheet{visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}.sheet.on{visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s}
+html.vpfix .app{bottom:auto!important;height:var(--apph)!important}
 </style>
 </head>
 <body>
@@ -2571,7 +2571,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v35';
+const SWV='kamala-v36';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -3207,6 +3207,6 @@ setInterval(()=>{tick();todayStrip()},30000);
 if(!chCheckJoin())go(location.hash.slice(1)||'home',false);
 requestAnimationFrame(resize);setTimeout(resize,300);
 </script>
-<script>(function(){try{if(/[?&]r=\d/.test(location.search))history.replaceState(history.state,'',location.pathname+location.hash)}catch(e){}function fit(){var st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches;var h=window.innerHeight;if(st){var sh=(screen.width>screen.height)===(innerWidth>innerHeight)?screen.height:screen.width;document.documentElement.classList.add('pwa')}document.documentElement.style.setProperty('--apph',h+'px')}fit();addEventListener('resize',fit);addEventListener('orientationchange',function(){setTimeout(fit,300)});document.addEventListener('visibilitychange',fit)})();</script>
+<script>(function(){try{if(/[?&]r=\d/.test(location.search))history.replaceState(history.state,'',location.pathname+location.hash)}catch(e){}function fit(){var st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches;var h=window.innerHeight;if(st){var sh=(screen.width>screen.height)===(innerWidth>innerHeight)?screen.height:screen.width;document.documentElement.classList.add('pwa');var gap=sh-h,de=document.documentElement;if(gap>=0&&gap<=75){try{localStorage.setItem('kfg_gap',gap)}catch(e){}de.classList.remove('vpfix')}else if(gap>75){var g=59;try{g=+localStorage.getItem('kfg_gap')||59}catch(e){}de.style.setProperty('--apph',(sh-g)+'px');de.classList.add('vpfix');return}}document.documentElement.style.setProperty('--apph',h+'px')}fit();addEventListener('resize',fit);addEventListener('orientationchange',function(){setTimeout(fit,300)});document.addEventListener('visibilitychange',fit)})();</script>
 </body>
 </html>

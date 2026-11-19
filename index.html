@@ -1013,8 +1013,9 @@ html{background:var(--ivory,#f7f3ec);height:100%}
         <p>The Marin Phuket Kamala Beach<br>111/1 Moo 3, Soi Kamala 12, Kamala, Kathu, Phuket</p>
         <div class="row2">
           <button class="act" data-copy="The Marin Phuket Kamala Beach, 111/1 Moo 3 Soi Kamala 12, Kamala, Kathu, Phuket">Копировать адрес</button>
-          <button class="act" data-rhome>Дорога в отель</button>
+          <button class="act" data-taxi>📍 Показать адрес</button>
         </div>
+        <button class="act pri" data-rhome style="width:100%;margin-top:8px">🗺️ Дорога в отель · Google Карты</button>
       </div>
       <div class="sec">Картинки на телефон</div>
       <div class="offgrid">
@@ -1071,8 +1072,8 @@ html{background:var(--ivory,#f7f3ec);height:100%}
       </div>
       <div class="row2" style="margin-top:12px">
         <a class="act call" href="tel:+66805325695" data-copy="+66 80 532 5695"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Ресепшен</a>
-        <button class="act" data-rhome>Дорога в отель</button>
-        <button class="act" data-taxi>🚕 Таксисту</button>
+        <button class="act" data-taxi>📍 Показать адрес</button>
+        <button class="act pri" data-rhome>🗺️ Дорога в отель</button>
       </div>
       <p class="phone-line">Телефон отеля: +66 80 532 5695</p>
 
@@ -1344,7 +1345,7 @@ function openSheet(id){const p=P.find(x=>x.id===id);if(!p)return;const c=CAT[p.c
   ${op===null?'':`<span class="tag ${op?'open':'closed'}">${op?'Открыто сейчас':'Сейчас закрыто'}</span>`}${hrs}</div>
  <p class="desc">${p.desc||''}</p>
  <div class="acts">
-  ${p.id==='hotel'?`<button class="act pri" data-rhome>🗺️ Дорога в отель</button><button class="act" data-taxi>🚕 Таксисту</button>`:placeBtns(p.id,{n:p.name,en:p.en||p.name,lat:p.lat,lng:p.lng})}
+  ${p.id==='hotel'?`<button class="act pri" data-rhome>🗺️ Дорога в отель · Google</button><button class="act" data-taxi>📍 Показать адрес</button>`:placeBtns(p.id,{n:p.name,en:p.en||p.name,lat:p.lat,lng:p.lng})}
   ${p.tel?`<a class="act call" href="${telHref(p.tel)}" data-copy="${p.tel}">${ic('phone')}Позвонить</a>`:`<button class="act" data-show="${p.id}">${ic('map')}На карте</button>`}
   ${p.tel&&!(p.drive&&p.cat!=='fun')?`<button class="act wide" data-show="${p.id}">${ic('map')}Показать на карте</button>`:''}
  </div>${p.tel?`<p class="phone-line">Телефон: <b>${p.tel}</b> · нажмите «Позвонить», номер также скопируется</p>`:''}`;
@@ -1627,7 +1628,7 @@ document.getElementById('kidlist').addEventListener('click',e=>{const f=e.target
 /* --- guide segmented --- */
 function pane(p){document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.pane===p));document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));document.getElementById('v-guide').scrollTop=0}
 document.getElementById('seg').addEventListener('click',e=>{const b=e.target.closest('[data-pane]');if(b)pane(b.dataset.pane)});
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;const[v,p]=g.dataset.go.split(':');if(v==='sea'){seaSheet();return}go(v);if(p&&v==='guide')pane(p);if(p&&v==='fun'){funCat=p;renderFun()}if(v==='chain'){chainOpen(p||'711');return}if(v==='gen'){genNow=p||'men';renderGen();return}if(p&&v==='sos')setTimeout(()=>document.getElementById(p).scrollIntoView({behavior:'smooth'}),80)});
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;const[v,p]=g.dataset.go.split(':');if(v==='rhome'){routeTo(HOTEL,'Наш отель The Marin',{toHotel:true});return}if(v==='sea'){seaSheet();return}go(v);if(p&&v==='guide')pane(p);if(p&&v==='fun'){funCat=p;renderFun()}if(v==='chain'){chainOpen(p||'711');return}if(v==='gen'){genNow=p||'men';renderGen();return}if(p&&v==='sos')setTimeout(()=>document.getElementById(p).scrollIntoView({behavior:'smooth'}),80)});
 
 /* --- HOME --- */
 function nextOpen(p,t){for(let i=1;i<=7;i++){const d=(t.getDay()+i)%7;if(p.h.d.includes(d))return i===1?'завтра':DFULL[d].replace('среда','в среду').replace('пятница','в пятницу').replace('суббота','в субботу').replace(/^(понедельник|вторник|четверг|воскресенье)$/,'в $1')}return''}
@@ -1650,7 +1651,7 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   const s=td?(on?'Открыто сейчас':'Сегодня '+p.h.f+'–'+p.h.t):'Сегодня выходной · '+nextOpen(p,t);
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
-const TILES=[['cal','Календарь','cal','#e8590c'],['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
+const TILES=[['rhome','Дорога в отель','route','#d6453d'],['cal','Календарь','cal','#e8590c'],['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
 document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${g==='kz'?'<img src="img/kz-flag.svg" class="tflag" alt="Флаг Казахстана">':ic(i)}</span>${n}</button>`).join('');
 document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
@@ -1661,9 +1662,9 @@ const sosBtn=document.createElement('button');sosBtn.className='fsos';sosBtn.id=
 sosBtn.onclick=()=>{sheet.innerHTML=`<div class="grab"></div>
  <div class="sh-head"><div class="sh-ic" style="--c:#d6453d">${ic('sos')}</div><div class="sh-t"><h2>Потерялись?</h2><p>Маршрут от вашего места до отеля The Marin</p></div></div>
  <div class="acts" style="grid-template-columns:1fr">
-  <button class="act pri" style="background:#d6453d;padding:18px;font-size:16px" data-rhome>${ic('route')}Показать дорогу до отеля</button>
+  <button class="act pri" style="background:#d6453d;padding:18px;font-size:16px" data-rhome>${ic('route')}Дорога в отель · Google Карты</button>
   <a class="act call" href="tel:+66805325695" data-copy="+66 80 532 5695">${ic('phone')}Позвонить в отель · +66 80 532 5695</a>
-  <button class="act" data-taxi>${ic('pin')}Показать адрес таксисту</button>
+  <button class="act" data-taxi>${ic('pin')}Показать адрес</button>
   <button class="act" data-go="sos:kids-sec">${ic('kids')}Карточки детей</button>
   <a class="act" href="tel:1155" data-copy="1155">Туристическая полиция · 1155</a>
   <a class="act" href="tel:1669" data-copy="1669">Скорая помощь · 1669</a>
@@ -2557,7 +2558,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v29';
+const SWV='kamala-v30';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}

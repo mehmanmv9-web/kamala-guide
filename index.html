@@ -593,6 +593,10 @@ svg.scene{overflow:hidden}
 .confetti{position:absolute;inset:0;z-index:70;pointer-events:none;overflow:hidden}
 .confetti i{position:absolute;top:-40px;font-style:normal;animation:fall 2.2s ease-in forwards}
 @keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.wnow{margin:0 0 12px;padding:12px 14px;border-radius:16px;background:#fff;font-weight:800;font-size:17px;text-align:center;color:#3a4a66;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.wnow.on{background:#2f6fde;color:#fff;animation:wpulse 1s infinite alternate}@keyframes wpulse{to{transform:scale(1.03)}}
+.zello{margin-top:16px;padding:14px;border-radius:18px;background:#fff7e6;border:1px solid #f3dca8}.zello b{font-size:16px}.zello p{margin:6px 0 10px;font-size:14.5px;line-height:1.4;color:#5a4a2a}
+.nsteps{margin:4px 0 8px;padding-left:22px;font-size:16px;line-height:1.4}.nsteps li{margin-bottom:14px}.nhint{font-size:14.5px;color:#56627a}
 </style>
 </head>
 <body>
@@ -1736,7 +1740,7 @@ function linkify(t){return esc(t).replace(/(https:\/\/[^\s<]+)/g,'<a href="$1" t
 const chView=document.getElementById('v-chat');
 function chRender(){
  if(!CH.me||!CH.code){chSetup();return}
- chView.innerHTML=`<div class="chhead"><div><b>💬 Чат трёх семей</b><small id="chstat">подключаюсь…</small></div><div style="display:flex;gap:8px"><button class="chset" id="chwalk" aria-label="Рация">📻</button><button class="chset" id="chset" aria-label="Настройки">⚙️</button></div></div>
+ chView.innerHTML=`<div class="chhead"><div><b>💬 Чат трёх семей</b><small id="chstat">подключаюсь…</small></div><div style="display:flex;gap:8px"><button class="chset" id="chbell" aria-label="Уведомления">🔔</button><button class="chset" id="chwalk" aria-label="Рация">📻</button><button class="chset" id="chset" aria-label="Настройки">⚙️</button></div></div>
  <div class="chlist" id="chlist"></div>
  <div class="chquick" id="chquick">${[['📍','Я тут (место)','loc'],['🏖️','Мы на пляже'],['🏊','Мы у бассейна'],['🍽️','Идём кушать'],['🏨','Мы в отеле'],['🚕','Едем в отель'],['🆘','Нужна помощь!','sos']].map(([e,t,k])=>`<button data-qm="${k||''}" data-qt="${t}">${e} ${t}</button>`).join('')}</div>
  <form class="chin" id="chform"><input id="chtext" maxlength="800" placeholder="Сообщение…" autocomplete="off"><button class="chsend" aria-label="Отправить">➤</button></form>`;
@@ -1744,7 +1748,7 @@ function chRender(){
  document.getElementById('chform').onsubmit=e=>{e.preventDefault();const i=document.getElementById('chtext');const t=i.value.trim();if(!t)return;i.value='';chSend({k:'t',t})};
  document.getElementById('chquick').onclick=e=>{const b=e.target.closest('[data-qt]');if(!b)return;const k=b.dataset.qm;
   if(k==='loc')return chLoc();if(k==='sos')return chSend({k:'sos',t:'🆘 Нужна помощь! Позвоните мне.'});chSend({k:'t',t:b.textContent.trim()})};
- document.getElementById('chset').onclick=chSettings;document.getElementById('chwalk').onclick=()=>kWalkie()}
+ document.getElementById('chset').onclick=chSettings;document.getElementById('chwalk').onclick=()=>kWalkie();document.getElementById('chbell').onclick=chNotifySheet}
 function chList(){const el=document.getElementById('chlist');if(!el)return;let last='';
  const pending=CH.queue.map(q=>({...q.m,pend:1}));
  const all=[...CH.msgs,...pending];
@@ -1776,10 +1780,10 @@ function chSettings(){const link=chInvite();const wa='https://wa.me/?text='+enco
  sheet.innerHTML=`<div class="grab"></div><div class="sh-head"><div class="sh-ic" style="--c:#2f6fde;font-size:26px">💬</div><div class="sh-t"><h2>Пригласить в чат</h2><p>Отправьте ссылку или код остальным семьям</p></div></div>
  <div class="codebox">${CH.code}</div>
  <div class="acts" style="grid-template-columns:1fr"><a class="act call" href="${wa}" target="_blank" rel="noopener">🟢 Отправить в WhatsApp</a><button class="act" data-copy="${link}">🔗 Копировать ссылку</button><button class="act" data-copy="${CH.code}">🔑 Копировать код</button>
- <button class="act" id="ch-rename">✏️ Поменять имя или значок</button><button class="act" id="ch-leave" style="color:#b5332c">🚪 Выйти из комнаты</button></div>
+ <button class="act" id="ch-bell">🔔 Звук на телефон, когда сайт закрыт</button><button class="act" id="ch-rename">✏️ Поменять имя или значок</button><button class="act" id="ch-leave" style="color:#b5332c">🚪 Выйти из комнаты</button></div>
  <p class="phone-line">Сообщения зашифрованы кодом комнаты. Сервер хранит их только 12 часов, а вся история остаётся в телефонах участников. Фото удобнее отправлять в WhatsApp.</p>`;
  sheet.classList.add('on');scrim.classList.add('on');
- document.getElementById('ch-rename').onclick=()=>{closeSheet();const c=CH.code;CH.code=null;chSetup();document.getElementById('cs-c').value=c};
+ document.getElementById('ch-bell').onclick=()=>chNotifySheet();document.getElementById('ch-rename').onclick=()=>{closeSheet();const c=CH.code;CH.code=null;chSetup();document.getElementById('cs-c').value=c};
  document.getElementById('ch-leave').onclick=()=>{closeSheet();if(CH.es)CH.es.close();CH.code=null;LS.set('ch_code',null);CH.msgs=[];saveMsgs();chRender()}}
 
 /* ---- сеть ---- */
@@ -1796,7 +1800,28 @@ async function chStart(){if(!CH.code||!CH.me)return;await setupCrypto(CH.code);i
     else{try{navigator.vibrate&&navigator.vibrate(80)}catch(e){}if(!onChat)toast((m.k==='voice'?'📻 ':'💬 ')+m.n+(m.k==='voice'?': голосовое':': '+String(m.t).slice(0,40)))}}
    chList();if(m.k==='voice'&&window.onVoiceIn)window.onVoiceIn(m)}catch(e){}}}catch(e){chStat('⚠️ чат недоступен')}}
 async function chSend(p){const m={...p,n:CH.me.n,a:CH.me.a,uid:CH.me.uid,cid:b64(crypto.getRandomValues(new Uint8Array(6))),ts:Math.floor(Date.now()/1000)};
- CH.queue.push({m});LS.set('ch_q',CH.queue);chList();chFlush()}
+ CH.queue.push({m});LS.set('ch_q',CH.queue);chList();chFlush();chNotify(m)}
+/* ---- уведомления на телефон через приложение ntfy (работают, даже когда сайт закрыт) ---- */
+const NT_APP='https://apps.apple.com/app/id1625396347',NT_PLAY='https://play.google.com/store/apps/details?id=io.heckel.ntfy';
+function ntTopic(){return CH.topic?CH.topic+'-n':''}
+function chNotify(m){if(!CH.topic)return;const n=m.n||'Кто-то';let title,msg,pr=4,tags=[];
+ if(m.k==='sos'){title='🆘 '+n+': нужна помощь!';msg='Откройте чат и позвоните '+n;pr=5;tags=['rotating_light']}
+ else if(m.k==='voice'){title='📻 Голосовое от '+n;msg='Нажмите, чтобы послушать в рации';tags=['studio_microphone']}
+ else if(m.k==='loc'){title='📍 '+n+' отправил(а) место';msg='Нажмите, чтобы открыть чат'}
+ else if(m.k==='test'){title='🔔 Проверка: '+n;msg='Уведомления работают!';pr=3}
+ else{title='💬 '+n+' пишет в чат';msg='Нажмите, чтобы прочитать'}
+ const body=JSON.stringify({topic:ntTopic(),title,message:msg,priority:pr,tags,click:location.origin+location.pathname+(m.k==='voice'?'#kids':'#chat')});
+ const go_=()=>fetch('https://ntfy.sh/',{method:'POST',body}).catch(()=>{});
+ if(navigator.onLine===false)addEventListener('online',go_,{once:true});else go_()}
+function chNotifySheet(){const t=ntTopic(),dl='ntfy://ntfy.sh/'+t;
+ sheet.innerHTML=`<div class="grab"></div><div class="sh-head"><div class="sh-ic" style="--c:#e8a317;font-size:26px">🔔</div><div class="sh-t"><h2>Звук, когда сайт закрыт</h2><p>Телефон сам скажет: «Айгерим пишет», «Голосовое от Арман», «Нужна помощь!»</p></div></div>
+ <ol class="nsteps"><li><b>Скачайте бесплатное приложение ntfy</b><div class="acts" style="grid-template-columns:1fr 1fr;margin-top:8px"><a class="act" href="${NT_APP}" target="_blank" rel="noopener"> iPhone</a><a class="act" href="${NT_PLAY}" target="_blank" rel="noopener">🤖 Android</a></div></li>
+ <li><b>Подпишитесь на наш канал</b><br><span class="nhint">Android: нажмите зелёную кнопку. iPhone: скопируйте название, откройте ntfy → «+» → вставьте → Subscribe.</span>
+ <div class="acts" style="grid-template-columns:1fr;margin-top:8px"><a class="act call" href="${dl}">🤖 Подписаться одним нажатием (Android)</a><button class="act" data-copy="${t}">📋 Скопировать название канала</button></div><div class="codebox" style="font-size:15px;letter-spacing:0">${t}</div></li>
+ <li><b>Проверьте</b><div class="acts" style="grid-template-columns:1fr;margin-top:8px"><button class="act pri" id="nt-test">🔔 Прислать проверку</button></div></li></ol>
+ <p class="phone-line">В уведомлении видно только имя и тип сообщения — сам текст остаётся зашифрованным в чате. Нажмите на уведомление — откроется сайт.</p>`;
+ sheet.classList.add('on');scrim.classList.add('on');
+ document.getElementById('nt-test').onclick=()=>{chNotify({k:'test',n:CH.me.n});toast('🔔 Отправлено — через пару секунд придёт')}}
 let flushing=false;
 async function chFlush(){if(flushing||!CH.key||navigator.onLine===false)return;flushing=true;
  try{for(const q of [...CH.queue]){const body=await seal(q.m);const r=await fetch('https://ntfy.sh/'+CH.topic,{method:'POST',body});if(!r.ok)break;
@@ -1937,10 +1962,11 @@ let wRec=null,wStream=null,wChunks=[],wT0=0,wAuto=LS.get('w_auto',true),wPlayer=
 const wMime=()=>['audio/mp4','audio/webm;codecs=opus','audio/webm'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m))||'';
 function kWalkie(){if(!CH.code||!CH.me){kOpen('📻 Рация',`<div class="ytdone" style="color:var(--ink)"><div>📻</div><b>Сначала войдите в чат</b><p>Рация работает в той же комнате, что и чат трёх семей.</p></div><button class="act pri" style="width:100%;padding:18px;font-size:17px" id="w2chat">Открыть чат</button>`,'#eef3ff');document.getElementById('w2chat').onclick=()=>{kClose();go('chat')};return}
  kOpen('📻 Рация',`<p class="kp">Нажми и держи кнопку — говори. Отпусти — сообщение улетит всем.</p>
- <button class="ptt" id="ptt"><span>🎙️</span><b id="pttl">Нажми и говори</b></button>
+ <div class="wnow" id="wnow">📻 Здесь будет видно, кто говорит</div><button class="ptt" id="ptt"><span>🎙️</span><b id="pttl">Нажми и говори</b></button>
  <label class="wauto"><input type="checkbox" id="wauto" ${wAuto?'checked':''}> Сразу включать новые сообщения</label>
  <div class="sec" style="margin-top:18px">Последние</div><div id="wlist"></div>
- <p class="phone-line">Нужен интернет. Голосовые хранятся на сервере 3 часа. Слышно, пока сайт открыт.</p>`,'#eef3ff');
+ <p class="phone-line">Нужен интернет. Голосовые хранятся на сервере 3 часа. Слышно, пока сайт открыт. Чтобы телефон звенел и при закрытом сайте — включите 🔔 в чате.</p>
+ <div class="zello"><b>📡 Настоящая рация в фоне — Zello</b><p>Работает даже при заблокированном телефоне. Один взрослый создаёт канал (например «Kamala семьи») и присылает ссылку остальным.</p><div class="acts" style="grid-template-columns:1fr 1fr"><a class="act" href="https://apps.apple.com/app/id508231856" target="_blank" rel="noopener"> Zello iPhone</a><a class="act" href="https://play.google.com/store/apps/details?id=com.loudtalks" target="_blank" rel="noopener">🤖 Zello Android</a></div></div>`,'#eef3ff');
  const b=document.getElementById('ptt');unlockAudio();
  const start=async e=>{e.preventDefault();if(wRec)return;if(navigator.onLine===false){toast('Нет интернета — рация не работает 📶');return}
   try{wStream=wStream&&wStream.active?wStream:await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}})}catch(err){toast('Разрешите доступ к микрофону 🎙️');return}
@@ -1953,9 +1979,11 @@ function kWalkie(){if(!CH.code||!CH.me){kOpen('📻 Рация',`<div class="ytd
 function unlockAudio(){if(wUnlocked)return;try{wPlayer.src='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';wPlayer.play().then(()=>{wUnlocked=true}).catch(()=>{})}catch(e){}}
 async function wSend(blob,dur){if(dur<.6)return;try{toast('📡 Отправляю…');const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},CH.key,await blob.arrayBuffer());
  const meta=await seal({k:'voice',n:CH.me.n,a:CH.me.a,uid:CH.me.uid,cid:b64(crypto.getRandomValues(new Uint8Array(6))),mime:blob.type,iv:b64(iv),dur:Math.round(dur)});
- const r=await fetch('https://ntfy.sh/'+CH.topic,{method:'PUT',body:ct,headers:{'Filename':'v.bin','Message':meta}});if(!r.ok)throw 0;toast('✅ Отправлено')}catch(e){toast('Не получилось отправить — проверьте интернет')}}
+ const r=await fetch('https://ntfy.sh/'+CH.topic,{method:'PUT',body:ct,headers:{'Filename':'v.bin','Message':meta}});if(!r.ok)throw 0;toast('✅ Отправлено');chNotify({k:'voice',n:CH.me.n})}catch(e){toast('Не получилось отправить — проверьте интернет')}}
 async function wPlay(m){try{const buf=await fetch(m.url).then(r=>{if(!r.ok)throw 0;return r.arrayBuffer()});const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:ub64(m.iv)},CH.key,buf);
- wPlayer.src=URL.createObjectURL(new Blob([pt],{type:m.mime||'audio/mp4'}));await wPlayer.play()}catch(e){toast(m.ts&&Date.now()/1000-m.ts>10800?'Это сообщение уже удалено с сервера (старше 3 часов)':'Не получилось включить — нажмите ▶ ещё раз')}}
+ wPlayer.src=URL.createObjectURL(new Blob([pt],{type:m.mime||'audio/mp4'}));wNow(m);await wPlayer.play()}catch(e){toast(m.ts&&Date.now()/1000-m.ts>10800?'Это сообщение уже удалено с сервера (старше 3 часов)':'Не получилось включить — нажмите ▶ ещё раз')}}
+function wNow(m){const t=(m.uid===CH.me.uid?'🔁 Вы':'🔊 Говорит: '+m.a+' '+m.n);const el=document.getElementById('wnow');if(el){el.textContent=t;el.classList.add('on')}else toast(t);
+ wPlayer.onended=()=>{const e=document.getElementById('wnow');if(e){e.classList.remove('on');e.textContent='📻 Последним говорил(а): '+m.n}}}
 function wList(){const el=document.getElementById('wlist');if(!el)return;const vs=CH.msgs.filter(m=>m.k==='voice').slice(-12).reverse();
  el.innerHTML=vs.length?vs.map(m=>`<button class="wmsg ${m.uid===CH.me.uid?'me':''}" data-wp="${m.id}"><span>${m.a}</span><b>${esc(m.n)}</b><em>▶ ${m.dur||''} с</em><i>${phTime(m.ts)}</i></button>`).join(''):'<p class="kp">Пока тихо 🤫</p>'}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-wp]');if(!b)return;const m=CH.msgs.find(x=>x.id===b.dataset.wp);if(m){unlockAudio();wPlay(m)}});

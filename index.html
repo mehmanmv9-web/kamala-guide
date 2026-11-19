@@ -719,6 +719,9 @@ html{background:var(--ivory,#f7f3ec);height:100%}
 .hclocks{display:flex;flex-direction:column;gap:6px;align-items:flex-end}.hclock.kz b{font-size:18px}.hclock.kz{padding:6px 12px}
 .clocks{display:flex;gap:12px;align-items:flex-start}.clock.kz b{font-size:15px;opacity:.9}.clock.kz span{font-size:10px}
 .clocks{gap:8px!important;flex:none}.clock span{white-space:nowrap}.clock.kz .kfl{width:1.4em;height:.7em}
+.tripdays{display:grid;gap:8px;margin-top:6px}.tday{display:flex;gap:12px;align-items:flex-start;background:#f7f8fb;border-radius:16px;padding:10px 12px}.tday.now{background:#fff4e6;border:2px solid #f59f00}.tday.past{opacity:.55}
+.tnum{flex:none;width:46px;text-align:center;background:#fff;border-radius:12px;padding:4px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}.tnum b{display:block;font-size:20px}.tnum small{font-size:11px;color:#7b8699}.tday b{font-size:15px}.tday p{margin:3px 0 0;font-size:14px;line-height:1.35}
+#tripban .kbe{font-size:30px;flex:none;width:58px;text-align:center}
 </style>
 </head>
 <body>
@@ -791,6 +794,7 @@ html{background:var(--ivory,#f7f3ec);height:100%}
         </div>
         <p class="wx-note">Конец ноября — переход к сухому сезону: обычно солнечно, бывают короткие сильные ливни на 1–2 часа. В декабре дождливых дней примерно 8. УФ‑индекс очень высокий с 11:00 до 15:00.</p>
       </div>
+      <button class="kzban" id="tripban" style="background:linear-gradient(120deg,#e8590c,#f59f00)"></button>
       <button class="seacard" id="seacard"></button>
       <button class="kzban" data-go="fam" style="background:linear-gradient(120deg,#2f6fde,#6a4bc4)"><span class="kbe">👨‍👩‍👧</span><span class="kt"><b>Где все наши</b><small id="famcount">Видеть друг друга на карте</small></span><span class="ar">›</span></button>
 
@@ -2413,7 +2417,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v25';
+const SWV='kamala-v26';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2901,6 +2905,31 @@ function renderGen(){const G=GEN[genNow],el=document.getElementById('genbody');i
  G.g.map(([t,arr])=>`<div class="sec">${t}</div>`+arr.map(([e,nm,ar,d,q])=>{const id='g'+genNow[0]+(n++);return `<div class="hli"><div class="hl-t"><b>${e} ${nm}</b><small>📍 ${ar}</small><p>${d}</p></div><div class="hl-a">${placeBtns(id,{n:nm,en:q})}</div></div>`}).join('')).join('')+
  `<p class="foot">Цены и часы меняются — уточняйте на месте или по кнопке «Как выглядит».</p>`}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-gen]');if(b){genNow=b.dataset.gen;renderGen();document.querySelector('.views').scrollTop=0}});
+/* ---------- ✈️ Поездка 26 ноября — 5 декабря ---------- */
+const TRIP={a:[2026,10,26],b:[2026,11,5]};
+const TRIPDAYS=[
+ ['2026-11-26','Прилёт ✈️','Отдохните с дороги: пляж Камала и закат у моря. Купите SIM‑карту в аэропорту.'],
+ ['2026-11-27','Пятница','Вечером — Fun Friday на Boat Avenue в Банг Тао: рынок, еда, музыка.'],
+ ['2026-11-28','Суббота','Рынок Нака в Пхукет‑тауне (выходные) — сувениры и уличная еда.'],
+ ['2026-11-29','Воскресенье','Последний день фуд‑фестиваля PHOODIE. Вечером — воскресная улица Lard Yai в Старом городе.'],
+ ['2026-11-30','Понедельник','Хороший день для острова: Пхи‑Пхи или Пханг‑Нга — в будни меньше людей.'],
+ ['2026-12-01','Вторник','День в аквапарке или Большой Будда и Ват Чалонг утром, пока не жарко.'],
+ ['2026-12-02','Среда','Пляжи Сурин и Лаем Синг, вечером Café del Mar на закате.'],
+ ['2026-12-03','Четверг','Шопинг: Central Phuket или Jungceylon, детские игровые центры.'],
+ ['2026-12-04','Пятница','Последний полный день: мыс Промтеп на закате, сувениры, соберите чемоданы.'],
+ ['2026-12-05','Вылет · День отца 🇹🇭','Национальный праздник: жёлтые украшения, церемонии со свечами. Банки закрыты (кроме ТЦ), возможны ограничения на алкоголь. Около этих дней у пляжа Ката стартует парусная регата King’s Cup. Выезжайте в аэропорт заранее — праздничные пробки.']];
+function tripState(){const t=bkk(),d0=new Date(t.getFullYear(),t.getMonth(),t.getDate());const A=new Date(...TRIP.a),B=new Date(...TRIP.b);const day=Math.round((d0-A)/864e5)+1,total=Math.round((B-A)/864e5)+1;
+ if(d0<A)return{k:'before',n:Math.round((A-d0)/864e5),total};if(d0>B)return{k:'after',total};return{k:'during',day,total,left:total-day}}
+function renderTrip(){const el=document.getElementById('tripban');if(!el)return;const s=tripState();
+ const txt=s.k==='before'?[`✈️ До Пхукета ${s.n} ${s.n%10===1&&s.n%100!==11?'день':(s.n%10>=2&&s.n%10<=4&&(s.n%100<10||s.n%100>=20))?'дня':'дней'}`,'26 ноября — 5 декабря · 10 дней на море']:s.k==='during'?(s.left===0?['🧳 Сегодня вылет','Проверьте паспорта, билеты и детские вещи']:[`🌴 День ${s.day} из ${s.total}`,`Осталось ${s.left} ${s.left===1?'день':s.left<5?'дня':'дней'} · до 5 декабря`]):['💛 Спасибо за поездку!','Пхукет ждёт вас снова'];
+ el.innerHTML=`<span class="kbe">📅</span><span class="kt"><b>${txt[0]}</b><small>${txt[1]}</small></span><span class="ar">›</span>`}
+function tripSheet(){const s=tripState(),t=bkk(),today=`${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;
+ sheet.innerHTML=`<div class="grab"></div><div class="sh-head"><div class="sh-ic" style="--c:#e8590c;font-size:26px">📅</div><div class="sh-t"><h2>Наша поездка</h2><p>26 ноября — 5 декабря 2026 · 10 дней</p></div></div>
+ <div class="tripdays">${TRIPDAYS.map(([d,t2,x],i)=>{const dt=new Date(d+'T00:00:00');return `<div class="tday ${d===today?'now':''} ${d<today?'past':''}"><div class="tnum"><b>${dt.getDate()}</b><small>${['вс','пн','вт','ср','чт','пт','сб'][dt.getDay()]}</small></div><div><b>День ${i+1} · ${t2}</b><p>${x}</p></div></div>`}).join('')}</div>
+ <p class="phone-line">Это подсказки, а не обязательный план. Погоду на каждый день смотрите в «Море сегодня».</p>`;
+ sheet.classList.add('on');scrim.classList.add('on')}
+document.addEventListener('click',e=>{if(e.target.closest('#tripban'))tripSheet()});
+renderTrip();setInterval(renderTrip,60000);
 /* ---------- init ---------- */
 renderChips();applyFilter();renderList();renderWeek();todayStrip();tick();
 

@@ -716,6 +716,9 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
  .scale{bottom:calc(94px + var(--safe-b) * .5)!important}.attrib{bottom:calc(92px + var(--safe-b) * .5)!important}
 }
 html{background:var(--ivory,#f7f3ec);height:100%}
+.hclocks{display:flex;flex-direction:column;gap:6px;align-items:flex-end}.hclock.kz b{font-size:18px}.hclock.kz{padding:6px 12px}
+.clocks{display:flex;gap:12px;align-items:flex-start}.clock.kz b{font-size:15px;opacity:.9}.clock.kz span{font-size:10px}
+.clocks{gap:8px!important;flex:none}.clock span{white-space:nowrap}.clock.kz .kfl{width:1.4em;height:.7em}
 </style>
 </head>
 <body>
@@ -723,7 +726,7 @@ html{background:var(--ivory,#f7f3ec);height:100%}
   <header class="top">
     <div class="top-row">
       <div class="brand"><small>Семейный гид · 3 семьи</small><h1>Kamala Beach</h1></div>
-      <div class="clock"><b id="clk">--:--</b><span id="clkd">Пхукет</span></div>
+      <div class="clocks"><div class="clock kz"><b id="aclk2">--:--</b><span><img src="img/kz-flag.svg" class="kfl" alt=""> Алматы</span></div><div class="clock"><b id="clk">--:--</b><span id="clkd">Пхукет</span></div></div>
     </div>
     <div class="today" id="today"></div>
     <div class="netb">📴 Нет интернета. Приложение всё равно работает 👍</div>
@@ -766,7 +769,7 @@ html{background:var(--ivory,#f7f3ec);height:100%}
         <div class="hz">
           <div class="hz-row">
             <div class="sawas"><svg viewBox="0 0 24 24" fill="currentColor"><g id="plm"><ellipse cx="12" cy="6" rx="3.2" ry="5.2"/></g><use href="#plm" transform="rotate(72 12 12)"/><use href="#plm" transform="rotate(144 12 12)"/><use href="#plm" transform="rotate(216 12 12)"/><use href="#plm" transform="rotate(288 12 12)"/><circle cx="12" cy="12" r="2" fill="#f3a64a"/></svg>สวัสดี · Sawasdee</div>
-            <div class="hclock"><b id="hclk">--:--</b><span id="hday">Пхукет</span></div>
+            <div class="hclocks"><div class="hclock"><b id="hclk">--:--</b><span id="hday">Пхукет</span></div><div class="hclock kz"><b id="aclk">--:--</b><span id="aday">Алматы</span></div></div>
           </div>
           <p class="hello" id="hello">Добро пожаловать</p>
           <h1>Kamala<br>Beach</h1>
@@ -1152,6 +1155,8 @@ const APX={f_iron:[7.89,98.37],f_sn:[7.912,98.379],f_circ:[7.85,98.34],f_splash:
 function placeBtns(key,o){let lat=o.lat,lng=o.lng,ap=false;if(lat==null&&APX[key]){[lat,lng]=APX[key];ap=true}
  PLX[key]={n:o.n||o.name,en:o.en||o.q||o.name||o.n,th:o.th,addr:o.addr,lat,lng,ap};
  return `<button class="act pri" data-pmap="${key}">🗺️ На карте Google</button><button class="act" data-ptx="${key}">🚕 Таксисту</button><button class="act look" data-look="${key}">📷 Как выглядит</button>`}
+function almatyClock(){const a=new Date(Date.now()+5*3600000),hm=pad(a.getUTCHours())+':'+pad(a.getUTCMinutes());const d=DFULL[a.getUTCDay()];
+ const x=document.getElementById('aclk');if(x){x.textContent=hm;document.getElementById('aday').textContent='Алматы · '+d}const y=document.getElementById('aclk2');if(y)y.textContent=hm}
 const I={
  men:'<circle cx="12" cy="6" r="3"/><path d="M8 21v-7l-2-1V10a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v3l-2 1v7"/>',
  women:'<circle cx="12" cy="6" r="3"/><path d="M12 9l-4 8h8z"/><path d="M10 17v4M14 17v4"/>',
@@ -1271,7 +1276,7 @@ function openToday(p,t=bkk()){return p.h&&p.h.d.includes(t.getDay())}
 
 /* ---------- header ---------- */
 function tick(){const t=bkk();document.getElementById('clk').textContent=String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0');
- document.getElementById('clkd').textContent='Пхукет · '+DFULL[t.getDay()]}
+ document.getElementById('clkd').textContent='Пхукет · '+DFULL[t.getDay()];almatyClock()}
 function todayStrip(){const t=bkk();const items=['fs','cm','mkt','bpc','anda'].map(id=>P.find(p=>p.id===id));
  document.getElementById('today').innerHTML=items.map(p=>{const td=openToday(p,t);const on=isOpen(p,t);
   let s=p.id==='bpc'||p.id==='anda'?(on?'открыто':'сейчас закрыто'):(td?(on?'сейчас открыто':'сегодня с '+p.h.f):'сегодня выходной');
@@ -1599,7 +1604,7 @@ document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!
 /* --- HOME --- */
 function nextOpen(p,t){for(let i=1;i<=7;i++){const d=(t.getDay()+i)%7;if(p.h.d.includes(d))return i===1?'завтра':DFULL[d].replace('среда','в среду').replace('пятница','в пятницу').replace('суббота','в субботу').replace(/^(понедельник|вторник|четверг|воскресенье)$/,'в $1')}return''}
 function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;const st=sunTimes(t);
- document.getElementById('hclk').textContent=pad(t.getHours())+':'+pad(t.getMinutes());document.getElementById('hday').textContent='Пхукет · '+DFULL[t.getDay()];
+ document.getElementById('hclk').textContent=pad(t.getHours())+':'+pad(t.getMinutes());document.getElementById('hday').textContent='Пхукет · '+DFULL[t.getDay()];almatyClock();
  document.getElementById('hello').textContent=hr<5?'Доброй ночи':hr<12?'Доброе утро':hr<17?'Добрый день':'Добрый вечер';
  document.getElementById('sunr').textContent=fmtH(st.rise);document.getElementById('suns').textContent=fmtH(st.set);
  const evToday=['fs','cm','mkt'].map(id=>P.find(p=>p.id===id)).filter(p=>openToday(p,t));
@@ -2408,7 +2413,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v24';
+const SWV='kamala-v25';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}

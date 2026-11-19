@@ -2370,7 +2370,9 @@ function clearRoute(){const g=document.getElementById('rtg');if(g)g.innerHTML=''
 function getPos(cb){if(!navigator.geolocation)return cb(null);let done=false;const t=setTimeout(()=>{if(!done){done=true;cb(null)}},6000);
  navigator.geolocation.getCurrentPosition(p=>{if(done)return;done=true;clearTimeout(t);cb({lat:p.coords.latitude,lng:p.coords.longitude})},()=>{if(!done){done=true;clearTimeout(t);cb(null)}},{enableHighAccuracy:true,timeout:6000,maximumAge:60000})}
 /* from: null = «где я» (или отель), to: место */
-function routeTo(to,label,{fromHotel=false,toHotel=false}={}){if(typeof navStop==='function')navStop();NAV.to=to;NAV.label=label||to.name||to.n||'';closeSheet&&closeSheet();if(full)full.classList.remove('on');
+function routeTo(to,label,{fromHotel=false,toHotel=false}={}){
+ if(navigator.onLine!==false&&to&&to.lat!=null){closeSheet&&closeSheet();if(full)full.classList.remove('on');const far=hav(HOTEL,to)>1500||toHotel;const u=`https://www.google.com/maps/dir/?api=1${fromHotel?`&origin=${HOTEL.lat},${HOTEL.lng}`:''}&destination=${to.lat},${to.lng}&travelmode=${far?'driving':'walking'}`;const w=window.open(u,'_blank');if(!w)location.href=u;return}
+ if(navigator.onLine===false)toast('Нет интернета — показываю нашу карту');if(typeof navStop==='function')navStop();NAV.to=to;NAV.label=label||to.name||to.n||'';closeSheet&&closeSheet();if(full)full.classList.remove('on');
  toast('🧭 Строю маршрут…');
  const finish=me=>{let from=toHotel?(me&&inMap(me)?me:null):(me&&inMap(me)&&!fromHotel?me:HOTEL);
   if(toHotel&&!from){taxiCard(HOTEL_TAXI,true);toast('Не вижу, где вы. Покажите таксисту адрес отеля');return}
@@ -2400,7 +2402,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v22';
+const SWV='kamala-v23';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}

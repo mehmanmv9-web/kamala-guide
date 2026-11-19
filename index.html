@@ -543,8 +543,8 @@ svg.scene{overflow:hidden}
 .mc.ok{background:#e4ffe0;box-shadow:0 4px 0 #9cd894}
 .bstat{text-align:center;font-size:20px;font-weight:900;color:#1d4e6b}
 .bfield{position:relative;height:calc(100% - 40px);min-height:420px;overflow:hidden;touch-action:none}
-.bub{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff 0 12%,var(--bc) 40%,color-mix(in srgb,var(--bc) 70%,#fff) 100%);opacity:.92;box-shadow:inset -6px -8px 14px rgba(255,255,255,.6),0 4px 10px rgba(0,0,0,.08);font-size:26px;display:grid;place-items:center;transition:transform .2s,opacity .2s}
-.bub.pop{transform:scale(1.6);opacity:0}
+.gbub{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff 0 12%,var(--bc) 40%,color-mix(in srgb,var(--bc) 70%,#fff) 100%);opacity:.92;box-shadow:inset -6px -8px 14px rgba(255,255,255,.6),0 4px 10px rgba(0,0,0,.08);font-size:26px;display:grid;place-items:center;transition:transform .2s,opacity .2s}
+.gbub.pop{transform:scale(1.6);opacity:0}
 .hprog{position:relative;height:30px;border-radius:15px;background:#ffe9c2;overflow:hidden;margin-bottom:12px}
 .hprog i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#ffb84d,#ff7a6b);border-radius:15px}
 .hprog span{position:relative;display:block;text-align:center;line-height:30px;font-weight:900;color:#5b3a12}
@@ -755,6 +755,10 @@ html{background:var(--ivory,#f7f3ec);height:100%}
 .sheet{visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}.sheet.on{visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s}
 html.vpfix .app{bottom:auto!important;height:var(--apph)!important}
 .hclocks{position:relative}.hfact{position:absolute;top:calc(100% + 8px);right:0;width:min(180px,calc(100vw - 212px));text-align:left;font:600 11px/1.3 inherit;color:#fff;background:rgba(15,27,45,.28);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:14px;padding:7px 10px;display:block;cursor:pointer;animation:factin .6s}.hfact small{display:block;font-size:10px;font-weight:800;color:#ffd43b;margin-bottom:2px;letter-spacing:.3px}@keyframes factin{from{opacity:0;transform:translateY(-4px)}}
+.eatg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.eatc{background:#fff;border-radius:18px;padding:10px;text-align:left;display:flex;flex-direction:column;gap:3px;box-shadow:0 2px 8px rgba(15,27,45,.07);font:inherit;color:#0f1b2d}.eatc span{font-size:28px}.eatc b{font-size:14px;line-height:1.25}.eatc i{font-style:normal;font-size:15px;color:#1f9d6b;line-height:1.3}
+.agecard{background:#e6fcf5;border-radius:18px;padding:12px;margin-top:10px}.agecard>div{display:flex;gap:8px;align-items:center;margin:8px 0}.agecard label{display:flex;align-items:center;gap:4px;font-weight:700}.agecard input{width:60px;font:inherit;font-size:18px;padding:6px;border-radius:10px;border:2px solid #96f2d7;text-align:center}.agecard small{color:#5b6577;font-size:12px}
+.pideas{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.pideas button{background:#f3f0ff;border-radius:20px;padding:7px 11px;font:600 13px inherit;color:#5f3dc4}.pideas button:disabled{opacity:.4}
+.poll{display:flex;flex-direction:column;gap:6px;min-width:220px}.poll>b{font-size:15px}.poll small{font-size:11px;opacity:.7}.popt2{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:6px;background:rgba(112,72,232,.08);border:2px solid transparent;border-radius:12px;padding:9px 10px;font:600 14px inherit;color:inherit;text-align:left}.popt2.on{border-color:#7048e8}.pbar{position:absolute;left:0;top:0;bottom:0;background:rgba(112,72,232,.22);transition:width .4s}.ptx,.pct{position:relative}.pct{white-space:nowrap;font-size:13px}
 </style>
 </head>
 <body>
@@ -939,6 +943,7 @@ html.vpfix .app{bottom:auto!important;height:var(--apph)!important}
     </section>
 
     <section class="view" id="v-gen"><div id="genbody"></div></section>
+    <section class="view" id="v-eat"><div id="eatbody"></div></section>
     <section class="view" id="v-fly"><div id="flybody"></div></section>
     <section class="view" id="v-cal"><div id="calbody"></div></section>
 
@@ -1327,9 +1332,9 @@ const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок'
 
 /* ---------- tabs / router ---------- */
 const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
-const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain','gen','cal','fly'];
+const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain','gen','cal','fly','eat'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
-function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k==='cal')setTimeout(renderCal,0);if(k==='fly')setTimeout(renderFly,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
+function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k==='cal')setTimeout(renderCal,0);if(k==='fly')setTimeout(renderFly,0);if(k==='eat')setTimeout(renderEat,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
  if(push){try{if(history.state&&history.state.ov)history.replaceState({v:k},'','#'+k);else if(location.hash.slice(1)!==k)history.pushState({v:k},'','#'+k)}catch(e){try{location.hash=k}catch(_){}}}
@@ -1641,7 +1646,7 @@ document.getElementById('kidlist').addEventListener('click',e=>{const f=e.target
 /* --- guide segmented --- */
 function pane(p){document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.pane===p));document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));document.getElementById('v-guide').scrollTop=0}
 document.getElementById('seg').addEventListener('click',e=>{const b=e.target.closest('[data-pane]');if(b)pane(b.dataset.pane)});
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;const[v,p]=g.dataset.go.split(':');if(v==='rhome'){routeTo(HOTEL,'Наш отель The Marin',{toHotel:true});return}if(v==='sea'){seaSheet();return}go(v);if(p&&v==='guide')pane(p);if(p&&v==='fun'){funCat=p;renderFun()}if(v==='chain'){chainOpen(p||'711');return}if(v==='gen'){genNow=p||'men';renderGen();return}if(p&&v==='sos')setTimeout(()=>document.getElementById(p).scrollIntoView({behavior:'smooth'}),80)});
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;const[v,p]=g.dataset.go.split(':');if(v==='vote'){pollSheet();return}if(v==='rhome'){routeTo(HOTEL,'Наш отель The Marin',{toHotel:true});return}if(v==='sea'){seaSheet();return}go(v);if(p&&v==='guide')pane(p);if(p&&v==='fun'){funCat=p;renderFun()}if(v==='chain'){chainOpen(p||'711');return}if(v==='gen'){genNow=p||'men';renderGen();return}if(p&&v==='sos')setTimeout(()=>document.getElementById(p).scrollIntoView({behavior:'smooth'}),80)});
 
 /* --- HOME --- */
 function nextOpen(p,t){for(let i=1;i<=7;i++){const d=(t.getDay()+i)%7;if(p.h.d.includes(d))return i===1?'завтра':DFULL[d].replace('среда','в среду').replace('пятница','в пятницу').replace('суббота','в субботу').replace(/^(понедельник|вторник|четверг|воскресенье)$/,'в $1')}return''}
@@ -1664,7 +1669,7 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   const s=td?(on?'Открыто сейчас':'Сегодня '+p.h.f+'–'+p.h.t):'Сегодня выходной · '+nextOpen(p,t);
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
-const TILES=[['rhome','Дорога в отель','route','#d6453d'],['fly','Наш рейс','plane','#1c7ed6'],['cal','Календарь','cal','#e8590c'],['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
+const TILES=[['rhome','Дорога в отель','route','#d6453d'],['fly','Наш рейс','plane','#1c7ed6'],['vote','Куда идём?','chat','#7048e8'],['eat','Еда и аптека','pharm','#1f9d6b'],['cal','Календарь','cal','#e8590c'],['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
 document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${g==='kz'?'<img src="img/kz-flag.svg" class="tflag" alt="Флаг Казахстана">':ic(i)}</span>${n}</button>`).join('');
 document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
@@ -1967,18 +1972,18 @@ function chRender(){
  if(!CH.me||!CH.code){chSetup();return}
  chView.innerHTML=`<div class="chhead"><div><b>💬 Чат трёх семей</b><small id="chstat">подключаюсь…</small></div><div style="display:flex;gap:8px"><button class="chset" id="chbell" aria-label="Уведомления">🔔</button><button class="chset" id="chwalk" aria-label="Рация">📻</button><button class="chset" id="chset" aria-label="Настройки">⚙️</button></div></div>
  <div class="chlist" id="chlist"></div>
- <div class="chquick" id="chquick">${[['📍','Я тут (место)','loc'],['🏖️','Мы на пляже'],['🏊','Мы у бассейна'],['🍽️','Идём кушать'],['🏨','Мы в отеле'],['🚕','Едем в отель'],['🆘','Нужна помощь!','sos']].map(([e,t,k])=>`<button data-qm="${k||''}" data-qt="${t}">${e} ${t}</button>`).join('')}</div>
+ <div class="chquick" id="chquick">${[['🗳️','Голосование','poll'],['📍','Я тут (место)','loc'],['🏖️','Мы на пляже'],['🏊','Мы у бассейна'],['🍽️','Идём кушать'],['🏨','Мы в отеле'],['🚕','Едем в отель'],['🆘','Нужна помощь!','sos']].map(([e,t,k])=>`<button data-qm="${k||''}" data-qt="${t}">${e} ${t}</button>`).join('')}</div>
  <form class="chin" id="chform"><input id="chtext" maxlength="800" placeholder="Сообщение…" autocomplete="off"><button class="chsend" aria-label="Отправить">➤</button></form>`;
  chList();chStat();
  document.getElementById('chform').onsubmit=e=>{e.preventDefault();const i=document.getElementById('chtext');const t=i.value.trim();if(!t)return;i.value='';chSend({k:'t',t})};
  document.getElementById('chquick').onclick=e=>{const b=e.target.closest('[data-qt]');if(!b)return;const k=b.dataset.qm;
-  if(k==='loc')return chLoc();if(k==='sos')return chSend({k:'sos',t:'🆘 Нужна помощь! Позвоните мне.'});chSend({k:'t',t:b.textContent.trim()})};
+  if(k==='poll')return pollSheet();if(k==='loc')return chLoc();if(k==='sos')return chSend({k:'sos',t:'🆘 Нужна помощь! Позвоните мне.'});chSend({k:'t',t:b.textContent.trim()})};
  document.getElementById('chset').onclick=chSettings;document.getElementById('chwalk').onclick=()=>kWalkie();document.getElementById('chbell').onclick=chNotifySheet}
 function chList(){const el=document.getElementById('chlist');if(!el)return;let last='';
  const pending=CH.queue.map(q=>({...q.m,pend:1}));
- const all=[...CH.msgs,...pending];
+ const all=[...CH.msgs,...pending].filter(m=>m.k!=='vote');
  el.innerHTML=all.length?all.map(m=>{const day=phDay(m.ts);const sep=day!==last?`<div class="chday">${day}</div>`:'';last=day;const mine=m.uid===CH.me.uid;
-  return sep+`<div class="chm ${mine?'me':''} ${m.k==='sos'?'sos':''}">${mine?'':`<span class="ava">${m.a}</span>`}<div class="bub">${mine?'':`<b>${esc(m.n)}</b>`}${m.k==='voice'?`<button class="vplay" data-wp="${m.id}">▶ Голосовое · ${m.dur||''} с</button>`:m.k==='loc'?`📍 ${esc(m.t)}<br><button class="maplink" data-cloc="${m.lat}|${m.lng}|${esc(m.n)}">🧭 Как дойти</button>`:linkify(m.t)}<i>${m.pend?'⏳ ждёт интернет':phTime(m.ts)}</i></div></div>`}).join('')
+  return sep+`<div class="chm ${mine?'me':''} ${m.k==='sos'?'sos':''}">${mine?'':`<span class="ava">${m.a}</span>`}<div class="bub">${mine?'':`<b>${esc(m.n)}</b>`}${m.k==='voice'?`<button class="vplay" data-wp="${m.id}">▶ Голосовое · ${m.dur||''} с</button>`:m.k==='poll'?pollHTML(m):m.k==='loc'?`📍 ${esc(m.t)}<br><button class="maplink" data-cloc="${m.lat}|${m.lng}|${esc(m.n)}">🧭 Как дойти</button>`:linkify(m.t)}<i>${m.pend?'⏳ ждёт интернет':phTime(m.ts)}</i></div></div>`}).join('')
  :`<div class="chempty"><div>👋</div><b>Здесь пока пусто</b><p>Напишите первое сообщение — его увидят все, кто вошёл по вашему коду.</p></div>`;
  el.scrollTop=el.scrollHeight}
 function chStat(t){const s=document.getElementById('chstat');if(!s)return;s.textContent=t||(navigator.onLine===false?'📴 нет интернета — сообщения отправятся позже':'🟢 на связи · '+CH.me.a+' '+CH.me.n)}
@@ -2020,19 +2025,20 @@ async function chStart(){if(!CH.code||!CH.me)return;await setupCrypto(CH.code);i
    const m=await open_(d.message);if(!m)return;m.id=d.id;m.ts=d.time;if(m.k==='voice'){if(!d.attachment)return;m.url=d.attachment.url}
    CH.queue=CH.queue.filter(q=>q.m.cid!==m.cid);LS.set('ch_q',CH.queue);
    CH.msgs.push(m);CH.msgs.sort((a,b)=>a.ts-b.ts);saveMsgs();
-   if(m.uid!==CH.me.uid){const onChat=chView.classList.contains('on');if(!onChat){CH.unread++;chBadge()}
+   if(m.uid!==CH.me.uid&&m.k!=='vote'){const onChat=chView.classList.contains('on');if(!onChat){CH.unread++;chBadge()}
     if(m.k==='sos'){try{navigator.vibrate&&navigator.vibrate([300,150,300,150,600])}catch(e){}toast('🆘 '+m.n+': нужна помощь!')}
-    else{try{navigator.vibrate&&navigator.vibrate(80)}catch(e){}if(!onChat)toast((m.k==='voice'?'📻 ':'💬 ')+m.n+(m.k==='voice'?': голосовое':': '+String(m.t).slice(0,40)))}}
+    else{try{navigator.vibrate&&navigator.vibrate(80)}catch(e){}if(!onChat)toast((m.k==='voice'?'📻 ':m.k==='poll'?'🗳️ ':'💬 ')+m.n+(m.k==='voice'?': голосовое':m.k==='poll'?' зовёт голосовать: '+String(m.t).slice(0,30):': '+String(m.t).slice(0,40)))}}
    chList();if(m.k==='voice'&&window.onVoiceIn)window.onVoiceIn(m)}catch(e){}}}catch(e){chStat('⚠️ чат недоступен')}}
 async function chSend(p){const m={...p,n:CH.me.n,a:CH.me.a,uid:CH.me.uid,cid:b64(crypto.getRandomValues(new Uint8Array(6))),ts:Math.floor(Date.now()/1000)};
  CH.queue.push({m});LS.set('ch_q',CH.queue);chList();chFlush();chNotify(m)}
 /* ---- уведомления на телефон через приложение ntfy (работают, даже когда сайт закрыт) ---- */
 const NT_APP='https://apps.apple.com/app/id1625396347',NT_PLAY='https://play.google.com/store/apps/details?id=io.heckel.ntfy';
 function ntTopic(){return CH.topic?CH.topic+'-n':''}
-function chNotify(m){if(!CH.topic)return;const n=m.n||'Кто-то';let title,msg,pr=4,tags=[];
+function chNotify(m){if(!CH.topic||m.k==='vote')return;const n=m.n||'Кто-то';let title,msg,pr=4,tags=[];
  if(m.k==='sos'){title='🆘 '+n+': нужна помощь!';msg='Откройте чат и позвоните '+n;pr=5;tags=['rotating_light']}
  else if(m.k==='voice'){title='📻 Голосовое от '+n;msg='Нажмите, чтобы послушать в рации';tags=['studio_microphone']}
  else if(m.k==='loc'){title='📍 '+n+' отправил(а) место';msg='Нажмите, чтобы открыть чат'}
+ else if(m.k==='poll'){title='🗳️ '+n+': голосование';msg=m.t+' — нажмите и выберите'}
  else if(m.k==='test'){title='🔔 Проверка: '+n;msg='Уведомления работают!';pr=3}
  else{title='💬 '+n+' пишет в чат';msg='Нажмите, чтобы прочитать'}
  const body=JSON.stringify({topic:ntTopic(),title,message:msg,priority:pr,tags,click:location.origin+location.pathname+(m.k==='voice'?'#kids':'#chat')});
@@ -2132,10 +2138,10 @@ function kMemory(n){n=n||LS.get('mem_n',6);LS.set('mem_n',n);const E=['🐘','�
 let bubT=null,bubR=null;
 function kBubbles(){kOpen('🫧 Лопни пузыри',`<div class="bstat">Лопнуто: <b id="bcount">0</b></div><div class="bfield" id="bfield"></div>`,'linear-gradient(#bfe9ff,#7cc7ea)');
  const f=document.getElementById('bfield');let cnt=0;const BC=['#ff9fcf','#9fd8ff','#b9f3a8','#ffe08a','#d2b8ff'];
- const add=()=>{if(f.children.length>14)return;const b=document.createElement('button');b.className='bub';const s=50+Math.random()*60;b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*(f.clientWidth-s)}px;top:${f.clientHeight}px;--bc:${BC[Math.floor(Math.random()*BC.length)]}`;b.dataset.v=.6+Math.random()*1.2;b.innerHTML=Math.random()<.25?['🐠','🐢','⭐','🐘'][Math.floor(Math.random()*4)]:'';f.appendChild(b)};
+ const add=()=>{if(f.children.length>14)return;const b=document.createElement('button');b.className='gbub';const s=50+Math.random()*60;b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*(f.clientWidth-s)}px;top:${f.clientHeight}px;--bc:${BC[Math.floor(Math.random()*BC.length)]}`;b.dataset.v=.6+Math.random()*1.2;b.innerHTML=Math.random()<.25?['🐠','🐢','⭐','🐘'][Math.floor(Math.random()*4)]:'';f.appendChild(b)};
  bubT=setInterval(add,700);
  const loop=()=>{[...f.children].forEach(b=>{const y=parseFloat(b.style.top)-b.dataset.v;b.style.top=y+'px';if(y<-120)b.remove()});bubR=requestAnimationFrame(loop)};loop();
- f.onpointerdown=e=>{const b=e.target.closest('.bub');if(!b||b.classList.contains('pop'))return;b.classList.add('pop');beep(300+Math.random()*700,.1,'sine',.2);cnt++;document.getElementById('bcount').textContent=cnt;if(cnt%20===0){yay();sayKid('Ура! '+cnt+' пузырей!')}setTimeout(()=>b.remove(),250)}}
+ f.onpointerdown=e=>{const b=e.target.closest('.gbub');if(!b||b.classList.contains('pop'))return;b.classList.add('pop');beep(300+Math.random()*700,.1,'sine',.2);cnt++;document.getElementById('bcount').textContent=cnt;if(cnt%20===0){yay();sayKid('Ура! '+cnt+' пузырей!')}setTimeout(()=>b.remove(),250)}}
 
 /* ---------- 4. Охота за сокровищами ---------- */
 const HUNT=[['🛺','Тук‑тук'],['🐘','Слон'],['🦎','Геккон'],['🛶','Лодка'],['🥥','Кокос'],['🛕','Храм'],['🐒','Обезьянка'],['🌺','Цветок'],['🦀','Краб'],['🐚','Ракушка'],['🥭','Манго'],['🍍','Ананас'],['🏍️','Мотобайк'],['⛱️','Зонтик'],['🌅','Закат'],['🐟','Рыбка']];
@@ -2572,7 +2578,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v38';
+const SWV='kamala-v39';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -3085,6 +3091,42 @@ function tripSheet(){const s=tripState(),t=bkk(),today=`${t.getFullYear()}-${pad
  sheet.classList.add('on');scrim.classList.add('on')}
 document.addEventListener('click',e=>{if(e.target.closest('#tripban'))go('fly')});
 renderTrip();setInterval(renderTrip,60000);
+/* ---------- 🍽️💊 Еда и аптека: карточки по‑тайски ---------- */
+const EAT={food:{t:'Еда',ic:'🍽️',l:[['🌶️','Не острое','ไม่เผ็ด','май пет'],['👶','Это для ребёнка, совсем не остро','อันนี้สำหรับเด็ก ไม่เผ็ดเลย','ан ни самрап дек, май пет лёй'],['🤏','Чуть‑чуть остро','เผ็ดนิดหน่อย','пет нит ной'],['🧊','Без льда','ไม่ใส่น้ำแข็ง','май сай нам кхэнг'],['🍬','Без сахара','ไม่ใส่น้ำตาล','май сай нам тан'],['🧂','Без глутамата (MSG)','ไม่ใส่ผงชูรส','май сай понг чу рот'],['🥜','Аллергия на арахис','แพ้ถั่วลิสง','пэ туа лисонг'],['🦐','Аллергия на морепродукты','แพ้อาหารทะเล','пэ аhан тхалей'],['🥛','Аллергия на молоко','แพ้นมวัว','пэ ном вуа'],['🐷','Без свинины','ไม่ใส่หมู','май сай му'],['☪️','Только халяль, пожалуйста','ขออาหารฮาลาลเท่านั้น','кхо аhан халал тхао нан'],['💧','Воду в бутылке, пожалуйста','ขอน้ำเปล่าขวดหนึ่ง','кхо нам плао кхуат нынг'],['🍚','Просто белый рис','ขอข้าวสวย','кхо кхао суай'],['🍳','Жареный рис с курицей','ข้าวผัดไก่','кхао пат кай'],['🍗','Курица гриль','ไก่ย่าง','кай янг'],['🥡','Заверните с собой','ใส่กล่องกลับบ้าน','сай клонг клап бан'],['🧾','Счёт, пожалуйста','เช็คบิลด้วย','чек бин дуай']]},
+ pharm:{t:'Аптека',ic:'💊',l:[['🏥','Где аптека?','ร้านขายยาอยู่ที่ไหน','ран кхай я ю тхи най'],['🌡️','Жаропонижающее для ребёнка','ยาลดไข้สำหรับเด็ก','я лот кхай самрап дек'],['🤕','Обезболивающее','ยาแก้ปวด','я кэ пуат'],['🚽','От диареи','ยาแก้ท้องเสีย','я кэ тхонг сиа'],['🧂','Соли для питья (от обезвоживания)','ผงเกลือแร่','понг клыа рэ'],['🤢','От тошноты и рвоты','ยาแก้อาเจียน','я кэ а‑чиан'],['🚤','От укачивания','ยาแก้เมารถ เมาเรือ','я кэ мао рот мао рыа'],['🦟','Средство от комаров','ยากันยุง','я кан юнг'],['🐜','От зуда после укусов','ยาแก้คัน ยุงกัด','я кэ кхан, юнг кат'],['☀️','Солнечный ожог — гель алоэ','ผิวไหม้แดด ขอเจลว่านหางจระเข้','пиу май дэт, кхо чел ван ханг чоракхе'],['🪼','Обжёгся медузой','ถูกแมงกะพรุนต่อย','тхук мэнг капрун той'],['🤧','От аллергии','ยาแก้แพ้','я кэ пэ'],['😷','От кашля','ยาแก้ไอ','я кэ ай'],['🩹','Пластырь','พลาสเตอร์ปิดแผล','пластэ пит плэ'],['👂','Капли для ушей','ยาหยอดหู','я йот ху']]},
+ doc:{t:'Врач',ic:'🩺',l:[['👨‍⚕️','Нам нужен врач','ต้องการพบหมอ','тонг кан поп мо'],['🚑','Вызовите скорую!','ช่วยเรียกรถพยาบาลด้วย','чуай рияк рот пхаябан дуай'],['🤒','У ребёнка температура','ลูกมีไข้','лук ми кхай'],['🤮','Ребёнка рвёт','ลูกอาเจียน','лук а‑чиан'],['🫁','Трудно дышать','หายใจลำบาก','хай чай лам бак'],['🩸','Порез, идёт кровь','โดนบาด มีเลือดออก','дон бат, ми лыат ок'],['📄','У нас есть страховка','เรามีประกันการเดินทาง','рао ми пракан кан дын тханг']]}};
+let eatNow='food';
+function renderEat(){const el=document.getElementById('eatbody');if(!el)return;const E=EAT[eatNow];
+ el.innerHTML=`<div class="chhero" style="--c:#1f9d6b"><span>🗣️</span><div><h2>Еда и аптека</h2><p>Нажмите карточку — покажите телефон продавцу</p></div></div>
+ <div class="wsort">${Object.entries(EAT).map(([k,v])=>`<button class="${k===eatNow?'on':''}" data-eat="${k}">${v.ic} ${v.t}</button>`).join('')}</div>
+ ${eatNow==='pharm'?`<div class="agecard"><b>⚖️ Возраст и вес ребёнка</b><div><label>лет <input id="eage" type="number" min="0" max="17" value="${LS.get('eage',3)}"></label><label>кг <input id="ekg" type="number" min="3" max="80" value="${LS.get('ekg',14)}"></label><button class="act pri" data-eatage>Показать</button></div><small>Фармацевт подберёт дозу по весу. Дозу для детей всегда уточняйте у фармацевта или врача.</small></div>`:''}
+ <div class="eatg">${E.l.map((x,i)=>`<button class="eatc" data-eatc="${i}"><span>${x[0]}</span><b>${x[1]}</b><i>${x[2]}</i></button>`).join('')}</div>
+ ${eatNow!=='food'?`<div class="sec">${eatNow==='pharm'?'Аптеки рядом':'Клиники и больницы'}</div>${P.filter(p=>p.cat===(eatNow==='pharm'?'pharm':'med')).map(p=>`<div class="hli"><div class="hl-t"><b>${p.name}</b><small>${p.sub||''}</small>${p.tel?`<small>📞 <a href="tel:${p.tel.replace(/\s/g,'')}">${p.tel}</a></small>`:''}</div><div class="hl-a">${placeBtns('eat_'+p.id,{n:p.name,en:p.q||p.name,lat:p.lat,lng:p.lng})}</div></div>`).join('')}`:''}
+ <p class="foot">Перевод простой и вежливый. Если вас не поняли — покажите картинку и скажите слово ещё раз.</p>`}
+function eatFull(ic,ru,th,tr){showFull(`<div style="font-size:64px">${ic}</div><div class="big">${th}</div><div class="tr">${tr}</div><div class="ru">${ru}</div><button class="act pri" style="margin-top:18px" data-sayth="${th}">🔊 Сказать по‑тайски</button>`)}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-eat]');if(t){eatNow=t.dataset.eat;renderEat();return}
+ const c=e.target.closest('[data-eatc]');if(c){const x=EAT[eatNow].l[+c.dataset.eatc];eatFull(...x);return}
+ if(e.target.closest('[data-eatage]')){const a=+document.getElementById('eage').value||0,k=+document.getElementById('ekg').value||0;LS.set('eage',a);LS.set('ekg',k);eatFull("👶",`Возраст ребёнка: ${a} · вес ${k} кг`,`เด็กอายุ ${a} ปี น้ำหนัก ${k} กิโล`,`дек аю ${a} пи, нам нак ${k} кило`);return}
+ const s=e.target.closest('[data-sayth]');if(s){if(!sayTh(s.dataset.sayth))toast('В телефоне нет тайского голоса — просто покажите экран')}});
+/* ---------- 🗳️ Голосование в чате ---------- */
+const POLLIDEAS=['🏖️ Пляж Камала','🏊 Бассейн в отеле','🛍️ Рынок','🐘 Шоу FantaSea','🎠 Carnival Magic','🏝️ На остров','🛒 Торговый центр','🍽️ Ужин в ресторане','🌅 Закат на смотровой','😴 Отдыхаем в отеле'];
+function pollSheet(){if(!CH.me||!CH.code){toast('Сначала войдите в чат трёх семей');go('chat');return}
+ const ev=(typeof calFor==='function')?calFor(new Date(bkk().getFullYear(),bkk().getMonth(),bkk().getDate())).filter(x=>x.q).slice(0,4).map(x=>x.ic+' '+x.t):[];
+ const ideas=[...new Set([...ev,...POLLIDEAS])].slice(0,12);
+ sheet.innerHTML=`<div class="grab"></div><div class="sh-head"><div class="sh-ic" style="--c:#7048e8;font-size:26px">🗳️</div><div class="sh-t"><h2>Голосование</h2><p>Все 3 семьи нажмут — и сразу видно, куда идём</p></div></div>
+ <label class="lab">Вопрос</label><input id="pq" class="trq" maxlength="80" value="Куда идём сегодня?">
+ <label class="lab">Варианты (2–4) — нажмите идею или впишите своё</label>
+ <div class="pideas">${ideas.map(x=>`<button data-pidea="${esc(x)}">${x}</button>`).join('')}</div>
+ ${[0,1,2,3].map(i=>`<input class="trq popt" maxlength="40" placeholder="Вариант ${i+1}" style="margin-top:6px">`).join('')}
+ <button class="act pri" id="psend" style="width:100%;margin-top:12px">📨 Отправить в чат</button>`;
+ sheet.classList.add('on');scrim.classList.add('on');
+ sheet.querySelector('.pideas').onclick=e=>{const b=e.target.closest('[data-pidea]');if(!b)return;const f=[...sheet.querySelectorAll('.popt')].find(x=>!x.value.trim());if(f){f.value=b.dataset.pidea;b.disabled=true}else toast('Максимум 4 варианта')};
+ document.getElementById('psend').onclick=()=>{const q=document.getElementById('pq').value.trim()||'Куда идём?';const o=[...sheet.querySelectorAll('.popt')].map(x=>x.value.trim()).filter(Boolean);if(o.length<2){toast('Нужно минимум 2 варианта');return}
+  chSend({k:'poll',t:q,o,pid:b64(crypto.getRandomValues(new Uint8Array(6)))});closeSheet();go('chat')}}
+function pollVotes(pid){const v={};[...CH.msgs,...CH.queue.map(q=>q.m)].filter(m=>m.k==='vote'&&m.pid===pid).sort((a,b)=>a.ts-b.ts).forEach(m=>v[m.uid]={i:m.i,a:m.a,n:m.n});return v}
+function pollHTML(m){const v=Object.values(pollVotes(m.pid)),mineV=pollVotes(m.pid)[CH.me.uid],tot=v.length||1;
+ return `<div class="poll"><b>🗳️ ${esc(m.t)}</b>${m.o.map((o,i)=>{const w=v.filter(x=>x.i===i);return `<button class="popt2 ${mineV&&mineV.i===i?'on':''}" data-vote="${m.pid}|${i}"><span class="pbar" style="width:${Math.round(w.length/tot*100)}%"></span><span class="ptx">${esc(o)}</span><span class="pct">${w.map(x=>x.a).join('')} ${w.length||''}</span></button>`}).join('')}<small>${v.length} проголосовали · нажмите, чтобы выбрать</small></div>`}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-vote]');if(!b)return;const[pid,i]=b.dataset.vote.split('|');const mv=pollVotes(pid)[CH.me.uid];if(mv&&mv.i===+i)return;chSend({k:'vote',pid,i:+i});try{navigator.vibrate&&navigator.vibrate(30)}catch(x){}});
 /* ---------- 💡 Факт каждые 2 часа ---------- */
 const FACTS=['Таиланд — единственная страна в регионе, которая никогда не была колонией.','Пхукет — самый большой остров Таиланда.','Слон — символ Таиланда. 13 марта здесь празднуют День слона 🐘','Тайцы здороваются жестом «вай»: ладони вместе, лёгкий поклон 🙏','Голову в Таиланде считают священной — детей незнакомых людей по голове не гладят.','По буддийскому календарю сейчас в Таиланде 2569 год!','«Спасибо» по‑тайски: женщины говорят «кхоп кхун кха», мужчины — «кхоп кхун кхрап».','В тайском алфавите 44 согласные буквы.','Дуриан — «король фруктов». Из‑за запаха его не пускают в отели!','Любимый тайский десерт — манго с клейким рисом и кокосовым молоком 🥭','Раньше Пхукет богател на добыче олова и на каучуке.','Старый город Пхукета — это яркие сино‑португальские домики.','Большой Будда на Пхукете высотой 45 метров и сделан из белого мрамора.','На Камале много мусульман — поэтому рядом есть мечети и халяльная еда.','Морские черепахи откладывают яйца на пляже Май Кхао на севере Пхукета 🐢','Вода в Андаманском море почти круглый год тёплая — около 28–30°.','Длиннохвостая лодка — это лодка с мотором от машины на длинном шесте.','На Пхукете время на 2 часа больше, чем в Алматы.','Наш самолёт летит из Алматы до Пхукета около 7,5 часов ✈️','Тайцы едят ложкой, а вилкой только подталкивают еду на ложку 🥄','Палочками в Таиланде едят в основном лапшу.','«Сабай‑сабай» — по‑тайски «спокойно, расслабленно». Это девиз тайцев 😌','5 декабря — день рождения короля Рамы IX и День отца в Таиланде 💛','Муай‑тай называют «искусством восьми конечностей»: кулаки, локти, колени и ноги.','В Таиланде, как и в Англии, ездят по левой стороне дороги.','Сиамские кошки родом из Таиланда — Сиам это старое название страны 🐈','Таиланд — один из крупнейших в мире продавцов риса 🍚','«Поесть» по‑тайски — «кин кхао», буквально «съесть рис».','Геккона в номере тайцы считают к удаче — к тому же он ест комаров 🦎','Белые цветы франжипани (лилавади) пахнут сладко и растут почти у каждого отеля 🌸','В Таиланде 3 сезона: жаркий, дождливый и прохладный. У нас — начало сухого ☀️','На острове Пхи‑Пхи Лей снимали фильм «Пляж» с Леонардо Ди Каприо 🎬','«Остров Джеймса Бонда» в заливе Пханг‑Нга прославился после фильма 1974 года.','На всех тайских деньгах портрет короля — на монету нельзя наступать ногой.','Женщинам нельзя касаться буддийских монахов — даже передавать им вещи из рук в руки.','Тук‑тук на Пхукете — это маленький цветной грузовичок, торгуйтесь до посадки 🛺','Кокос пьют прямо из ореха трубочкой, а потом ложкой едят мягкую мякоть 🥥','На тайском флаге 5 полос: красный — народ, белый — религия, синий — король.','Флаг Казахстана: солнце, орёл‑беркут и национальный узор на голубом небе 🇰🇿','Обезьяны на смотровых площадках Пхукета любят воровать еду и очки — держите крепко! 🐒'];
 let factOff=0;function renderFact(){const el=document.getElementById('hfact');if(!el)return;const i=(Math.floor(Date.now()/72e5)+factOff)%FACTS.length;el.innerHTML=`<small>💡 Знаете ли вы?</small>${FACTS[i]}`}

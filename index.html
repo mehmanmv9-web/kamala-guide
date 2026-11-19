@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0f1b2d">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
@@ -449,6 +449,17 @@ a{color:inherit}
 .wx-note{font-size:13.5px}
 .tile{font-size:13px}
 .tabs .tab{font-size:10px}
+
+/* v6: без горизонтального «гуляния» */
+html,body{overflow-x:hidden;overscroll-behavior:none;touch-action:manipulation;width:100%;position:fixed;inset:0}
+.app{overflow:hidden;touch-action:manipulation}
+.view{overflow-x:hidden!important;overscroll-behavior-x:none;touch-action:pan-y}
+.hscroll,.listchips,.chips,.seg,.today{touch-action:pan-x pan-y;overscroll-behavior-x:contain}
+.map{touch-action:none}
+.sheet,.full{overflow-x:hidden;touch-action:pan-y}
+svg.scene{overflow:hidden}
+.row2{flex-wrap:wrap}.row2 .act{min-width:0;flex:1 1 60px}.offgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.num{min-width:0;overflow-wrap:anywhere}
+.tiles{gap:8px}.tile{min-width:0;padding:12px 4px 10px;font-size:11.5px!important;text-align:center;hyphens:manual;line-height:1.2}.tile .ti{width:44px;height:44px}
 </style>
 </head>
 <body>
@@ -1283,9 +1294,9 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   const s=td?(on?'Открыто сейчас':'Сегодня '+p.h.f+'–'+p.h.t):'Сегодня выходной · '+nextOpen(p,t);
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
-const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Переводчик','tr','#e0567f'],['fun','Развлечения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['sos:kids-sec','Дети','kids','#b8935a']];
+const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['sos:kids-sec','Дети','kids','#b8935a']];
 document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${ic(i)}</span>${n}</button>`).join('');
-document.getElementById('tiles').style.gridTemplateColumns='repeat(4,1fr)';
+document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
 document.getElementById('near4').innerHTML=near.map(([id,lab])=>{const p=P.find(x=>x.id===id);const c=CAT[p.cat];const[d,w]=distTxt(p);return `<button class="n4" data-open="${id}"><div class="ic" style="--c:${c.c}">${ic(c.i)}</div><b>${lab}</b><span>${d} · ${w.replace('≈ ','')}</span></button>`}).join('');
 

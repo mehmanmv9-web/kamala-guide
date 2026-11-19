@@ -898,6 +898,8 @@ html{background:var(--ivory,#f7f3ec);height:100%}
       <div id="chainbody"></div>
     </section>
 
+    <section class="view" id="v-gen"><div id="genbody"></div></section>
+
     <section class="view" id="v-halal">
       <h2 class="h">🕌 Халяль и намаз</h2><p class="sub">Время азана, мечети и халяльная еда — с дорогой прямо на нашей карте</p>
       <div id="halbody"></div>
@@ -1151,6 +1153,10 @@ function placeBtns(key,o){let lat=o.lat,lng=o.lng,ap=false;if(lat==null&&APX[key
  PLX[key]={n:o.n||o.name,en:o.en||o.q||o.name||o.n,th:o.th,addr:o.addr,lat,lng,ap};
  return `<button class="act pri" data-pmap="${key}">🗺️ На карте Google</button><button class="act" data-ptx="${key}">🚕 Таксисту</button><button class="act look" data-look="${key}">📷 Как выглядит</button>`}
 const I={
+ men:'<circle cx="12" cy="6" r="3"/><path d="M8 21v-7l-2-1V10a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v3l-2 1v7"/>',
+ women:'<circle cx="12" cy="6" r="3"/><path d="M12 9l-4 8h8z"/><path d="M10 17v4M14 17v4"/>',
+ game:'<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="16" cy="11.5" r="1"/><circle cx="18" cy="13.5" r="1"/>',
+ wave:'<path d="M2 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M2 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><circle cx="16" cy="7" r="3"/>',
  leaf:'<path d="M12 3c1.6 3.6 1.6 8.4 0 12.6-1.6-4.2-1.6-9 0-12.6z"/><path d="M12 15.6C9.6 12.6 6.3 10.5 2.5 9.8c2.2 3.6 5.4 5.4 9.5 5.8z"/><path d="M12 15.6c2.4-3 5.7-5.1 9.5-5.8-2.2 3.6-5.4 5.4-9.5 5.8z"/><path d="M12 15.6c-2.8-1-5.6-.7-8.4 1 2.8 1 5.6.7 8.4-1zM12 15.6c2.8-1 5.6-.7 8.4 1-2.8 1-5.6.7-8.4-1z"/><path d="M12 15.6V21"/>',
  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 3l.7 1.6L19.3 5l-1.6.7L17 7.3l-.7-1.6L14.7 5l1.6-.4z"/>',
  hotel:'<path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/><path d="M8 10h.01M12 10h.01M16 10h.01"/>',
@@ -1274,7 +1280,7 @@ const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок'
 
 /* ---------- tabs / router ---------- */
 const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
-const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain'];
+const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain','gen'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
 function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
@@ -1588,7 +1594,7 @@ document.getElementById('kidlist').addEventListener('click',e=>{const f=e.target
 /* --- guide segmented --- */
 function pane(p){document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.pane===p));document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));document.getElementById('v-guide').scrollTop=0}
 document.getElementById('seg').addEventListener('click',e=>{const b=e.target.closest('[data-pane]');if(b)pane(b.dataset.pane)});
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;const[v,p]=g.dataset.go.split(':');go(v);if(p&&v==='guide')pane(p);if(p&&v==='fun'){funCat=p;renderFun()}if(v==='chain'){chainOpen(p||'711');return}if(p&&v==='sos')setTimeout(()=>document.getElementById(p).scrollIntoView({behavior:'smooth'}),80)});
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;const[v,p]=g.dataset.go.split(':');if(v==='sea'){seaSheet();return}go(v);if(p&&v==='guide')pane(p);if(p&&v==='fun'){funCat=p;renderFun()}if(v==='chain'){chainOpen(p||'711');return}if(v==='gen'){genNow=p||'men';renderGen();return}if(p&&v==='sos')setTimeout(()=>document.getElementById(p).scrollIntoView({behavior:'smooth'}),80)});
 
 /* --- HOME --- */
 function nextOpen(p,t){for(let i=1;i<=7;i++){const d=(t.getDay()+i)%7;if(p.h.d.includes(d))return i===1?'завтра':DFULL[d].replace('среда','в среду').replace('пятница','в пятницу').replace('суббота','в субботу').replace(/^(понедельник|вторник|четверг|воскресенье)$/,'в $1')}return''}
@@ -1611,7 +1617,7 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   const s=td?(on?'Открыто сейчас':'Сегодня '+p.h.f+'–'+p.h.t):'Сегодня выходной · '+nextOpen(p,t);
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
-const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a']];
+const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a'],['gen:men','Мужчинам','men','#1c4b82'],['gen:women','Женщинам','women','#c2255c'],['kids:games','Игры','game','#ff922b'],['sea','Море сегодня','wave','#119aa6']];
 document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${g==='kz'?'<img src="img/kz-flag.svg" class="tflag" alt="Флаг Казахстана">':ic(i)}</span>${n}</button>`).join('');
 document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
@@ -2402,7 +2408,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v23';
+const SWV='kamala-v24';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2806,6 +2812,90 @@ function lookPlace(key){const p=PLX[key];if(!p)return;closeSheet();const ph=phot
  <p class="ru" style="font-size:13px;opacity:.75;margin-top:8px">Фото и карта — Google. «Все фото» откроет Google Карты в новой вкладке, сайт останется открытым.</p>`,'lookfull');
  let sat=false;document.getElementById('lk-sat').onclick=e=>{sat=!sat;const f=full.querySelector('iframe');f.src=`https://maps.google.com/maps?q=${q}${ll?'&ll='+ll:''}&z=${sat?18:17}&t=${sat?'k':'m'}&hl=ru&output=embed`;e.target.textContent=sat?'🗺️ Обычная карта':'🛰️ Вид со спутника'}}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-look]');if(b)lookPlace(b.dataset.look)});
+/* ---------- 👨 Мужчинам / 👩 Женщинам ---------- */
+const GEN={
+ men:{t:'Мужчинам',ic:'👨',c:'#1c4b82',sub:'Спорт, драйв, море, рыбалка, гольф и вечер в хорошем баре',g:[
+  ['🥊 Муай‑тай и бои',[
+   ['🥊','Tiger Muay Thai','Чалонг','Самый известный лагерь тайского бокса: разовые тренировки для новичков, утром и вечером.','Tiger Muay Thai Chalong Phuket'],
+   ['🥊','Phuket Top Team','Чалонг','Муай‑тай, ММА и бокс, групповые и личные тренировки.','Phuket Top Team Chalong'],
+   ['🥊','Bangla Boxing Stadium','Патонг','Вечерние бои по тайскому боксу: шум, атмосфера, лучшие места у ринга.','Bangla Boxing Stadium Patong'],
+   ['🥊','Patong Boxing Stadium','Патонг','Ещё один стадион с вечерними боями несколько раз в неделю.','Patong Boxing Stadium']]],
+  ['🏎️ Драйв и адреналин',[
+   ['🏎️','Patong Go‑Kart Speedway','Катху','Картинг на серьёзной трассе, машины разной мощности.','Patong Go-Kart Speedway Kathu'],
+   ['🎯','Phuket Shooting Range','Катху','Тир с настоящим оружием под присмотром инструктора.','Phuket Shooting Range Kathu'],
+   ['🪂','Phuket Bungy Jump','Катху','Прыжок с тарзанки над озером.','Jungle Bungy Jump Phuket Kathu'],
+   ['🚙','Сафари на квадроциклах (ATV)','Катху и Чалонг','Грязь, джунгли и виды на море, 1–2 часа езды.','ATV Phuket Adventure'],
+   ['🌲','Hanuman World — зиплайн','Катху','Тросы над джунглями, высота и скорость.','Hanuman World Phuket'],
+   ['🏄','Surf House (волна)','Ката','Искусственная волна для сёрфинга и бодиборда, бар рядом.','Surf House Phuket Kata'],
+   ['🌊','Phuket Wake Park','Катху','Вейкборд на канатной дороге над озером, учат с нуля.','Phuket Wake Park'],
+   ['🚤','Гидроцикл и парасейлинг','Патонг, Камала','Прокат прямо на пляже. Договаривайтесь о цене и проверяйте технику до поездки.','Jet ski Patong Beach']]],
+  ['🎣 Море и рыбалка',[
+   ['🎣','Морская рыбалка из Чалонга','Чалонг','Лодка на полдня или день: тунец, барракуда, групер.','Chalong Pier deep sea fishing'],
+   ['🐟','Пруд для рыбалки Andaman Fishing Park','Таланг','Крупная рыба с берега, снасти дают на месте.','Fishing Park Phuket'],
+   ['🤿','Дайвинг у островов Рача','Чалонг','Погружения для новичков и опытных, прозрачная вода.','Racha Yai diving Phuket'],
+   ['⛵','Яхта на закат','Чалонг, Ао По','Аренда яхты или катамарана на компанию.','Phuket yacht charter sunset'],
+   ['🚤','Спидбот по островам','Ао По, Чалонг','Пхи‑Пхи, Пханг‑Нга, острова Кхай — за один день.','Phuket speedboat island tour']]],
+  ['⛳ Гольф и спорт',[
+   ['⛳','Blue Canyon Country Club','Таланг','Знаменитое поле с каньоном и озёрами.','Blue Canyon Country Club Phuket'],
+   ['⛳','Red Mountain Golf Club','Катху','Красивое поле в бывшем карьере.','Red Mountain Golf Club Phuket'],
+   ['⛳','Laguna Golf Phuket','Банг Тао','Поле рядом с Банг Тао, есть уроки.','Laguna Golf Phuket'],
+   ['🏋️','Тренажёрный зал на день','Камала','Разовое посещение — спросите в отеле ближайший.','Gym Kamala Phuket'],
+   ['🎳','Боулинг и бильярд','Пхукет‑таун, Central Phuket','Вечер с друзьями под крышей, когда дождь.','Bowling Central Phuket']]],
+  ['💈 Для себя',[
+   ['💈','Барбершоп','Камала','Стрижка и бритьё по‑мужски, без записи в будни.','Barber shop Kamala Phuket'],
+   ['💆','Спортивный тайский массаж','Камала','После тренировки или перелёта — массаж ног и спины.','Thai massage Kamala'],
+   ['🛵','Прокат байка или машины','Камала','Нужны водительские права с категорией и международное удостоверение.','Car rental Kamala Phuket']]],
+  ['🌅 Вечер',[
+   ['🌅','Café del Mar Phuket','Камала','Пляжный клуб на закате: лежаки, музыка, коктейли.','Cafe del Mar Phuket Kamala'],
+   ['🍹','Catch Beach Club','Банг Тао','Модный пляжный клуб с ужином и диджеем.','Catch Beach Club Phuket'],
+   ['🍺','Kamala Beergarden','Камала','Пиво, спорт на экранах, спокойная атмосфера.','Kamala Beergarden'],
+   ['🌃','Bangla Road','Патонг','Главная ночная улица острова: бары и клубы. Шумно, без детей.','Bangla Road Patong'],
+   ['🎶','Illuzion','Патонг','Самый большой клуб острова, шоу и диджеи.','Illuzion Phuket']]]]},
+ women:{t:'Женщинам',ic:'👩',c:'#c2255c',sub:'СПА, красота, шопинг, йога, кулинария и красивые места для фото',g:[
+  ['💆 СПА и массаж',[
+   ['💆','Oasis Turquoise Cove Spa','Камала','Тихий СПА у FantaSea, программы на 2–3 часа.','Oasis Turquoise Cove Spa Kamala'],
+   ['🪷','Oasis Royal Thai Spa','Камала','Классический тайский и ароматерапия.','Oasis Royal Thai Spa Kamala'],
+   ['⛰️','Ratana Spa','Камала, Ayara Kamala','Массаж с видом на море.','Ratana Spa Ayara Kamala'],
+   ['🌸','Let’s Relax Spa','Патонг, Jungceylon','Известная сеть, удобно после шопинга.','Lets Relax Spa Jungceylon Patong'],
+   ['🌿','Массаж на пляже','Камала','Под зонтиком у моря, 300–500 ฿ за час.','Beach massage Kamala']]],
+  ['💅 Красота',[
+   ['💅','Маникюр и педикюр','Камала','Салоны на главной улице, без записи.','Nail salon Kamala Phuket'],
+   ['💇‍♀️','Парикмахерская и укладка','Камала','Мытьё и укладка — недорого и быстро.','Hair salon Kamala Phuket'],
+   ['👁️','Ресницы и брови','Камала','Наращивание и ламинирование.','Eyelash extension Kamala Phuket'],
+   ['✨','Уход за лицом','Патонг','Косметологические салоны и клиники.','Facial spa Patong Phuket']]],
+  ['🧘 Йога и здоровье',[
+   ['🧘','Йога на рассвете','Камала, Сурин','Групповые занятия в студиях и на пляже.','Yoga Kamala Phuket'],
+   ['🤸','Пилатес','Банг Тао','Студии рядом с Boat Avenue.','Pilates Bang Tao Phuket'],
+   ['🥊','Муай‑тай для женщин','Камала, Чалонг','Фитнес‑тренировки без спаррингов.','Muay Thai fitness Kamala']]],
+  ['🛍️ Шопинг',[
+   ['🛍️','Central Phuket','Пхукет‑таун','Самый большой торговый центр острова.','Central Phuket Floresta'],
+   ['🛍️','Jungceylon','Патонг','Большой ТЦ: одежда, косметика, Big C.','Jungceylon Patong'],
+   ['🛍️','Porto de Phuket','Чернг Талай','Бутики и кафе под открытым небом.','Porto de Phuket'],
+   ['🛍️','Boat Avenue','Банг Тао','Магазины, кафе, по пятницам вечерний рынок.','Boat Avenue Phuket'],
+   ['🧺','Рынок Нака','Пхукет‑таун','Одежда, сувениры, уличная еда — по выходным.','Naka Weekend Market Phuket'],
+   ['🎨','Chillva Market','Пхукет‑таун','Хипстерский вечерний рынок в контейнерах.','Chillva Market Phuket'],
+   ['💎','Gems Gallery','Чалонг','Ювелирные украшения и жемчуг.','Gems Gallery Phuket']]],
+  ['🍳 Мастер‑классы',[
+   ['🍳','Кулинарный класс Blue Elephant','Пхукет‑таун','Тайская кухня с шефом в старинном особняке.','Blue Elephant Cooking School Phuket'],
+   ['🍲','Pum Thai Cooking','Патонг','Короткий урок тайской кухни.','Pum Thai Cooking School Patong'],
+   ['🖌️','Мастерская батика','Пхукет‑таун','Роспись по ткани — с собой домой.','Batik workshop Phuket']]],
+  ['📸 Красивые места и вечер',[
+   ['📸','Старый город Пхукета','Пхукет‑таун','Цветные дома и стрит‑арт — лучшее место для фото.','Phuket Old Town'],
+   ['👗','Фотосессия в тайском костюме','Пхукет‑таун','Прокат национального платья и фото.','Thai costume photo Phuket Old Town'],
+   ['🌅','Café del Mar на закате','Камала','Ужин и закат у моря.','Cafe del Mar Phuket Kamala'],
+   ['💃','Simon Cabaret','Патонг','Яркое кабаре‑шоу с костюмами.','Simon Cabaret Phuket'],
+   ['🐘','Phuket Elephant Sanctuary','Пак Лок','Этичный заповедник: только наблюдать за слонами.','Phuket Elephant Sanctuary'],
+   ['🐎','Прогулка на лошадях','Най Харн','Конная прогулка по пляжу.','Phuket Riding Club'],
+   ['🌺','Ботанический сад Пхукета','Чалонг','Цветы, пруды и тенистые дорожки для прогулки и фото.','Phuket Botanic Garden'],
+   ['🧁','Кафе‑десерты Старого города','Пхукет‑таун','Красивые кофейни с тортами и манговыми десертами.','Dessert cafe Phuket Old Town']]]]}};
+let genNow='men';
+function renderGen(){const G=GEN[genNow],el=document.getElementById('genbody');if(!el)return;let n=0;
+ const total=G.g.reduce((a,x)=>a+x[1].length,0);
+ el.innerHTML=`<div class="chhero" style="--c:${G.c}"><span>${G.ic}</span><div><h2>${G.t}</h2><p>${G.sub} · ${total} мест</p></div></div>
+ <div class="wsort"><button class="${genNow==='men'?'on':''}" data-gen="men">👨 Мужчинам</button><button class="${genNow==='women'?'on':''}" data-gen="women">👩 Женщинам</button></div>`+
+ G.g.map(([t,arr])=>`<div class="sec">${t}</div>`+arr.map(([e,nm,ar,d,q])=>{const id='g'+genNow[0]+(n++);return `<div class="hli"><div class="hl-t"><b>${e} ${nm}</b><small>📍 ${ar}</small><p>${d}</p></div><div class="hl-a">${placeBtns(id,{n:nm,en:q})}</div></div>`}).join('')).join('')+
+ `<p class="foot">Цены и часы меняются — уточняйте на месте или по кнопке «Как выглядит».</p>`}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-gen]');if(b){genNow=b.dataset.gen;renderGen();document.querySelector('.views').scrollTop=0}});
 /* ---------- init ---------- */
 renderChips();applyFilter();renderList();renderWeek();todayStrip();tick();
 

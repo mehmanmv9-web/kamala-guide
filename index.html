@@ -699,6 +699,9 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
 .duel{display:flex;flex-direction:column;gap:10px;height:calc(100vh - 160px)}.dz{flex:1;border-radius:24px;color:#fff;font-size:28px;font-weight:900;touch-action:none}.dz.top{transform:rotate(180deg)}
 .rpsv{text-align:center;font-size:64px;margin:16px 0}
 .grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;background:#f4d58d;padding:10px;border-radius:30px}.grid6 button{aspect-ratio:1;border-radius:12px;background:#ffe8a3;font-size:24px}
+.chhero{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 60%,#ffb84d));color:#fff;border-radius:24px;padding:18px;box-shadow:0 12px 26px rgba(0,0,0,.18);margin-top:6px}.chhero span{font-size:52px}.chhero h2{margin:0;font-size:26px}.chhero p{margin:4px 0 0;font-size:14px;opacity:.95}
+.apx{color:#c2410c;font-weight:700;font-size:13px}
+.rtbar{flex-wrap:wrap}.rtbar .navbtn{width:auto!important;height:40px!important;padding:0 12px;border-radius:12px!important;background:#1fa36b!important;color:#fff;font-weight:900;font-size:14px!important}.rtbar .navbtn.on{background:#d6453d!important}
 </style>
 </head>
 <body>
@@ -874,6 +877,11 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
     <section class="view" id="v-fam">
       <h2 class="h">👨‍👩‍👧 Где все наши</h2><p class="sub">Все члены семьи на карте. Тревога, если ребёнок отошёл от взрослых</p>
       <div id="fambody"></div>
+    </section>
+
+    <section class="view" id="v-chain">
+      <div id="chainhead"></div>
+      <div id="chainbody"></div>
     </section>
 
     <section class="view" id="v-halal">
@@ -1252,7 +1260,7 @@ const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок'
 
 /* ---------- tabs / router ---------- */
 const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
-const EXTRA=['near','kz','tr','kids','halal','weed','fam'];
+const EXTRA=['near','kz','tr','kids','halal','weed','fam','chain'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
 function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
@@ -1566,7 +1574,7 @@ document.getElementById('kidlist').addEventListener('click',e=>{const f=e.target
 /* --- guide segmented --- */
 function pane(p){document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.pane===p));document.querySelectorAll('.pane').forEach(x=>x.classList.toggle('on',x.id==='p-'+p));document.getElementById('v-guide').scrollTop=0}
 document.getElementById('seg').addEventListener('click',e=>{const b=e.target.closest('[data-pane]');if(b)pane(b.dataset.pane)});
-document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;const[v,p]=g.dataset.go.split(':');go(v);if(p&&v==='guide')pane(p);if(p&&v==='fun'){funCat=p;renderFun()}if(p&&v==='sos')setTimeout(()=>document.getElementById(p).scrollIntoView({behavior:'smooth'}),80)});
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(!g)return;const[v,p]=g.dataset.go.split(':');go(v);if(p&&v==='guide')pane(p);if(p&&v==='fun'){funCat=p;renderFun()}if(v==='chain'){chainOpen(p||'711');return}if(p&&v==='sos')setTimeout(()=>document.getElementById(p).scrollIntoView({behavior:'smooth'}),80)});
 
 /* --- HOME --- */
 function nextOpen(p,t){for(let i=1;i<=7;i++){const d=(t.getDay()+i)%7;if(p.h.d.includes(d))return i===1?'завтра':DFULL[d].replace('среда','в среду').replace('пятница','в пятницу').replace('суббота','в субботу').replace(/^(понедельник|вторник|четверг|воскресенье)$/,'в $1')}return''}
@@ -1589,7 +1597,7 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   const s=td?(on?'Открыто сейчас':'Сегодня '+p.h.f+'–'+p.h.t):'Сегодня выходной · '+nextOpen(p,t);
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
-const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a']];
+const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a'],['chain:711','7‑Eleven','shop','#e8590c'],['chain:bigc','Big C','shop','#d6336c'],['fam','Где наши','kids','#2f6fde'],['guide:money','Курс','money','#b8935a']];
 document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${g==='kz'?'<img src="img/kz-flag.svg" class="tflag" alt="Флаг Казахстана">':ic(i)}</span>${n}</button>`).join('');
 document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
@@ -2348,7 +2356,7 @@ function clearRoute(){const g=document.getElementById('rtg');if(g)g.innerHTML=''
 function getPos(cb){if(!navigator.geolocation)return cb(null);let done=false;const t=setTimeout(()=>{if(!done){done=true;cb(null)}},6000);
  navigator.geolocation.getCurrentPosition(p=>{if(done)return;done=true;clearTimeout(t);cb({lat:p.coords.latitude,lng:p.coords.longitude})},()=>{if(!done){done=true;clearTimeout(t);cb(null)}},{enableHighAccuracy:true,timeout:6000,maximumAge:60000})}
 /* from: null = «где я» (или отель), to: место */
-function routeTo(to,label,{fromHotel=false,toHotel=false}={}){closeSheet&&closeSheet();if(full)full.classList.remove('on');
+function routeTo(to,label,{fromHotel=false,toHotel=false}={}){if(typeof navStop==='function')navStop();NAV.to=to;NAV.label=label||to.name||to.n||'';closeSheet&&closeSheet();if(full)full.classList.remove('on');
  toast('🧭 Строю маршрут…');
  const finish=me=>{let from=toHotel?(me&&inMap(me)?me:null):(me&&inMap(me)&&!fromHotel?me:HOTEL);
   if(toHotel&&!from){taxiCard(HOTEL_TAXI,true);toast('Не вижу, где вы. Покажите таксисту адрес отеля');return}
@@ -2356,8 +2364,8 @@ function routeTo(to,label,{fromHotel=false,toHotel=false}={}){closeSheet&&closeS
   go('map');setTimeout(()=>{resize();const m=drawRoute(from,to);fitXY(window._rtpts);const km=m<1000?Math.round(m/10)*10+' м':(m/1000).toFixed(1)+' км';const walk=Math.max(1,Math.round(m/75));
    const fromTxt=from===HOTEL?'от отеля':'от вас';
    let bar=document.getElementById('rtbar');if(!bar){bar=document.createElement('div');bar.id='rtbar';bar.className='rtbar';document.getElementById('v-map').appendChild(bar)}
-   bar.innerHTML=`<div><b>${label||to.name||to.n}</b><small>${fromTxt} · ${km} · ${m<2500?'🚶 ≈ '+walk+' мин пешком':'🚕 ≈ '+Math.max(3,Math.round(m/400))+' мин на машине'}</small></div><button aria-label="Закрыть">✕</button>`;
-   bar.querySelector('button').onclick=clearRoute;},300)};
+   bar.innerHTML=`<div><b>${label||to.name||to.n}</b><small>${fromTxt} · ${km} · ${m<2500?'🚶 ≈ '+walk+' мин пешком':'🚕 ≈ '+Math.max(3,Math.round(m/400))+' мин на машине'}</small></div><button id="navbtn" class="navbtn">▶️ Вести меня</button><button aria-label="Закрыть" class="rtx">✕</button>`;
+   bar.querySelector('.rtx').onclick=()=>{navStop();clearRoute()};bar.querySelector('#navbtn').onclick=()=>NAV.on?navStop():navStart();},300)};
  if(fromHotel)finish(null);else getPos(finish)}
 const HOTEL_TAXI={n:'The Marin Phuket Kamala Beach',th:'โรงแรม เดอะ มาริน ภูเก็ต กมลา',addr:'111/1 Moo 3, Soi Kamala 12, Kamala, Kathu',lat:HOTEL.lat,lng:HOTEL.lng};
 function taxiCard(p,home){const d=p.lat&&!home?hav(HOTEL,p):0;
@@ -2378,7 +2386,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v17';
+const SWV='kamala-v18';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2695,12 +2703,77 @@ function islandMap(p){const d=hav(HOTEL,p);closeSheet();
  <div class="big" style="font-size:22px;margin-top:12px">${p.n}</div>
  <div class="ru" style="margin-top:6px">≈ ${km.toFixed(0)} км по дороге · 🚕 ≈ ${min} мин на машине${p.ap?' · место отмечено примерно':''}</div>
  <button class="act pri" style="margin-top:14px;padding:14px 22px;font-size:17px" id="isletx">🚕 Показать таксисту</button>`);
- document.getElementById('isletx').onclick=()=>taxiCard(p)}
+ document.getElementById('isletx').onclick=()=>taxiCard(p);
+ getPos(me=>{if(!me||hav(me,HOTEL)>60000)return;const sv=full.querySelector('svg');if(!sv)return;sv.insertAdjacentHTML('beforeend',`<circle cx="${X(me.lng)}" cy="${Y(me.lat)}" r="7" fill="#1fa36b" stroke="#fff" stroke-width="3"/><text x="${X(me.lng)}" y="${+Y(me.lat)+20}" font-size="11" font-weight="800" text-anchor="middle" fill="#0f1b2d" font-family="Manrope,Arial">🟢 вы</text>`)})}
 function plxMap(key){const p=PLX[key];if(!p)return;if(p.lat==null){taxiCard(p);return}
  if(inMap(p))routeTo(p,(p.ap?'≈ ':'')+p.n);else islandMap(p)}
 document.addEventListener('click',e=>{let b=e.target.closest('[data-pmap]');if(b){plxMap(b.dataset.pmap);return}
  b=e.target.closest('[data-ptx]');if(b){const p=PLX[b.dataset.ptx];if(p){closeSheet();taxiCard(p.n===HOTEL_TAXI.n?HOTEL_TAXI:p)}}});
 document.addEventListener('click',e=>{if(e.target.closest('[data-taxi]')&&!e.target.closest('#sheet'))taxiCard(HOTEL_TAXI,true)});
+/* ---------- 🏪 7‑Eleven и 🛒 Big C — отдельные разделы ---------- */
+const CHAIN={
+ '711':{t:'7‑Eleven',ic:'🏪',c:'#e8590c',sub:'Круглосуточно: вода, перекус, кофе, детское питание, крем от солнца, пластыри. На Пхукете их почти 300.',items:[
+  {id:'s711a',n:'7‑Eleven · главная дорога Камалы',a:'Камала, главная дорога',lat:7.9499,lng:98.2854,h:'24/7'},
+  {id:'s711b',n:'7‑Eleven · у пляжа Камала',a:'Камала, у пляжа · банкомат Krungsri рядом',lat:7.95083,lng:98.28183,h:'24/7'},
+  {id:'e1',n:'7‑Eleven · юг Камалы',a:'Камала, у Rimhad Rd и Big C',ap:[7.9465,98.2805],h:'24/7'},
+  {id:'e2',n:'7‑Eleven · Сурин',a:'Сурин, главная дорога',ap:[7.9765,98.2835],h:'24/7'},
+  {id:'e3',n:'7‑Eleven · Банг Тао',a:'Чернг Талай, главная дорога',ap:[8.0,98.304],h:'24/7'},
+  {id:'e4',n:'7‑Eleven · Патонг, Bangla Road',a:'Патонг, рядом с Bangla Road',ap:[7.8935,98.2975],h:'24/7'},
+  {id:'e5',n:'7‑Eleven · Патонг, Pisitkoranee Rd',a:'64 Pisitkoranee Rd, Патонг',ap:[7.8985,98.3025],h:'24/7'},
+  {id:'e6',n:'7‑Eleven · Катху',a:'Катху, у Hanuman World',ap:[7.913,98.331],h:'24/7'},
+  {id:'e7',n:'7‑Eleven · Карон',a:'Карон, Patak Rd',ap:[7.845,98.298],h:'24/7'},
+  {id:'e8',n:'7‑Eleven · Ката',a:'Ката, Kata Rd',ap:[7.82,98.3],h:'24/7'},
+  {id:'e9',n:'7‑Eleven · Чалонг',a:'Чалонг, у кольца',ap:[7.846,98.338],h:'24/7'},
+  {id:'e10',n:'7‑Eleven · Раваи',a:'Раваи, Wiset Rd',ap:[7.776,98.325],h:'24/7'},
+  {id:'e11',n:'7‑Eleven · Пхукет‑таун',a:'Старый город',ap:[7.885,98.388],h:'24/7'},
+  {id:'e12',n:'7‑Eleven · аэропорт',a:'Аэропорт Пхукета',ap:[8.112,98.307],h:'24/7'}]},
+ 'bigc':{t:'Big C',ic:'🛒',c:'#d6336c',sub:'Супермаркеты: продукты, фрукты, памперсы, детское, аптечка, сувениры дешевле, чем в туристических местах.',items:[
+  {id:'bigc',n:'Big C Kamala',a:'Камала · ближе всех к отелю',lat:7.94796,lng:98.28031,h:'≈ 07:00–23:00',d:'Главный супермаркет Камалы.'},
+  {id:'b1',n:'Mini Big C · Камала',a:'маленькие круглосуточные Big C на главных улицах Камалы',ap:[7.9505,98.2845],h:'24/7',d:'Небольшие магазины у дома: самое нужное.'},
+  {id:'b2',n:'Big C Extra · Jungceylon',a:'Патонг, ТЦ Jungceylon, напротив Bangla Road',ap:[7.8913,98.2992],h:'≈ 10:00–22:00',d:'Большой супермаркет внутри торгового центра Jungceylon.'},
+  {id:'b3',n:'Big C Supercenter Phuket',a:'Пхукет‑таун, объездная дорога (Bypass)',ap:[7.891,98.371],h:'≈ 09:00–22:00',d:'Самый большой Big C острова: рынок у входа и большой супермаркет. Рейтинг Google 4.3 (6 075 отзывов).'},
+  {id:'b4',n:'Big C · Чалонг',a:'Чалонг, Chao Fah West Rd',ap:[7.847,98.346],h:'≈ 09:00–22:00',d:'Удобно, если едете на юг острова.'},
+  {id:'b5',n:'Big C · Таланг',a:'Таланг, Thep Krasattri Rd, по дороге в аэропорт',ap:[8.02,98.335],h:'≈ 09:00–22:00',d:'По пути из аэропорта или в аэропорт.'}]}};
+let chainNow='711',chainFrom=null;
+function chainOpen(k){chainNow=k;go('chain');getPos(me=>{chainFrom=me;renderChain()});renderChain()}
+function renderChain(){const C=CHAIN[chainNow],el=document.getElementById('chainbody');if(!el)return;const from=chainFrom||HOTEL;
+ const arr=C.items.map(it=>{const ll=it.lat!=null?{lat:it.lat,lng:it.lng}:{lat:it.ap[0],lng:it.ap[1]};return{...it,...ll,approx:it.lat==null,dist:hav(from,ll)}}).sort((a,b)=>a.dist-b.dist);
+ const grp=[['🚶 Рядом — пешком',x=>x.dist<1500],['🛵 Недалеко — 5–15 минут',x=>x.dist>=1500&&x.dist<8000],['🚕 Подальше — по острову',x=>x.dist>=8000]];
+ document.getElementById('chainhead').innerHTML=`<div class="chhero" style="--c:${C.c}"><span>${C.ic}</span><div><h2>${C.t}</h2><p>${C.sub}</p></div></div>
+ <div class="wsort"><button class="${chainNow==='711'?'on':''}" data-chain="711">🏪 7‑Eleven</button><button class="${chainNow==='bigc'?'on':''}" data-chain="bigc">🛒 Big C</button></div>
+ <p class="phone-line" style="margin:8px 0">Расстояние ${chainFrom?'от вас':'от отеля'}. ${chainFrom?'':'Разрешите геопозицию — покажем от того места, где вы сейчас.'}</p>`;
+ el.innerHTML=grp.map(([t,f])=>{const g=arr.filter(f);return g.length?`<div class="sec">${t}</div>`+g.map(it=>`<div class="hli"><div class="hl-t"><b>${C.ic} ${it.n}</b><small>${it.a} · ${it.dist<1000?Math.round(it.dist/10)*10+' м':(it.dist/1000).toFixed(1)+' км'}${it.dist<1500?' · 🚶 '+Math.max(1,Math.round(it.dist*1.3/75))+' мин':''}</small>${it.d?`<p>${it.d}</p>`:''}<p><em>🕒 ${it.h}</em>${it.approx?' · <span class="apx">место примерно — на этой улице</span>':''}</p></div><div class="hl-a">${placeBtns(it.id,{n:it.n,en:(C.t==='Big C'?it.n.replace('Mini Big C · Камала','Mini Big C Kamala'):'7-Eleven '+it.a),lat:it.lat,lng:it.lng})}</div></div>`).join(''):''}).join('')+
+ (chainNow==='711'?`<div class="warn">💡 7‑Eleven есть почти на каждой улице: зелёно‑оранжевая вывеска. Если ищете ближайший — спросите: <b>«Сэвен ю тхи най?»</b> (เซเว่นอยู่ที่ไหน)</div>`:'')+
+ `<p class="foot">Точные места — по данным OpenStreetMap, остальные отмечены по улице или району.</p>`}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-chain]');if(b){chainNow=b.dataset.chain;renderChain();document.querySelector('.views').scrollTop=0}});
+for(const k in CHAIN)CHAIN[k].items.forEach(it=>{if(it.ap)APX[it.id]=it.ap});
+/* ---------- 🧭 навигация от того места, где вы сейчас ---------- */
+const NAV={on:false,w:null,to:null,label:'',spoken:{},lock:null,last:0};
+const umXY=(A,B)=>Math.hypot((A[0]-B[0])*UNIT_M,(A[1]-B[1])*UNIT_MY);
+function navMe(P){let g=document.getElementById('rtg');if(!g)return;let c=document.getElementById('navme');if(!c){g.insertAdjacentHTML('beforeend','<circle id="navme" r="4.5" fill="#1fa36b" stroke="#fff" stroke-width="3" vector-effect="non-scaling-stroke"/>');c=document.getElementById('navme')}c.setAttribute('cx',P[0]);c.setAttribute('cy',P[1])}
+function navBar(html){const b=document.getElementById('rtbar');if(!b)return;const d=b.querySelector('div');if(d)d.innerHTML=html}
+async function navStart(){if(!navigator.geolocation){toast('Телефон не даёт геопозицию');return}if(!NAV.to)return;NAV.on=true;NAV.spoken={};
+ try{NAV.lock=await navigator.wakeLock.request('screen')}catch(e){}
+ const btn=document.getElementById('navbtn');if(btn){btn.textContent='⏹ Стоп';btn.classList.add('on')}
+ sayKid('Поехали! Я подскажу дорогу');navBar('<b>🛰️ Ищу, где вы…</b><small>Выйдите на открытое место</small>');
+ NAV.w=navigator.geolocation.watchPosition(p=>navTick({lat:p.coords.latitude,lng:p.coords.longitude}),e=>{if(e.code===1){toast('Разрешите геопозицию в настройках браузера');navStop()}},{enableHighAccuracy:true,maximumAge:2000,timeout:20000})}
+function navStop(){NAV.on=false;if(NAV.w!=null)navigator.geolocation.clearWatch(NAV.w);NAV.w=null;try{NAV.lock&&NAV.lock.release()}catch(e){}NAV.lock=null;const btn=document.getElementById('navbtn');if(btn){btn.textContent='▶️ Вести меня';btn.classList.remove('on')}}
+function navTick(me){if(!NAV.on)return;
+ if(!inMap(me)){navBar('<b>Вы за пределами карты Камалы</b><small>Покажите таксисту адрес — кнопка «Таксисту»</small>');return}
+ const P=prj(me.lat,me.lng);let pts=window._rtpts||[];
+ const near=()=>{let bi=0,bd=1e9,bt=0;for(let i=0;i<pts.length-1;i++){const A=pts[i],B=pts[i+1],dx=B[0]-A[0],dy=B[1]-A[1],L=dx*dx+dy*dy||1;let t=((P[0]-A[0])*dx+(P[1]-A[1])*dy)/L;t=Math.max(0,Math.min(1,t));const Q=[A[0]+t*dx,A[1]+t*dy],d=umXY(P,Q);if(d<bd){bd=d;bi=i;bt=t}}return{bi,bd,bt}};
+ let n=near();
+ if(n.bd>40&&Date.now()-NAV.last>4000){NAV.last=Date.now();drawRoute(me,NAV.to);pts=window._rtpts;n=near();if(Date.now()-(NAV.rr||0)>15000){NAV.rr=Date.now();sayKid('Перестраиваю маршрут')}}
+ navMe(P);
+ // оставшийся путь
+ const Q=[pts[n.bi][0]+n.bt*(pts[n.bi+1][0]-pts[n.bi][0]),pts[n.bi][1]+n.bt*(pts[n.bi+1][1]-pts[n.bi][1])];let rem=umXY(Q,pts[n.bi+1]);for(let i=n.bi+1;i<pts.length-1;i++)rem+=umXY(pts[i],pts[i+1]);
+ if(rem<25){navBar(`<b>🎉 Вы пришли!</b><small>${NAV.label}</small>`);sayKid('Вы пришли!');beep(880,.15);setTimeout(()=>beep(1175,.2),160);navStop();return}
+ // следующий поворот
+ let turn=null,acc=umXY(Q,pts[n.bi+1]);for(let i=n.bi+1;i<pts.length-1;i++){const a=[pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]],b=[pts[i+1][0]-pts[i][0],pts[i+1][1]-pts[i][1]];const la=Math.hypot(...a),lb=Math.hypot(...b);if(la>0.5&&lb>0.5){const cos=(a[0]*b[0]+a[1]*b[1])/(la*lb);if(cos<Math.cos(35*Math.PI/180)){turn={i,d:acc,right:(a[0]*b[1]-a[1]*b[0])>0};break}}acc+=umXY(pts[i],pts[i+1])}
+ const tTxt=turn?(turn.d<15?`Сейчас ${turn.right?'направо ➡️':'налево ⬅️'}`:`Через ${Math.round(turn.d/10)*10} м ${turn.right?'направо ➡️':'налево ⬅️'}`):'Прямо ⬆️ до конца';
+ navBar(`<b>${tTxt}</b><small>Осталось ${rem<1000?Math.round(rem/10)*10+' м':(rem/1000).toFixed(1)+' км'} · ${rem<2500?'🚶 ≈ '+Math.max(1,Math.round(rem/75))+' мин':'🚕 ≈ '+Math.max(2,Math.round(rem/400))+' мин'}</small>`);
+ if(turn&&turn.d<45&&!NAV.spoken[turn.i]){NAV.spoken[turn.i]=1;sayKid(`Через ${Math.max(10,Math.round(turn.d/10)*10)} метров поверните ${turn.right?'направо':'налево'}`)}
+ if(document.getElementById('v-map').classList.contains('on'))animTo(P[0],P[1],Math.max(k,Wd/220))}
 /* ---------- init ---------- */
 renderChips();applyFilter();renderList();renderWeek();todayStrip();tick();
 

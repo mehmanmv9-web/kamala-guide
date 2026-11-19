@@ -717,6 +717,10 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
 }
 html{background:var(--ivory,#f7f3ec);height:100%}
 .app{height:var(--apph,100%)!important;bottom:auto!important}
+@media (display-mode: standalone){
+ html,body{position:static!important;overflow:visible!important;height:auto!important;inset:auto!important}
+ .app{position:fixed!important;top:0!important;bottom:auto!important;left:0;right:0;height:var(--apph,100vh)!important;overflow:hidden}
+}
 </style>
 </head>
 <body>
@@ -2401,7 +2405,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v19';
+const SWV='kamala-v20';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2810,6 +2814,6 @@ setInterval(()=>{tick();todayStrip()},30000);
 if(!chCheckJoin())go(location.hash.slice(1)||'home',false);
 requestAnimationFrame(resize);setTimeout(resize,300);
 </script>
-<script>(function(){function fit(){var st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches;var h=window.innerHeight;if(st){var sh=(screen.width>screen.height)===(innerWidth>innerHeight)?screen.height:screen.width;if(sh>h&&sh-h<120)h=sh}document.documentElement.style.setProperty('--apph',h+'px')}fit();addEventListener('resize',fit);addEventListener('orientationchange',function(){setTimeout(fit,300)});document.addEventListener('visibilitychange',fit)})();</script>
+<script>(function(){function fit(){var st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches;var h=window.innerHeight;if(st){var sh=(screen.width>screen.height)===(innerWidth>innerHeight)?screen.height:screen.width;if(sh>h&&sh-h<140)h=sh;document.documentElement.classList.add('pwa')}document.documentElement.style.setProperty('--apph',h+'px')}fit();addEventListener('resize',fit);addEventListener('orientationchange',function(){setTimeout(fit,300)});document.addEventListener('visibilitychange',fit)})();</script>
 </body>
 </html>

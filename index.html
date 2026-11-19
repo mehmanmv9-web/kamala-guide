@@ -375,7 +375,9 @@ a{color:inherit}
 .say.on .eq3{display:flex}.say.on .eq3 i{background:#fff}
 .act.on{background:#e0567f;color:#fff}
 
-.kzflag{display:block;width:100%;height:100%;border-radius:6px}
+.kzflag{display:block;width:100%;height:100%;border-radius:6px;object-fit:fill}
+.tflag{width:34px;height:17px;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.25);display:block}
+.kfl{display:inline-block;width:1.6em;height:.8em;border-radius:2px;vertical-align:-.05em;box-shadow:0 1px 2px rgba(0,0,0,.25)}
 .kzban{display:flex;align-items:center;gap:14px;width:calc(100% - 28px);margin:14px 14px 0;padding:14px 16px;border-radius:24px;text-align:left;color:#fff;background:linear-gradient(120deg,#0095b0,#00AFCA 55%,#35c6db);box-shadow:0 12px 26px rgba(0,175,202,.3);position:relative;overflow:hidden}
 .kzban:after{content:"";position:absolute;right:-30px;top:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(254,197,12,.45),transparent 65%)}
 .kzban [data-kzflag]{flex:none;width:58px;height:29px;box-shadow:0 3px 8px rgba(0,0,0,.18);border-radius:6px}
@@ -597,6 +599,31 @@ svg.scene{overflow:hidden}
 .wnow.on{background:#2f6fde;color:#fff;animation:wpulse 1s infinite alternate}@keyframes wpulse{to{transform:scale(1.03)}}
 .zello{margin-top:16px;padding:14px;border-radius:18px;background:#fff7e6;border:1px solid #f3dca8}.zello b{font-size:16px}.zello p{margin:6px 0 10px;font-size:14.5px;line-height:1.4;color:#5a4a2a}
 .nsteps{margin:4px 0 8px;padding-left:22px;font-size:16px;line-height:1.4}.nsteps li{margin-bottom:14px}.nhint{font-size:14.5px;color:#56627a}
+.icflag{width:26px;height:13px;border-radius:2px;box-shadow:0 1px 2px rgba(0,0,0,.25);display:block}
+.kzurl{font-size:13px;color:#56627a;align-self:center}
+.rtbar{position:absolute;left:12px;right:12px;top:72px;z-index:30;display:flex;align-items:center;gap:10px;background:#fff;border-radius:18px;padding:12px 14px;box-shadow:0 10px 26px rgba(15,27,45,.22);border-left:6px solid #2f6fde}
+.rtbar div{flex:1;min-width:0}.rtbar b{display:block;font-size:16px}.rtbar small{font-size:14px;color:#3a4a66;font-weight:600}.rtbar button{width:38px;height:38px;border-radius:12px;background:#eef2f8;font-size:16px;flex:none}
+.prh{background:linear-gradient(135deg,#0e5c43,#0e8a5f 60%,#3fae7f);color:#fff;border-radius:24px;padding:18px;box-shadow:0 12px 26px rgba(14,138,95,.3)}
+.prh-top{display:flex;align-items:center;gap:12px}.prh-top span{font-size:34px}.prh-top small{opacity:.85;font-size:13px;display:block}.prh-top b{font-size:30px;font-weight:800}
+.prnext{margin-top:12px;background:rgba(255,255,255,.14);border-radius:16px;padding:12px 14px}.prnext small{opacity:.85;font-size:13px;display:block}.prnext b{font-size:22px;display:block}.prnext span{font-size:15px;font-weight:700}
+.prgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.prc{background:#fff;border-radius:16px;padding:10px 6px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05);border:2px solid transparent}.prc span{font-size:20px}.prc b{display:block;font-size:20px;font-weight:800}.prc i{display:block;font-style:normal;font-weight:700;font-size:14px}.prc small{font-size:12px;color:#7b8699}
+.prc.on{border-color:#0e8a5f;background:#e8f6ef}.prc.sr{opacity:.7}
+.hli{background:#fff;border-radius:18px;padding:14px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.05)}.hl-t b{font-size:17px}.hl-t small{display:block;color:#56627a;font-size:13.5px;margin-top:2px}.hl-t p{font-size:15px;margin:8px 0 10px;line-height:1.4}.hl-t em{font-style:normal;color:#0e8a5f;font-weight:700}
+.hl-a{display:flex;gap:8px;flex-wrap:wrap}.hl-a .act{flex:1;min-width:140px}
+.qib{text-align:center;margin-top:12px}.qdial{width:200px;height:200px;margin:0 auto;border-radius:50%;background:radial-gradient(circle,#fff 60%,#e8f6ef);border:4px solid #0e8a5f;position:relative;transition:transform .2s}.qn{position:absolute;top:6px;left:50%;transform:translateX(-50%);font-weight:900;color:#d6453d}
+.qarrow{position:absolute;inset:0;display:flex;justify-content:center;font-size:34px;padding-top:18px}.qarrow:after{content:"";position:absolute;top:58px;bottom:96px;width:6px;border-radius:3px;background:#0e8a5f;left:calc(50% - 3px)}
+.hscroll.pretty{gap:12px}.pcard{flex:none;width:220px;background:#fff;border-radius:20px;overflow:hidden;text-align:left;box-shadow:0 6px 18px rgba(15,27,45,.12)}
+.pimg svg,.pbig svg{display:block;width:100%;height:auto}.pimg{height:124px;overflow:hidden}.pt{padding:10px 12px 12px}.pt b{display:block;font-size:16px}.pt small{display:block;font-size:13px;color:#56627a}.pt span{display:block;font-size:13px;margin-top:4px;font-weight:700;color:#119aa6}
+.pbig{border-radius:20px;overflow:hidden;margin-top:6px}
+.offc{background:linear-gradient(120deg,#123a5a,#1f6f8b);color:#fff;border-radius:22px;padding:16px;margin:14px 0;box-shadow:0 12px 26px rgba(18,58,90,.3)}
+.offc b{font-size:18px;display:block}.offc small{opacity:.9;font-size:14px;display:block;margin-top:4px}.offc button{margin-top:12px;width:100%;padding:16px;border-radius:16px;background:#fff;color:#123a5a;font-weight:800;font-size:17px}
+.offp{display:none;margin-top:10px}.offp .tr2{height:10px;border-radius:5px;background:rgba(255,255,255,.25);overflow:hidden}.offp .tr2 i{display:block;height:100%;width:0;background:#7fe0b0;transition:width .2s}.offp p{font-size:14px;margin:8px 0 0}
+.fulln .item{text-decoration:none}.fulln .dist{font-size:15px}
+.weedhero{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#1f3d22,#3d7a3a);color:#fff;border-radius:24px;padding:18px;box-shadow:0 12px 26px rgba(31,61,34,.3)}
+.weedhero h2{margin:0;font-size:24px}.weedhero p{margin:4px 0 0;opacity:.9;font-size:14px}.wleaf{width:70px;height:70px;flex:none}.wleaf svg,#wleaf2 svg{width:100%;height:100%}#wleaf2{width:34px;height:34px;flex:none;display:block}
+.wz{background:#fff;border-radius:18px;padding:14px;margin-bottom:10px;box-shadow:0 2px 10px rgba(0,0,0,.05);border-left:6px solid #3d7a3a}.wz b{font-size:17px}.wz small{display:block;color:#56627a;font-size:13.5px}.wz p{font-size:15px;margin:8px 0 10px;line-height:1.4}
+.wrule{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:8px;font-size:15.5px;line-height:1.4}.wrule span{font-size:22px;flex:none}
 </style>
 </head>
 <body>
@@ -671,7 +698,7 @@ svg.scene{overflow:hidden}
         <div class="wx-top">
           <svg class="wx-ic" viewBox="0 0 64 64"><circle cx="26" cy="26" r="12" fill="#ffb84d"/><g stroke="#ffb84d" stroke-width="3" stroke-linecap="round"><path d="M26 6v5M26 41v5M6 26h5M41 26h5M12 12l3.5 3.5M36.5 36.5 40 40M12 40l3.5-3.5M36.5 15.5 40 12"/></g><path d="M24 50a10 10 0 0 1 9-14 12 12 0 0 1 22 4 8 8 0 0 1-1 16H28a8 8 0 0 1-4-6z" fill="#fff" stroke="#dfe5ee" stroke-width="2"/></svg>
           <div class="wx-t"><b>31<sup>°C</sup></b><span>Обычно днём · солнце и короткие ливни</span></div>
-          <a class="wx-btn" target="_blank" rel="noopener" href="https://www.google.com/search?q=%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0+%D0%9A%D0%B0%D0%BC%D0%B0%D0%BB%D0%B0+%D0%9F%D1%85%D1%83%D0%BA%D0%B5%D1%82">Прогноз ↗</a>
+          
         </div>
         <div class="wx-grid">
           <div><b>29°</b><span>море</span></div>
@@ -684,7 +711,9 @@ svg.scene{overflow:hidden}
 
       <button class="kzban" id="instbtn" style="display:none;background:linear-gradient(120deg,#0f1b2d,#2a3f63);box-shadow:0 12px 26px rgba(15,27,45,.3)"><span style="font-size:26px;flex:none">📲</span><span class="kt"><b>Установить приложение</b><small>Иконка на экране и работа без интернета</small></span><span class="ar">›</span></button>
       <button class="kzban kidsban" data-go="kids"><span class="kbe">🧸</span><span class="kt"><b>Детская зона</b><small>Игры · раскраски · мультики · рация</small></span><span class="ar">›</span></button>
+      <button class="kzban" data-go="halal" style="background:linear-gradient(120deg,#0e5c43,#0e8a5f)"><span class="kbe">🕌</span><span class="kt"><b>Халяль и намаз</b><small id="halban">Мечети · халяльная еда · время азана</small></span><span class="ar">›</span></button>
       <button class="kzban" data-go="kz"><span data-kzflag></span><span class="kt"><b>Лучший Казахстан</b><small>Консульство · посольство · Air Astana · казахская кухня</small></span><span class="ar">›</span></button>
+      <button class="kzban" data-go="weed" style="background:linear-gradient(120deg,#1f3d22,#3d7a3a)"><span class="kbe" id="wleaf2"></span><span class="kt"><b>Каннабис: закон и районы</b><small>Где эти магазины · что можно туристам · 18+</small></span><span class="ar">›</span></button>
       <div class="mconv">
         <div class="mh">Калькулятор <span id="mrate">1 ฿ ≈ 13,1 ₸</span></div>
         <div class="mr"><div class="mi"><input id="hB" inputmode="decimal" value="100"><i>฿</i></div><span class="eq">=</span><div class="mi"><input id="hK" inputmode="decimal"><i>₸</i></div></div>
@@ -693,6 +722,12 @@ svg.scene{overflow:hidden}
 
       <div class="hsec"><h3>Сегодня</h3><div class="orn"></div></div>
       <div class="hscroll" id="evs"></div>
+
+      <div class="hsec"><h3>Красивые места</h3><div class="orn"></div></div>
+      <div class="hscroll pretty" id="prettyrow"></div>
+
+      <div class="offc"><b>📥 Скачать всё для работы без интернета</b><small id="offst">Нажмите один раз, пока есть Wi‑Fi</small>
+        <button id="offbtn">Скачать сейчас</button><div class="offp"><div class="tr2"><i id="offbar"></i></div><p id="offtxt"></p></div></div>
 
       <div class="hsec"><h3>Быстрый доступ</h3><div class="orn"></div></div>
       <div class="tiles" id="tiles"></div>
@@ -755,8 +790,8 @@ svg.scene{overflow:hidden}
       <div class="trbox">
         <div class="langs"><select id="tr-from"></select><select id="tr-to"></select></div>
         <input id="tr-q" class="trq" placeholder="🔍 Поиск: вода, больница, такси…">
-        <div class="row2" style="margin-top:10px"><button class="act pri" id="tr-reply">Ответ собеседника ⇄</button><a class="act" id="tr-g" target="_blank" rel="noopener" href="https://translate.google.com">Свой текст ↗</a></div>
-        <p class="tr-hint">«Свой текст» открывает Google Переводчик — для него нужен интернет. Всё остальное на этой странице работает офлайн.</p>
+        <div class="row2" style="margin-top:10px"><button class="act pri" id="tr-reply">Ответ собеседника ⇄</button><button class="act" data-go="guide:phr">Разговорник</button></div>
+        <p class="tr-hint">Вся страница работает без интернета.</p>
       </div>
       <div id="trlist"></div>
     </section>
@@ -765,11 +800,22 @@ svg.scene{overflow:hidden}
     <!-- KAZAKHSTAN -->
     <section class="view" id="v-kz">
       <div class="kzhero"><span data-kzflag></span><div><small>Қош келдіңіз · Добро пожаловать</small><h2>Лучший Казахстан</h2><p>Всё казахстанское на Пхукете: сначала помощь, потом рядом с отелем, потом город и страна.</p></div></div>
+      <button class="kzban" data-go="halal" style="background:linear-gradient(120deg,#0e5c43,#0e8a5f);margin-bottom:12px"><span class="kbe">🕌</span><span class="kt"><b>Халяль и намаз</b><small>Время азана · мечети · халяльная еда</small></span><span class="ar">›</span></button>
       <div id="kzlist"></div>
       <p class="foot">Часы работы ресторанов — по данным путеводителей на 2026 год; перед поездкой лучше позвонить или проверить в Google Maps.</p>
     </section>
 
     <!-- KIDS -->
+    <section class="view" id="v-halal">
+      <h2 class="h">🕌 Халяль и намаз</h2><p class="sub">Время азана, мечети и халяльная еда — с дорогой прямо на нашей карте</p>
+      <div id="halbody"></div>
+    </section>
+
+    <section class="view" id="v-weed">
+      <div class="weedhero"><div class="wleaf" id="wleaf"></div><div><h2>Каннабис в Таиланде</h2><p>Законы и районы, где такие магазины есть · только 18+</p></div></div>
+      <div id="weedbody"></div>
+    </section>
+
     <section class="view" id="v-kids">
       <div class="khero"><div class="kh-e">🧸</div><div><h2>Детская зона</h2><p>Игры, раскраски, мультики и рация</p></div></div>
       <div class="kgrid" id="kidsgrid"></div>
@@ -789,6 +835,9 @@ svg.scene{overflow:hidden}
         <div class="row2"><a class="act" href="tel:1669" data-copy="1669">Позвонить 1669</a></div>
       </div>
       <div class="grid2" id="sosnums"></div>
+      <div class="sec">📵 Номер не проходит? Звоните на полный</div>
+      <div class="warn">С казахстанской SIM‑картой в роуминге короткие номера (1669, 191, 1155) <b>часто не соединяются</b>. Эти номера — полные, с +66, они работают с любого телефона.</div>
+      <div class="list fulln" id="fullnums"></div>
       <div class="sec">Как дойти до отеля</div>
 <div class="way">
   <div class="way-h"><span>🧭</span><div><b>Как дойти до отеля</b><small>Работает без интернета</small></div></div>
@@ -839,7 +888,7 @@ svg.scene{overflow:hidden}
         <p>The Marin Phuket Kamala Beach<br>111/1 Moo 3, Soi Kamala 12, Kamala, Kathu, Phuket</p>
         <div class="row2">
           <button class="act" data-copy="The Marin Phuket Kamala Beach, 111/1 Moo 3 Soi Kamala 12, Kamala, Kathu, Phuket">Копировать адрес</button>
-          <a class="act" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=7.960592,98.285965">Маршрут</a>
+          <button class="act" data-rhome>Дорога в отель</button>
         </div>
       </div>
       <div class="sec">Картинки на телефон</div>
@@ -897,7 +946,7 @@ svg.scene{overflow:hidden}
       </div>
       <div class="row2" style="margin-top:12px">
         <a class="act call" href="tel:+66805325695" data-copy="+66 80 532 5695"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>Ресепшен</a>
-        <a class="act" target="_blank" rel="noopener" href="https://www.themarinphuket.com">Сайт отеля</a>
+        <button class="act" data-rhome>Дорога в отель</button>
       </div>
       <p class="phone-line">Телефон отеля: +66 80 532 5695</p>
 
@@ -994,6 +1043,7 @@ svg.scene{overflow:hidden}
 <script>
 /* ---------- icons ---------- */
 const I={
+ moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 3l.7 1.6L19.3 5l-1.6.7L17 7.3l-.7-1.6L14.7 5l1.6-.4z"/>',
  hotel:'<path d="M3 21V8l9-5 9 5v13"/><path d="M9 21v-6h6v6"/><path d="M8 10h.01M12 10h.01M16 10h.01"/>',
  med:'<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/>',
  pharm:'<path d="M10.5 20.5 3.5 13.5a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7z"/><path d="m8.5 8.5 7 7"/>',
@@ -1019,7 +1069,7 @@ const I={
  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
  flag:'<path d="M4 22V3"/><path d="M4 4h13l-2 4 2 4H4"/>'
 };
-const ic=(n,sw=2)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
+const ic=(n,sw=2)=>n==='flag'?'<img src="img/kz-flag.svg" class="icflag" alt="Флаг Казахстана">':`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
 
 /* ---------- categories ---------- */
 const CAT={
@@ -1032,7 +1082,8 @@ const CAT={
  beach:{n:'Пляжи',c:'#119aa6',i:'beach'},
  food:{n:'Сладкое',c:'#e9822e',i:'food'},
  money:{n:'Деньги',c:'#5d6b82',i:'money'},
- police:{n:'Полиция',c:'#22356b',i:'police'}
+ police:{n:'Полиция',c:'#22356b',i:'police'},
+ halal:{n:'Халяль и мечети',c:'#0e8a5f',i:'moon'}
 };
 const ALL=[0,1,2,3,4,5,6];
 /* hours: d = days (0=Вс), f/t = from/to "HH:MM" */
@@ -1070,6 +1121,12 @@ const P=[
  /* kids */
  {id:'play',cat:'kids',name:'Детская площадка',sub:'Парк Мемориала цунами',lat:7.95171,lng:98.2825,desc:'Небольшой парк у пляжа с детской площадкой и мемориалом. Хорошее место для прогулки вечером, когда спадёт жара.'},
  /* beaches */
+ {id:'mq1',cat:'halal',name:'Мечеть Аль‑Бушра',sub:'Мечеть · ближайшая к отелю',lat:7.95553,lng:98.28388,desc:'Небольшая мечеть Камалы, ближе всех к отелю. Время намаза — в разделе «Халяль и намаз».'},
+ {id:'mq2',cat:'halal',name:'Главная мечеть Камалы',sub:'Мечеть · пятничный намаз',lat:7.94464,lng:98.28666,desc:'Главная мечеть посёлка, здесь проходит джума. Вокруг много халяльных кафе.'},
+ {id:'hl1',cat:'halal',name:"Sam's Indian Restaurant",sub:'Халяль · на нашей улице Soi 12',lat:7.96146,lng:98.28650,h:{d:ALL,f:'09:00',t:'21:00'},desc:'Индийская кухня с отметкой «халяль»: карри, бирьяни, наан. 1–2 минуты от отеля.'},
+ {id:'hl2',cat:'halal',name:'Stek House (Halal)',sub:'Халяль · стейки и гриль',lat:7.94647,lng:98.28459,desc:'Халяльные стейки и гриль на Khok Yang Road.'},
+ {id:'hl3',cat:'halal',name:'Somtam Restaurant Halal',sub:'Халяль · тайская кухня',lat:7.97996,lng:98.29449,desc:'Халяльный сомтам, курица‑гриль, клейкий рис.'},
+ {id:'lsb',cat:'beach',name:'Пляж Лаем Синг',sub:'Бухта между скал',lat:7.9693,lng:98.2780,desc:'Маленькая бирюзовая бухта между скалами. Спуск по лестнице.'},
  {id:'kb',cat:'beach',name:'Пляж Камала',sub:'Северная часть · ближайший',lat:7.96,lng:98.2836,desc:'Широкий спокойный пляж с мягким песком — один из лучших на Пхукете для детей. От отеля ≈ 300 м. Купайтесь у спасательных вышек.'},
  {id:'ls',cat:'beach',name:'Смотровая Лаем Синг',sub:'Вид на бухту',lat:7.97006,lng:98.27939,desc:'Смотровая площадка над бухтой Лаем Синг по дороге на Сурин. Красивые фото, особенно на закате.'},
  {id:'surin',cat:'beach',name:'Пляж Сурин',sub:'Шаттл от отеля',lat:7.97509,lng:98.28079,desc:'Красивый пляж в 4 км севернее; отель возит туда бесплатным шаттлом.'},
@@ -1108,9 +1165,9 @@ const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок'
 
 /* ---------- tabs / router ---------- */
 const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
-const EXTRA=['near','kz','tr','kids'];
+const EXTRA=['near','kz','tr','kids','halal','weed'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
-function go(k,push=true){if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
+function go(k,push=true){if(k==='halal')setTimeout(renderHalal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
  if(push){try{history.replaceState(null,'','#'+k)}catch(e){try{location.hash=k}catch(_){}}}
@@ -1139,7 +1196,7 @@ function openSheet(id){const p=P.find(x=>x.id===id);if(!p)return;const c=CAT[p.c
   ${op===null?'':`<span class="tag ${op?'open':'closed'}">${op?'Открыто сейчас':'Сейчас закрыто'}</span>`}${hrs}</div>
  <p class="desc">${p.desc||''}</p>
  <div class="acts">
-  ${p.id==='hotel'?`<a class="act pri" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}">${ic('pin')}Открыть в Google Maps</a>`:`<a class="act pri" target="_blank" rel="noopener" href="${dirUrl(p)}">${ic('route')}Маршрут</a>`}
+  ${p.id==='hotel'?`<button class="act pri" data-taxi>${ic('pin')}Адрес для таксиста</button>`:`<button class="act pri" data-rplace="${p.id}">${ic('route')}Маршрут</button>`}
   ${p.tel?`<a class="act call" href="${telHref(p.tel)}" data-copy="${p.tel}">${ic('phone')}Позвонить</a>`:`<button class="act" data-show="${p.id}">${ic('map')}На карте</button>`}
   ${p.tel&&!(p.drive&&p.cat!=='fun')?`<button class="act wide" data-show="${p.id}">${ic('map')}Показать на карте</button>`:''}
  </div>${p.tel?`<p class="phone-line">Телефон: <b>${p.tel}</b> · нажмите «Позвонить», номер также скопируется</p>`:''}`;
@@ -1157,7 +1214,7 @@ function item(p){const c=CAT[p.cat];const [d,w]=distTxt(p);const op=isOpen(p);
  <div class="dist">${d}${p.approx?' ≈':''}<small>${w}</small>${op===null?'':`<span class="st ${op?'o':'c'}">${op?'открыто':'закрыто'}</span>`}</div></button>`}
 const byDist=(a,b)=>hav(HOTEL,a)-hav(HOTEL,b);
 let listCat='all';
-function renderList(){const cats=['all','med','pharm','shop','fun','kids','beach','food','money','police'];
+function renderList(){const cats=['all','med','pharm','shop','fun','kids','beach','halal','food','money','police'];
  document.getElementById('listchips').innerHTML=cats.map(k=>`<button class="chip ${listCat===k?'on':''}" data-lc="${k}" style="--c:${k==='all'?'#0f1b2d':CAT[k].c}">${k==='all'?'':'<i></i>'}${k==='all'?'Все':CAT[k].n}</button>`).join('');
  const arr=P.filter(p=>p.id!=='hotel'&&(listCat==='all'||p.cat===listCat)).sort(byDist);
  document.getElementById('list').innerHTML=arr.map(item).join('')}
@@ -1167,6 +1224,8 @@ function fill(id,f){document.getElementById(id).innerHTML=P.filter(f).sort(byDis
 /* ---------- SOS ---------- */
 const NUMS=[['191','Полиция','Общий экстренный номер','#22356b'],['1155','Туристическая полиция','English · 24/7 · помогут с переводом','#2f6fde'],['199','Пожарные','Пожар и спасатели','#e9822e'],['1719','Bangkok Hospital','Скорая частной сети · 24/7','#d6453d'],['+66 80 532 5695','Ресепшен отеля','The Marin Phuket','#b8935a'],['1193','Дорожная полиция','ДТП на трассах','#5d6b82']];
 document.getElementById('sosnums').innerHTML=NUMS.map(([n,l,d,c])=>`<a class="num" href="${telHref(n)}" data-copy="${n}" style="--c:${c};text-decoration:none"><span class="n" style="${n.length>6?'font-size:18px;line-height:1.9':''}">${n}</span><span class="l">${l}</span><span class="d">${d}</span></a>`).join('');
+const FULLN=[['🚑','Скорая · Bangkok Hospital Phuket','Приёмный покой 24/7, свои машины скорой','+66 76 254 425','#d6453d'],['🚑','Скорая · Bangkok Hospital Siriroj','Скорая помощь 24/7','+66 76 210 935','#d6453d'],['🏥','Больница Патонга · экстренное','Ближайшая государственная больница','+66 76 340 444','#d6453d'],['🏥','Больница Вачира (государственная)','Пхукет‑таун, справочная','+66 76 361 234','#d6453d'],['👮','Туристическая полиция Пхукета','Говорят по‑английски','+66 76 223 891','#2f6fde'],['👮','Полиция Камалы','Участок у пляжа','+66 76 279 058','#22356b'],['🆘','Центр помощи туристам Пхукета','Спасатели, Чалонг','+66 76 383 907','#e9822e'],['⚓','Морская полиция','Беда на воде, лодки','+66 76 211 883','#119aa6'],['🏨','Ресепшен отеля The Marin','Круглосуточно','+66 80 532 5695','#b8935a'],['<img src="img/kz-flag.svg" class="icflag" alt="">','Консульство Казахстана, Пхукет','Пн–Пт 9:00–17:30','+66 76 608 829','#00AFCA']];
+document.getElementById('fullnums').innerHTML=FULLN.map(([e,n,d,t,c])=>`<a class="item" href="${telHref(t)}" data-copy="${t}"><div class="ic" style="--c:${c};font-size:20px">${e}</div><div class="it"><b>${n}</b><span>${d}</span></div><div class="dist">${t}<small>позвонить</small></div></a>`).join('');
 const CONS=[['Консульство Казахстана · Пхукет','88/7 Chao Fah Tawan Tok Rd, Chalong · Пн–Пт 9:00–17:30','+66 76 608 829'],['Посольство Казахстана · Бангкок','P23 Building, Soi Sukhumvit 23','+66 2 254 3043']];
 document.getElementById('conslist').innerHTML=CONS.map(([n,a,t])=>`<a class="item" href="${telHref(t)}" data-copy="${t}" style="text-decoration:none"><div class="ic" style="--c:#22356b">${ic('flag')}</div><div class="it"><b>${n}</b><span>${a}</span></div><div class="dist">${t}<small>позвонить</small></div></a>`).join('');
 
@@ -1281,7 +1340,7 @@ mks.innerHTML=vis.map(p=>`<div class="mk ${p.id==='hotel'?'hotel':''}" data-id="
 const mkEls=[...mks.children];
 function selMarker(id){mkEls.forEach(m=>m.classList.toggle('sel',m.dataset.id===id))}
 // chips
-const mcats=['all','med','pharm','shop','fun','kids','beach','food','police'];
+const mcats=['all','med','pharm','shop','fun','kids','beach','halal','food','police'];
 function renderChips(){document.getElementById('mapchips').innerHTML=mcats.map(k=>`<button class="chip ${filt===k?'on':''}" data-mc="${k}" style="--c:${k==='all'?'#0f1b2d':CAT[k].c}">${k==='all'?'':'<i></i>'}${k==='all'?'Все места':CAT[k].n}</button>`).join('')}
 document.getElementById('mapchips').addEventListener('click',e=>{const b=e.target.closest('[data-mc]');if(!b)return;filt=b.dataset.mc;renderChips();applyFilter();
  if(filt!=='all'){const ps=vis.filter(p=>p.cat===filt);if(ps.length)fitTo(ps.concat([HOTEL]))}});
@@ -1444,7 +1503,7 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
 const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f']];
-document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${ic(i)}</span>${n}</button>`).join('');
+document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${g==='kz'?'<img src="img/kz-flag.svg" class="tflag" alt="Флаг Казахстана">':ic(i)}</span>${n}</button>`).join('');
 document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
 document.getElementById('near4').innerHTML=near.map(([id,lab])=>{const p=P.find(x=>x.id===id);const c=CAT[p.cat];const[d,w]=distTxt(p);return `<button class="n4" data-open="${id}"><div class="ic" style="--c:${c.c}">${ic(c.i)}</div><b>${lab}</b><span>${d} · ${w.replace('≈ ','')}</span></button>`}).join('');
@@ -1454,7 +1513,7 @@ const sosBtn=document.createElement('button');sosBtn.className='fsos';sosBtn.id=
 sosBtn.onclick=()=>{sheet.innerHTML=`<div class="grab"></div>
  <div class="sh-head"><div class="sh-ic" style="--c:#d6453d">${ic('sos')}</div><div class="sh-t"><h2>Потерялись?</h2><p>Маршрут от вашего места до отеля The Marin</p></div></div>
  <div class="acts" style="grid-template-columns:1fr">
-  <a class="act pri" style="background:#d6453d;padding:18px;font-size:16px" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=${HOTEL.lat},${HOTEL.lng}&travelmode=walking">${ic('route')}Проложить путь до отеля</a>
+  <button class="act pri" style="background:#d6453d;padding:18px;font-size:16px" data-rhome>${ic('route')}Показать дорогу до отеля</button>
   <a class="act call" href="tel:+66805325695" data-copy="+66 80 532 5695">${ic('phone')}Позвонить в отель · +66 80 532 5695</a>
   <button class="act" data-taxi>${ic('pin')}Показать адрес таксисту</button>
   <button class="act" data-go="sos:kids-sec">${ic('kids')}Карточки детей</button>
@@ -1529,7 +1588,7 @@ trFrom.value=LS.get('trf2','ru');trTo.value=LS.get('trt2','th');
 function renderTr(){LS.set('trf2',trFrom.value);LS.set('trt2',trTo.value);const fi=trFrom.value==='kk'?1:0,q=(trQ.value||'').trim().toLowerCase();
  document.getElementById('trlist').innerHTML=TR.map(([e,c,list],ci)=>{const rows=list.map((r,i)=>[r,i]).filter(([r])=>!q||r[0].toLowerCase().includes(q)||r[1].toLowerCase().includes(q)||r[4].toLowerCase().includes(q));
   if(!rows.length)return'';return `<div class="phcat">${e} ${c}</div>`+rows.map(([r,i])=>`<button class="ph" data-tr="${ci}_${i}"><span class="ru">${r[fi]}</span><span class="th">${trTo.value==='th'?r[2]+`<small>${r[3]}</small>`:r[4]}</span></button>`).join('')}).join('')||'<div class="card" style="text-align:center;color:var(--mute)">Такой фразы нет. Попробуйте другое слово — или откройте Google Переводчик ниже (нужен интернет).</div>';
- document.getElementById('tr-g').href=`https://translate.google.com/?sl=${trFrom.value}&tl=${trTo.value}&text=${encodeURIComponent(trQ.value||'')}&op=translate`}
+ }
 [trFrom,trTo].forEach(s=>s.onchange=renderTr);trQ.addEventListener('input',renderTr);
 function speakLang(text,lang){try{const L={th:'th-TH',en:'en-US',ru:'ru-RU'}[lang];const vs=speechSynthesis.getVoices();const v=vs.find(x=>x.lang&&x.lang.replace('_','-').toLowerCase().startsWith(L.slice(0,2)));
  if(!v&&lang==='th'){toast('На телефоне нет тайского голоса — покажите текст на экране');return}
@@ -1557,6 +1616,7 @@ const FCAT={
  islands:['🏝️','Острова и лодки','#0e7f8a'],
  culture:['🛕','Храмы и культура','#b8935a'],
  markets:['🛍️','Рынки','#d0702a'],
+ spa:['💆','СПА и массаж','#c0577a'],
  adults:['🌅','Вечер для взрослых','#22356b']};
 /* q — запрос для Google Maps; t — дорога от отеля; age — возраст; h — часы; p — цена */
 const FUN=[
@@ -1606,7 +1666,13 @@ const FUN=[
  /* adults */
  {id:'f_cdm',c:'adults',e:'🍹',n:'Café del Mar',t:'5 мин пешком',age:'взрослым',h:'днём и вечером',p:'',q:'Cafe del Mar Phuket',ref:'cdm',d:'Пляжный клуб рядом с отелем: лаунж, музыка, лучшие закаты.'},
  {id:'f_bg',c:'adults',e:'🍺',n:'Kamala Beergarden',t:'≈ 15 мин пешком',age:'взрослым',h:'16:00–02:00',p:'',q:'Kamala Beergarden',d:'Уютный бар на главной дороге Камалы, счастливые часы с 16 до 20.'},
- {id:'f_spa',c:'adults',e:'💆',n:'Тайский массаж',t:'везде рядом',age:'взрослым',h:'весь день',p:'≈ 300–500 ฿/час',q:'Thai massage Kamala',d:'Салоны массажа на каждой улице Камалы. Чаевые мастеру — 50–100 ฿.'}
+ /* spa */
+ {id:'f_spa',c:'spa',e:'💆',n:'Тайский массаж на улице Камалы',t:'везде рядом · 3–10 мин пешком',age:'взрослым · детям — массаж ног',h:'≈ 10:00–23:00',p:'≈ 300–500 ฿ за час',q:'Thai massage Kamala',d:'Небольшие салоны на каждой улице Камалы: тайский массаж, массаж ног, масляный. Цены написаны у входа. Если больно — скажите «бау‑бау» (мягче).'},
+ {id:'f_spa2',c:'spa',e:'🌺',n:'Oasis Turquoise Cove Spa',t:'≈ 5 мин на машине',age:'взрослым',h:'ежедневно 10:00–22:00',p:'от ≈ 1 500 ฿',q:'Oasis Turquoise Cove Spa, 71/10 Moo 5 Soi Fantasea, Kamala',d:'Известный СПА у FantaSea: тихие комнаты для пар, джакузи. Обычно бесплатно забирают из отеля — спросите при записи.'},
+ {id:'f_spa3',c:'spa',e:'🪷',n:'Oasis Royal Thai Spa',t:'≈ 5 мин на машине',age:'взрослым',h:'ежедневно 10:00–22:00',p:'от ≈ 1 200 ฿',q:'Oasis Royal Thai Spa, 128 Moo 3 Rimhad Rd, Kamala',d:'Первый салон сети Oasis — в самой Камале, недалеко от пляжа.'},
+ {id:'f_spa4',c:'spa',e:'🌿',n:'Andaman Massage',t:'≈ 5–10 мин',age:'взрослым',h:'ежедневно 10:00–23:00',p:'≈ 400–700 ฿',q:'Andaman Massage Kamala',d:'Небольшой салон у пляжа Камала с хорошими отзывами: тайский, спортивный, ароматический массаж.'},
+ {id:'f_spa5',c:'spa',e:'⛰️',n:'Ratana Spa (Ayara Kamala)',t:'≈ 5 мин на машине',age:'взрослым',h:'днём и вечером',p:'премиум',q:'Ratana Spa, Ayara Kamala Resort, 22/10 Moo 6 Kamala',d:'Спокойный СПА на холме с видом на море — для особенного вечера.'},
+ {id:'f_spa6',c:'spa',e:'🍃',n:'Siladon Spa',t:'≈ 5 мин на машине',age:'взрослым',h:'днём и вечером',p:'премиум',q:'Siladon Spa Kamala Phuket',d:'Красивый СПА‑курорт западного берега, тихо и без суеты.'},
 ];
 
 /* ---------- render fun view ---------- */
@@ -1621,12 +1687,11 @@ function renderFun(){const cats=['all',...Object.keys(FCAT)];
  document.getElementById('funall').innerHTML=groups.map(k=>`<div class="fsec"><span>${FCAT[k][0]}</span>${FCAT[k][1]}</div>`+FUN.filter(f=>f.c===k).map(funCard).join('')).join('');}
 document.getElementById('funchips').addEventListener('click',e=>{const b=e.target.closest('[data-fc]');if(!b)return;funCat=b.dataset.fc;renderFun();document.getElementById('funall').scrollIntoView({behavior:'smooth',block:'start'})});
 function openFun(id){const f=FUN.find(x=>x.id===id);if(!f)return;const[ce,cn,cc]=FCAT[f.c];
- const route=f.ref?dirUrl(P.find(p=>p.id===f.ref)):`https://www.google.com/maps/dir/?api=1&origin=${HOTEL.lat},${HOTEL.lng}&destination=${encodeURIComponent(f.q)}&travelmode=driving`;
  sheet.innerHTML=`<div class="grab"></div>
  <div class="sh-head"><div class="sh-ic" style="--c:${cc};font-size:28px">${f.e}</div><div class="sh-t"><h2>${f.n}</h2><p>${ce} ${cn}</p></div></div>
  <div class="meta"><span class="tag">🕒 ${f.h}</span><span class="tag">🚗 ${f.t}</span><span class="tag">👶 ${f.age}</span>${f.p?`<span class="tag">💰 ${f.p}</span>`:''}</div>
  <p class="desc">${f.d}</p>
- <div class="acts"><a class="act pri" target="_blank" rel="noopener" href="${route}">${ic('route')}Маршрут</a><button class="act" data-say="fun:${f.id}">🔊 Послушать</button>
+ <div class="acts">${f.ref?`<button class="act pri" data-rplace="${f.ref}">${ic('route')}Маршрут</button>`:`<button class="act pri" data-ftaxi="${f.id}">🚕 Показать таксисту</button>`}<button class="act" data-say="fun:${f.id}">🔊 Послушать</button>
  ${f.ref?`<button class="act wide" data-show="${f.ref}">${ic('map')}Показать на карте</button>`:''}</div>
  <p class="phone-line">Часы и цены — ориентир на ноябрь 2026; перед поездкой проверьте на сайте или в отеле.</p>`;
  sheet.classList.add('on');scrim.classList.add('on')}
@@ -1653,16 +1718,13 @@ const SAY={
  way:'Как дойти до отеля. Первое: встань спиной к морю. Второе: иди прямо, мимо больших зонтиков. Это пять минут. Третье: видишь большую дорогу? Стой! Переходи дорогу только со взрослым. Четвёртое: наш отель сразу за дорогой. Рядом парк с огоньками Карнавал Мэджик. Пятое: если не видишь отель — стой на месте и покажи взрослому в форме карточку «Я потерялся». А если ты у магазина Биг Си — иди по большой дороге к слону ФантаСи. Отель будет после него.',
  rules:'Важные правила в Таиланде. Первое: электронные сигареты и вейпы запрещены полностью, даже везти их с собой нельзя. За это очень большой штраф. Второе: на пляжах курить нельзя. Третье: в храм приходим в одежде, которая закрывает плечи и колени, а обувь снимаем. Четвёртое: нельзя трогать людей за голову, даже детей. Пятое: нельзя увозить домой ракушки, кораллы и песок. Шестое: не кормим обезьян и не гладим бездомных собак. И самое главное для детей: с одиннадцати до трёх часов дня солнце очень сильное. В это время играем в тени, пьём много воды и не забываем крем от солнца.'};
 document.addEventListener('click',e=>{const b=e.target.closest('[data-say]');if(!b)return;const k=b.dataset.say;
- let text=SAY[k];if(k.startsWith('fun:')){const f=FUN.find(x=>x.id===k.slice(4));text=f.n+'. '+f.d+' Время работы: '+f.h.replace(/·/g,',')+'.'}
+ let text=SAY[k];if(k.startsWith('pretty:')){const p=PRETTY.find(x=>x.id===k.slice(7));text=p.n+'. '+p.d+' Лучше всего: '+p.best+'.'}else if(k.startsWith('fun:')){const f=FUN.find(x=>x.id===k.slice(4));text=f.n+'. '+f.d+' Время работы: '+f.h.replace(/·/g,',')+'.'}
  sayRu(text,b)});
 
 renderFun();
 
 /* ================= v4: Лучший Казахстан ================= */
-const KZFLAG=`<svg viewBox="0 0 60 30" class="kzflag" aria-label="Флаг Казахстана"><rect width="60" height="30" fill="#00AFCA"/>
-<g fill="#FEC50C"><g transform="translate(4 0)">${Array.from({length:7},(_,i)=>`<path d="M0 ${i*4.3+1} l2 2 -2 2 2 -2z M1 ${i*4.3+1.2} q1.6 1 0 2.2 q-1.6 -1.2 0 -2.2z"/>`).join('')}</g>
-<circle cx="31" cy="12" r="4.6"/><g>${Array.from({length:32},(_,i)=>{const a=i*Math.PI/16;return `<path d="M${31+5.4*Math.cos(a)} ${12+5.4*Math.sin(a)} L${31+7.6*Math.cos(a+.06)} ${12+7.6*Math.sin(a+.06)} L${31+5.4*Math.cos(a+.12)} ${12+5.4*Math.sin(a+.12)}Z"/>`}).join('')}</g>
-<path d="M17 22 Q24 17 31 21 Q38 17 45 22 Q38 20.5 33 23.5 L31 25.5 L29 23.5 Q24 20.5 17 22Z"/></g></svg>`;
+const KZFLAG=`<img src="img/kz-flag.svg" class="kzflag" alt="Флаг Казахстана">`;
 const KZ=[
  ['🆘','Если беда — сначала сюда',[
   {n:'Экстренные службы Таиланда',s:'Рядом с вами · 24/7',d:'Скорая помощь — 1669, туристическая полиция — 1155 (говорят по‑английски). Красная кнопка SOS построит дорогу до отеля.',tel:'1669',tel2:'1155'},
@@ -1695,8 +1757,8 @@ function renderKZ(){document.getElementById('kzlist').innerHTML=KZ.map(([e,t,ite
  <b>${it.n}</b><span class="ks">${it.s}</span><p>${it.d}</p>
  <div class="kza">${it.tel?`<a class="act call" href="${telHref(it.tel)}" data-copy="${it.tel}">${ic('phone')}${it.tel}</a>`:''}${it.tel2?`<a class="act call" href="${telHref(it.tel2)}" data-copy="${it.tel2}">${ic('phone')}${it.tel2}</a>`:''}
  ${it.mail?`<button class="act" data-copy="${it.mail}">✉️ Копировать e‑mail</button>`:''}
- ${it.q?`<a class="act" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&origin=${HOTEL.lat},${HOTEL.lng}&destination=${encodeURIComponent(it.q)}&travelmode=driving">${ic('route')}Маршрут</a>`:''}
- ${it.url?`<a class="act" target="_blank" rel="noopener" href="${it.url}">Открыть сайт ↗</a>`:''}</div></div>`).join('')).join('')}
+ ${it.q?`<button class="act" data-ktaxi="${encodeURIComponent(it.q)}|${encodeURIComponent(it.n)}">🚕 Показать таксисту</button>`:''}
+ ${it.url?`<span class="kzurl">🌐 ${it.url.replace(/^https?:\/\/(www\.)?/,'').replace(/\/$/,'')}</span>`:''}</div></div>`).join('')).join('')}
 document.querySelectorAll('[data-kzflag]').forEach(el=>el.innerHTML=KZFLAG);
 renderKZ();
 
@@ -1704,7 +1766,7 @@ renderKZ();
 /* --- offline helpers --- */
 function offCard(k){if(k==='taxi')return showFull(`<div class="big" style="font-size:34px">โรงแรม เดอะ มาริน ภูเก็ต กมลา</div><div class="tr">ซอยกมลา 12, กมลา, กะทู้, ภูเก็ต</div><div class="ru" style="margin-top:16px">The Marin Phuket Kamala Beach<br>111/1 Moo 3, Soi Kamala 12, Kamala, Kathu, Phuket</div><div class="ru" style="margin-top:6px">ใกล้ภูเก็ตแฟนตาซี · near Phuket FantaSea</div><div class="ru" style="margin-top:10px;color:var(--red);font-size:22px">+66 80 532 5695</div>`);
  if(k==='kid')return showFull(`<div style="font-size:64px">🧒</div><div class="th3" style="font-size:28px;font-weight:800">ฉันหลงทาง<br>กรุณาโทรหาพ่อแม่ของฉัน</div><div class="en" style="margin-top:8px;font-size:18px">I am lost. Please call my parents.</div><div class="ru" style="margin-top:6px">Я потерялся. Позвоните моим родителям.</div><div class="ht" style="margin-top:18px;font-size:16px;font-weight:700">Hotel · โรงแรม: The Marin Phuket, Soi Kamala 12<br>near Phuket FantaSea</div><div class="tel" style="margin-top:10px;font-size:30px">+66 80 532 5695</div><div class="en">Tourist Police 1155 · Ambulance 1669</div>`,'kfull');
- if(k==='nums')return showFull(`<div class="nm2" style="font-size:26px;font-weight:800">Экстренные номера · Таиланд</div><div class="fcard-num"><div><b>1669</b><span>Скорая помощь</span></div><div><b>1155</b><span>Туристическая полиция<br>English 24/7</span></div><div><b>191</b><span>Полиция</span></div><div><b>199</b><span>Пожарные</span></div><div><b style="font-size:20px">+66 80 532 5695</b><span>Отель The Marin</span></div><div><b style="font-size:20px">+66 76 608 829</b><span>Консульство РК, Пхукет</span></div></div>`)}
+ if(k==='nums')return showFull(`<div class="nm2" style="font-size:26px;font-weight:800">Экстренные номера · Таиланд</div><div class="fcard-num"><div><b>1669</b><span>Скорая помощь</span></div><div><b>1155</b><span>Туристическая полиция<br>English 24/7</span></div><div><b>191</b><span>Полиция</span></div><div><b>199</b><span>Пожарные</span></div><div><b style="font-size:20px">+66 80 532 5695</b><span>Отель The Marin</span></div><div><b style="font-size:20px">+66 76 608 829</b><span>Консульство РК, Пхукет</span></div><div><b style="font-size:20px">+66 76 254 425</b><span>Скорая · Bangkok Hospital</span></div><div><b style="font-size:20px">+66 76 223 891</b><span>Туристическая полиция</span></div></div><div style="margin-top:10px;font-size:15px">С SIM Казахстана короткие номера могут не работать — звоните на полные</div>`)}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-offc]');if(b)offCard(b.dataset.offc)});
 function netState(){document.getElementById('app').classList.toggle('offline',navigator.onLine===false)}
 window.addEventListener('online',netState);window.addEventListener('offline',()=>{netState();toast('Нет интернета — приложение продолжает работать')});netState();
@@ -1753,7 +1815,7 @@ function chList(){const el=document.getElementById('chlist');if(!el)return;let l
  const pending=CH.queue.map(q=>({...q.m,pend:1}));
  const all=[...CH.msgs,...pending];
  el.innerHTML=all.length?all.map(m=>{const day=phDay(m.ts);const sep=day!==last?`<div class="chday">${day}</div>`:'';last=day;const mine=m.uid===CH.me.uid;
-  return sep+`<div class="chm ${mine?'me':''} ${m.k==='sos'?'sos':''}">${mine?'':`<span class="ava">${m.a}</span>`}<div class="bub">${mine?'':`<b>${esc(m.n)}</b>`}${m.k==='voice'?`<button class="vplay" data-wp="${m.id}">▶ Голосовое · ${m.dur||''} с</button>`:m.k==='loc'?`📍 ${esc(m.t)}<br><a class="maplink" href="https://www.google.com/maps/search/?api=1&query=${m.lat},${m.lng}" target="_blank" rel="noopener">Показать на карте ↗</a>`:linkify(m.t)}<i>${m.pend?'⏳ ждёт интернет':phTime(m.ts)}</i></div></div>`}).join('')
+  return sep+`<div class="chm ${mine?'me':''} ${m.k==='sos'?'sos':''}">${mine?'':`<span class="ava">${m.a}</span>`}<div class="bub">${mine?'':`<b>${esc(m.n)}</b>`}${m.k==='voice'?`<button class="vplay" data-wp="${m.id}">▶ Голосовое · ${m.dur||''} с</button>`:m.k==='loc'?`📍 ${esc(m.t)}<br><button class="maplink" data-cloc="${m.lat}|${m.lng}|${esc(m.n)}">🧭 Как дойти</button>`:linkify(m.t)}<i>${m.pend?'⏳ ждёт интернет':phTime(m.ts)}</i></div></div>`}).join('')
  :`<div class="chempty"><div>👋</div><b>Здесь пока пусто</b><p>Напишите первое сообщение — его увидят все, кто вошёл по вашему коду.</p></div>`;
  el.scrollTop=el.scrollHeight}
 function chStat(t){const s=document.getElementById('chstat');if(!s)return;s.textContent=t||(navigator.onLine===false?'📴 нет интернета — сообщения отправятся позже':'🟢 на связи · '+CH.me.a+' '+CH.me.n)}
@@ -1940,18 +2002,18 @@ function kWords(){kOpen('🗣️ Тайские слова',`<p class="kp">На�
   sayKid(w[1]+'. По‑тайски: '+w[3]);setTimeout(()=>{try{const v=speechSynthesis.getVoices().find(x=>/^th/i.test(x.lang));if(v){const u=new SpeechSynthesisUtterance(w[2]);u.lang='th-TH';u.voice=v;u.rate=.8;speechSynthesis.speak(u)}}catch(e){}},50)}}
 
 /* ---------- 7. Мультики ---------- */
-const YT=[['🐻','Маша и Медведь','UCRv76wLBC73jiP7LX4C3l8Q'],['🦔','Смешарики','UC5A-Wp9ujcr5g9sYagAafEA'],['🔧','Фиксики','UCs_uv3QyUIQjBoL1Ij5BdlQ'],['🌙','Лунтик','UCdgDIIKpFlpHB1L0LZnh5EQ'],['🎞️','Союзмультфильм','UCHS2LM1n3f5cyL-ebgkqyLw'],['🦈','Пингфонг и Акулёночек','UCneERKDodkMre9v6nNomjUQ'],['🎵','Кукутики — песенки','UCwQVH2MqlzxN7t8ADcyFHHQ'],['🇰🇿','Balapan — қазақша','UCSJKvyZVC0FLiyvo3LeEllg']];
+const YT=[['🐻','Маша и Медведь','UCRv76wLBC73jiP7LX4C3l8Q'],['🦔','Смешарики','UC5A-Wp9ujcr5g9sYagAafEA'],['🔧','Фиксики','UCs_uv3QyUIQjBoL1Ij5BdlQ'],['🌙','Лунтик','UCdgDIIKpFlpHB1L0LZnh5EQ'],['🎞️','Союзмультфильм','UCHS2LM1n3f5cyL-ebgkqyLw'],['🦈','Пингфонг и Акулёночек','UCneERKDodkMre9v6nNomjUQ'],['🎵','Кукутики — песенки','UCwQVH2MqlzxN7t8ADcyFHHQ'],['<img src="img/kz-flag.svg" class="kfl" alt="KZ">','Balapan — қазақша','UCSJKvyZVC0FLiyvo3LeEllg']];
 let ytTimer=null,ytEnd=0;function ytStop(){clearInterval(ytTimer);ytTimer=null}
 function kTV(){const lim=LS.get('yt_lim',30);
  kOpen('📺 Мультики',`<p class="kp">Только официальные детские каналы. Нужен интернет.</p>
  <div class="ytlim">⏱️ Время мультиков: ${[15,30,45,60].map(m=>`<button data-yl="${m}" class="${m===lim?'on':''}">${m} мин</button>`).join('')}</div>
  <div class="ytgrid">${YT.map((c,i)=>`<button data-yt="${i}"><span>${c[0]}</span><b>${c[1]}</b></button>`).join('')}</div>
- <div class="warn" style="margin-top:14px">👨‍👩‍👧 Для полного детского режима с родительским контролем лучше поставить приложение <b>YouTube Kids</b>.<div style="margin-top:8px"><a class="act" href="https://www.youtubekids.com" target="_blank" rel="noopener">Открыть YouTube Kids ↗</a></div></div>`,'#fff0f5');
+ `,'#fff0f5');
  KST.querySelector('.ytlim').onclick=e=>{const b=e.target.closest('[data-yl]');if(!b)return;LS.set('yt_lim',+b.dataset.yl);kTV()};
  KST.querySelector('.ytgrid').onclick=e=>{const b=e.target.closest('[data-yt]');if(!b)return;if(navigator.onLine===false){toast('Для мультиков нужен интернет 📶');return}ytPlay(+b.dataset.yt)}}
 function ytPlay(i){const c=YT[i];const lim=LS.get('yt_lim',30);if(!ytTimer)ytEnd=Date.now()+lim*60000;
  kOpen('📺 '+c[1],`<div class="ytbox"><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UULF${c[2].slice(2)}&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
- <div class="ytleft" id="ytleft"></div><a class="act" style="margin-top:8px;width:100%;background:#2b2b40;color:#fff" target="_blank" rel="noopener" href="https://www.youtube.com/channel/${c[2]}/videos">Не включается? Открыть на YouTube ↗</a><div class="ytgrid small">${YT.map((x,j)=>`<button data-yt="${j}" class="${j===i?'on':''}"><span>${x[0]}</span><b>${x[1]}</b></button>`).join('')}</div>`,'#1b1b2a');
+ <div class="ytleft" id="ytleft"></div><div class="ytgrid small">${YT.map((x,j)=>`<button data-yt="${j}" class="${j===i?'on':''}"><span>${x[0]}</span><b>${x[1]}</b></button>`).join('')}</div>`,'#1b1b2a');
  KST.querySelector('.ytgrid').onclick=e=>{const b=e.target.closest('[data-yt]');if(b)ytPlay(+b.dataset.yt)};
  const tick=()=>{const left=Math.max(0,ytEnd-Date.now());const el=document.getElementById('ytleft');if(el)el.textContent='⏱️ Осталось '+Math.ceil(left/60000)+' мин';
   if(left<=0){ytStop();KST.querySelector('.kst-b').innerHTML='<div class="ytdone"><div>🌙</div><b>Время мультиков закончилось!</b><p>Пойдём поиграем или на пляж? 🏖️</p></div>';sayKid('Время мультиков закончилось! Пойдём играть!')}};
@@ -1994,6 +2056,217 @@ const KZONE=[['🎨','Раскраска','#ff8fb1',kColor],['🃏','Найди 
 document.getElementById('kidsgrid').innerHTML=KZONE.map(([e,t,c],i)=>`<button class="ktile" data-kg="${i}" style="--c:${c}"><span>${e}</span><b>${t}</b></button>`).join('');
 document.getElementById('kidsgrid').onclick=e=>{const b=e.target.closest('[data-kg]');if(!b)return;beep(700,.06);unlockAudio();KZONE[+b.dataset.kg][3]()};
 
+/* ---------- маршруты прямо на нашей карте (без Google) ---------- */
+const UNIT_MY=0.052/1513.6*110574;
+let RG=null;
+function buildGraph(){const key=p=>p[0].toFixed(1)+','+p[1].toFixed(1);const idx=new Map(),xy=[],adj=[];
+ const id=p=>{const k=key(p);let i=idx.get(k);if(i===undefined){i=xy.length;idx.set(k,i);xy.push(p);adj.push([])}return i};
+ feats.filter(f=>!/beach|stream|river|canal|coast|water|wood|park|build/.test(f.k)&&f.pts&&f.pts.length>1).forEach(f=>{for(let j=1;j<f.pts.length;j++){const a=id(f.pts[j-1]),b=id(f.pts[j]);if(a===b)continue;const w=Math.hypot((xy[a][0]-xy[b][0])*UNIT_M,(xy[a][1]-xy[b][1])*UNIT_MY);adj[a].push([b,w]);adj[b].push([a,w])}});
+ return RG={xy,adj}}
+function nearNode(x,y){const g=RG||buildGraph();let bi=-1,bd=1e18;for(let i=0;i<g.xy.length;i++){if(!g.adj[i].length)continue;const d=(g.xy[i][0]-x)**2+(g.xy[i][1]-y)**2;if(d<bd){bd=d;bi=i}}return bi}
+function shortest(s,t){const g=RG||buildGraph(),n=g.xy.length,dist=new Float64Array(n).fill(Infinity),prev=new Int32Array(n).fill(-1);const H=[];
+ const push=(d,i)=>{H.push([d,i]);let c=H.length-1;while(c>0){const p=(c-1)>>1;if(H[p][0]<=H[c][0])break;[H[p],H[c]]=[H[c],H[p]];c=p}};
+ const pop=()=>{const top=H[0],last=H.pop();if(H.length){H[0]=last;let c=0;for(;;){const l=2*c+1,r=l+1;let m=c;if(l<H.length&&H[l][0]<H[m][0])m=l;if(r<H.length&&H[r][0]<H[m][0])m=r;if(m===c)break;[H[m],H[c]]=[H[c],H[m]];c=m}}return top};
+ dist[s]=0;push(0,s);while(H.length){const[d,u]=pop();if(d>dist[u])continue;if(u===t)break;for(const[v,w]of g.adj[u]){const nd=d+w;if(nd<dist[v]){dist[v]=nd;prev[v]=u;push(nd,v)}}}
+ if(!isFinite(dist[t]))return null;const path=[];for(let u=t;u!==-1;u=prev[u])path.push(g.xy[u]);return{pts:path.reverse(),m:dist[t]}}
+const inMap=p=>{const[x,y]=prj(p.lat,p.lng);return x>-150&&x<1150&&y>-150&&y<1650};
+function drawRoute(a,b){const A=prj(a.lat,a.lng),B=prj(b.lat,b.lng);const r=shortest(nearNode(A[0],A[1]),nearNode(B[0],B[1]));
+ let g=document.getElementById('rtg');if(!g){svgEl.insertAdjacentHTML('beforeend','<g id="rtg"></g>');g=document.getElementById('rtg')}
+ const pts=[A,...(r?r.pts:[]),B];const d=pstr(pts);const um=(P1,P2)=>Math.hypot((P1[0]-P2[0])*UNIT_M,(P1[1]-P2[1])*UNIT_MY);const m=r?r.m+um(A,r.pts[0])+um(r.pts[r.pts.length-1],B):hav(a,b)*1.3;
+ g.innerHTML=`<path d="${d}" fill="none" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/><path d="${d}" fill="none" stroke="#2f6fde" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/><path d="${d}" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="2 9" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+ <circle cx="${A[0]}" cy="${A[1]}" r="3.2" fill="#2f6fde" stroke="#fff" stroke-width="3" vector-effect="non-scaling-stroke"/><circle cx="${B[0]}" cy="${B[1]}" r="3.6" fill="#d6453d" stroke="#fff" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
+ window._rtpts=pts;return m}
+function fitXY(pts){const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);const minx=Math.min(...xs),maxx=Math.max(...xs),miny=Math.min(...ys),maxy=Math.max(...ys);const nk=Math.min((Wd-70)/Math.max(60,maxx-minx),(Hd-300)/Math.max(60,maxy-miny));animTo((minx+maxx)/2,(miny+maxy)/2-30/nk,nk)}
+function clearRoute(){const g=document.getElementById('rtg');if(g)g.innerHTML='';const b=document.getElementById('rtbar');if(b)b.remove()}
+function getPos(cb){if(!navigator.geolocation)return cb(null);let done=false;const t=setTimeout(()=>{if(!done){done=true;cb(null)}},6000);
+ navigator.geolocation.getCurrentPosition(p=>{if(done)return;done=true;clearTimeout(t);cb({lat:p.coords.latitude,lng:p.coords.longitude})},()=>{if(!done){done=true;clearTimeout(t);cb(null)}},{enableHighAccuracy:true,timeout:6000,maximumAge:60000})}
+/* from: null = «где я» (или отель), to: место */
+function routeTo(to,label,{fromHotel=false,toHotel=false}={}){closeSheet&&closeSheet();if(full)full.classList.remove('on');
+ toast('🧭 Строю маршрут…');
+ const finish=me=>{let from=toHotel?(me&&inMap(me)?me:null):(me&&inMap(me)&&!fromHotel?me:HOTEL);
+  if(toHotel&&!from){taxiCard(HOTEL_TAXI,true);toast('Не вижу, где вы. Покажите таксисту адрес отеля');return}
+  if(!inMap(to)){taxiCard(to);return}
+  go('map');setTimeout(()=>{resize();const m=drawRoute(from,to);fitXY(window._rtpts);const km=m<1000?Math.round(m/10)*10+' м':(m/1000).toFixed(1)+' км';const walk=Math.max(1,Math.round(m/75));
+   const fromTxt=from===HOTEL?'от отеля':'от вас';
+   let bar=document.getElementById('rtbar');if(!bar){bar=document.createElement('div');bar.id='rtbar';bar.className='rtbar';document.getElementById('v-map').appendChild(bar)}
+   bar.innerHTML=`<div><b>${label||to.name||to.n}</b><small>${fromTxt} · ${km} · ${m<2500?'🚶 ≈ '+walk+' мин пешком':'🚕 ≈ '+Math.max(3,Math.round(m/400))+' мин на машине'}</small></div><button aria-label="Закрыть">✕</button>`;
+   bar.querySelector('button').onclick=clearRoute;},300)};
+ if(fromHotel)finish(null);else getPos(finish)}
+const HOTEL_TAXI={n:'The Marin Phuket Kamala Beach',th:'โรงแรม เดอะ มาริน ภูเก็ต กมลา',addr:'111/1 Moo 3, Soi Kamala 12, Kamala, Kathu',lat:HOTEL.lat,lng:HOTEL.lng};
+function taxiCard(p,home){const d=p.lat&&!home?hav(HOTEL,p):0;
+ showFull(`<div style="font-size:15px;opacity:.8;margin-bottom:8px">🚕 Покажите водителю такси</div>
+ ${p.th?`<div class="big" style="font-size:30px">${p.th}</div>`:''}<div class="big" style="font-size:${p.th?22:30}px;margin-top:6px">${p.en||p.q||p.n||p.name}</div>
+ <div class="tr" style="margin-top:10px">กรุณาพาไปที่นี่ · Please take me here</div>
+ ${p.addr?`<div class="ru" style="margin-top:10px">${p.addr}</div>`:''}
+ <div class="ru" style="margin-top:14px">${home?'Это наш отель':(p.n||p.name)}${d?` · ≈ ${(d/1000).toFixed(0)} км от отеля`:''}</div>
+ ${!home?`<div class="ru" style="margin-top:10px;font-size:15px;opacity:.8">Обратно — нажмите красную кнопку SOS → «Адрес таксисту»</div>`:''}`)}
+
+/* ---------- Халяль · мечети · намаз ---------- */
+function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R),dcos=x=>Math.cos(x*R),dtan=x=>Math.tan(x*R),dacos=x=>Math.acos(x)/R,dasin=x=>Math.asin(x)/R,datan2=(a,b)=>Math.atan2(a,b)/R,fix=(a,b)=>{a-=b*Math.floor(a/b);return a<0?a+b:a};
+ if(m<=2){y--;m+=12}const A=Math.floor(y/100),B=2-A+Math.floor(A/4);const jd0=Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5-lng/(15*24);
+ const sun=t=>{const D=jd0+t/24-2451545,g=fix(357.529+.98560028*D,360),q=fix(280.459+.98564736*D,360),L=fix(q+1.915*dsin(g)+.020*dsin(2*g),360),e=23.439-.00000036*D;const RA=fix(datan2(dcos(e)*dsin(L),dcos(L))/15,24);return{decl:dasin(dsin(e)*dsin(L)),eq:q/15-RA}};
+ const noon=t=>fix(12-sun(t).eq,24);
+ const ang=(a,t,ccw)=>{const s=sun(t),T=dacos((-dsin(a)-dsin(s.decl)*dsin(lat))/(dcos(s.decl)*dcos(lat)))/15;return noon(t)+(ccw?-T:T)};
+ const asr=t=>{const s=sun(t);return ang(-(Math.atan(1/(1+dtan(Math.abs(lat-s.decl))))/R),t,false)};
+ let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
+ for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
+ const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
+const SWV='kamala-v8';
+const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
+const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
+function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
+function nextPrayer(){const t=bkk(),now=t.getHours()+t.getMinutes()/60+t.getSeconds()/3600;const pt=todayPT();
+ for(const [k,n] of PRN){if(k==='sunrise')continue;if(pt[k]>now)return{k,n,at:pt[k],left:pt[k]-now}}
+ const tm=todayPT(1);return{k:'fajr',n:'Фаджр',at:tm.fajr,left:tm.fajr+24-now,tomorrow:true}}
+const leftTxt=h=>{const m=Math.max(0,Math.round(h*60));return m>=60?Math.floor(m/60)+' ч '+(m%60)+' мин':m+' мин'};
+const QIBLA=(()=>{const R=Math.PI/180,f=HOTEL.lat*R,k=21.4225*R,dl=(39.8262-HOTEL.lng)*R;return (Math.atan2(Math.sin(dl),Math.cos(f)*Math.tan(k)-Math.sin(f)*Math.cos(dl))/R+360)%360})();
+const MOS=[
+ {n:'Мечеть Аль‑Бушра',s:'Камала · ближайшая к отелю',lat:7.95553,lng:98.28388,id:'mq1',d:'Небольшая мечеть в Камале, ближе всех к отелю — около 10 минут пешком.'},
+ {n:'Главная мечеть Камалы',s:'Камала · центр посёлка',lat:7.94464,lng:98.28666,id:'mq2',d:'Главная мечеть мусульманской деревни Камала. Здесь проходит пятничный намаз; вокруг много халяльных кафе.'},
+ {id:'mq3',n:'Мечеть Нурул Ислам',s:'Патонг · ≈ 20 мин на машине',lat:7.90421,lng:98.30310,d:'Мечеть в Патонге, рядом с арабским кварталом и халяльными ресторанами.'},
+ {id:'mq4',en:'Mukarram Mosque Bang Tao',n:'Мечеть Мукаррам (Банг Тао)',s:'Банг Тао · ≈ 15 мин на машине · самая большая на Пхукете',q:'Mukarram Mosque Bang Tao Phuket',d:'Самая большая мечеть Пхукета, на главной дороге Чернг Талай у пляжа Сурин.'},
+ {id:'mq5',en:'Masjid Yameay Phuket Town',n:'Мечеть Ямиай',s:'Пхукет‑таун · ≈ 40 мин',lat:7.87914,lng:98.39046,d:'Единственная мечеть в самом центре старого города.'}];
+const HAL=[
+ ['🚶','Рядом с отелем · пешком',[
+  {n:"Sam's Indian Restaurant",s:'Наша улица Soi 12 · 1–2 мин',lat:7.96146,lng:98.28650,id:'hl1',h:'09:00–21:00',d:'Индийская кухня с отметкой «халяль» — прямо на нашей улице: карри, бирьяни, лепёшки наан.'},
+  {n:'Stek House (Halal)',s:'Камала · Khok Yang Rd',lat:7.94647,lng:98.28459,id:'hl2',d:'Халяльные стейки и гриль в центре Камалы.'},
+  {id:'hl4',n:'Kusuma Halal Thai Seafood',s:'Камала · халяльные морепродукты',q:'Kusuma Halal Thai Seafood Kamala',d:'Любимое место местных: свежие халяльные тайские морепродукты.'},
+  {id:'hl5',n:'The Golden Kinnaree',s:'Камала · полностью халяль',q:'The Golden Kinnaree Kamala Phuket',d:'Вся еда сертифицирована как халяль, алкоголь не подают.'},
+  {id:'hl6',n:"De' Cafe Halal Food",s:'Камала · тайская халяльная',q:'De Cafe Halal Food Kamala',d:'Простое кафе мусульманской деревни: рис, курица, роти.'}]],
+ ['🚕','Сурин и Банг Тао · 5–15 мин на машине',[
+  {n:'Somtam Restaurant Halal',s:'Сурин · тайская кухня',lat:7.97996,lng:98.29449,id:'hl3',d:'Халяльный сомтам, курица‑гриль, клейкий рис.'},
+  {id:'hl7',n:'Bangtao Shawarma',s:'Банг Тао · шаурма',lat:7.99037,lng:98.29250,d:'Шаурма и кебаб — быстро и сытно.'}]],
+ ['🌆','Патонг · ≈ 20 мин на машине',[
+  {id:'hl8',n:'Jerusalem Restaurant (Halal)',s:'Патонг · арабская кухня',lat:7.90382,lng:98.30467,h:'09:00–00:00',d:'Палестинская и египетская кухня, гриль, мусаххан. Халяль.'},
+  {id:'hl9',n:'Royal Kitchen',s:'Патонг · индийская и арабская',lat:7.89489,lng:98.29607,h:'11:00–02:00',d:'Индийская, пакистанская, тайская и арабская кухня. Халяль.'},
+  {id:'hl10',n:'Burger Town Patong (Halal)',s:'Патонг · бургеры для детей',lat:7.90377,lng:98.30410,h:'14:00–00:00',d:'Халяльные бургеры и курица — детям понравится.'},
+  {id:'hl11',n:'Royal Palace Indian',s:'Патонг · 24 часа',lat:7.90033,lng:98.30010,h:'круглосуточно',d:'Индийская и тайская кухня, халяль, открыто круглые сутки.'}]],
+ ['🏙️','Пхукет‑таун · ≈ 40 мин',[
+  {id:'hl12',n:"Grill 'n' Pickle",s:'Ко Кео · ливанская кухня',lat:7.96282,lng:98.38522,d:'Ливанский гриль, хумус, фалафель. Халяль.'},
+  {id:'hl13',n:'Aroon',s:'Старый город · завтраки',lat:7.88463,lng:98.39016,h:'06:00–17:00',d:'Старое халяльное кафе: роти, карри, чай.'}]]];
+function routeUrl_unused(p){const dest=p.q?encodeURIComponent(p.q):p.lat+','+p.lng;const far=p.lat?hav(HOTEL,p)>1500:true;return `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=${far?'driving':'walking'}`}
+function plRow(p,col){const dist=p.lat?hav(HOTEL,p):null;const dt=dist==null?'':(dist<1000?Math.round(dist/10)*10+' м':(dist/1000).toFixed(1)+' км');const walk=dist!=null&&dist<1500?' · 🚶 '+Math.max(1,Math.round(dist*1.3/75))+' мин':'';
+ return `<div class="hli"><div class="hl-t"><b>${p.n}</b><small>${p.s}${dt?' · '+dt+' от отеля':''}${walk}</small><p>${p.d}${p.h?` <em>🕒 ${p.h}</em>`:''}</p></div>
+ <div class="hl-a">${p.lat&&inMap(p)?`<button class="act pri" style="--c:${col}" data-rto="${p.id}">🧭 Маршрут на карте</button>`:`<button class="act pri" style="--c:${col}" data-ptaxi="${p.id}">🚕 Показать таксисту</button>`}${P.some(x=>x.id===p.id)?`<button class="act" data-hmap="${p.id}">🗺️ На карте</button>`:''}</div></div>`}
+let azanOn=LS.get('azan',false),azanLast='';
+function renderHalal(){const el=document.getElementById('halbody');if(!el)return;const pt=todayPT(),nx=nextPrayer(),t=bkk(),fri=t.getDay()===5;
+ const dir='запад‑северо‑запад';
+ el.innerHTML=`<div class="prh"><div class="prh-top"><span>🕌</span><div><small>Сейчас на Пхукете</small><b id="prclock">${pad(t.getHours())}:${pad(t.getMinutes())}</b></div></div>
+ <div class="prnext"><small>Следующий азан${nx.tomorrow?' (завтра)':''}</small><b>${nx.n} · ${hm(nx.at)}</b><span id="prleft">через ${leftTxt(nx.left)}</span></div></div>
+ <div class="prgrid">${PRN.map(([k,n,kz,e])=>`<div class="prc ${k===nx.k&&!nx.tomorrow?'on':''} ${k==='sunrise'?'sr':''}"><span>${e}</span><b>${hm(pt[k])}</b><i>${n}</i><small>${kz}</small></div>`).join('')}</div>
+ ${fri?`<div class="warn" style="margin-top:12px">🕌 <b>Сегодня пятница — джума.</b> Пятничный намаз в мечетях Камалы в ${hm(pt.dhuhr)}. Приходите минут за 20.</div>`:`<p class="phone-line">Джума (пятница) — в ${hm(todayPT((5-t.getDay()+7)%7).dhuhr)} в главной мечети Камалы.</p>`}
+ <label class="wauto" style="margin-top:12px"><input type="checkbox" id="azan" ${azanOn?'checked':''}> 🔔 Сигнал, когда наступает время намаза (пока сайт открыт)</label>
+ <button class="act" id="qibbtn" style="width:100%;margin-top:10px">🧭 Кибла: ${Math.round(QIBLA)}° — ${dir}, в сторону моря чуть правее. Компас</button><div id="qib"></div>
+ <p class="phone-line">Время посчитано прямо в телефоне по координатам отеля (метод Всемирной исламской лиги, Аср по шафиитскому мазхабу, как в мечетях Таиланда) — работает без интернета. Разница с мечетью — 1–3 минуты.</p>
+ <div class="sec">🕌 Мечети</div>${MOS.map(p=>plRow(p,'#0e8a5f')).join('')}
+ ${HAL.map(([e,ti,arr])=>`<div class="sec">${e} Халяль · ${ti}</div>`+arr.map(p=>plRow(p,'#1f9d6b')).join('')).join('')}
+ <div class="warn" style="margin-top:14px">✅ Ищите зелёный знак <b>ฮาลาล</b> или <b>حلال</b> — это сертификат Исламского комитета Таиланда. Спросить: «Халан май?» (ฮาลาลไหม) — «Это халяль?». В Камале большинство жителей — мусульмане, еда у мечетей почти всегда халяльная.</div>
+ <p class="foot">Часы работы — по данным OpenStreetMap; перед поездкой лучше проверить в Google Maps.</p>`;
+ document.getElementById('azan').onchange=e=>{azanOn=e.target.checked;LS.set('azan',azanOn);if(azanOn){unlockAudio&&unlockAudio();toast('🔔 Сигнал включён')}};
+ document.getElementById('qibbtn').onclick=qiblaCompass}
+function qiblaCompass(){const box=document.getElementById('qib');box.innerHTML=`<div class="qib"><div class="qdial" id="qdial"><span class="qn">С</span><div class="qarrow" style="transform:rotate(${QIBLA}deg)">🕋</div></div><p id="qtxt">Положите телефон ровно. Стрелка с 🕋 показывает на Мекку.</p></div>`;
+ const h=e=>{let hd=e.webkitCompassHeading!=null?e.webkitCompassHeading:(e.absolute&&e.alpha!=null?360-e.alpha:null);if(hd==null)return;document.getElementById('qdial').style.transform=`rotate(${-hd}deg)`;document.getElementById('qtxt').textContent='Компас работает: поверните телефон, пока 🕋 не окажется сверху.'};
+ const go_=()=>{addEventListener('deviceorientationabsolute',h);addEventListener('deviceorientation',h)};
+ if(window.DeviceOrientationEvent&&DeviceOrientationEvent.requestPermission)DeviceOrientationEvent.requestPermission().then(r=>r==='granted'&&go_()).catch(()=>{});else go_()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-hmap]');if(!b)return;go('map');openSheetLater(b.dataset.hmap)});
+function halTick(){const nx=nextPrayer(),t=bkk();const c=document.getElementById('prclock');if(c)c.textContent=pad(t.getHours())+':'+pad(t.getMinutes());const l=document.getElementById('prleft');if(l)l.textContent='через '+leftTxt(nx.left);
+ const hb=document.getElementById('halban');if(hb)hb.textContent=`Азан ${nx.n} в ${hm(nx.at)} · через ${leftTxt(nx.left)}`;
+ const pt=todayPT(),now=t.getHours()*60+t.getMinutes();for(const [k,n] of PRN){if(k==='sunrise')continue;const m=Math.round(pt[k]*60);const key=t.toDateString()+k;
+  if(now===m&&azanLast!==key){azanLast=key;if(azanOn){[0,700,1400].forEach(d=>setTimeout(()=>beep(740,.35,'sine'),d));try{navigator.vibrate&&navigator.vibrate([400,200,400])}catch(e){}toast('🕌 Время намаза: '+n)}
+   if(document.getElementById('v-halal').classList.contains('on'))renderHalal()}}}
+setInterval(halTick,20000);
+
+/* ---------- скачать всё для офлайна ---------- */
+async function offlineAll(btn){if(navigator.onLine===false){toast('Нужен интернет, чтобы скачать 📶');return}
+ if(!('caches' in window)){toast('Этот браузер не умеет хранить сайт. Откройте в Safari или Chrome');return}
+ const bar=document.getElementById('offbar'),txt=document.getElementById('offtxt');btn.disabled=true;bar.parentElement.style.display='block';
+ try{if(navigator.storage&&navigator.storage.persist)await navigator.storage.persist()}catch(e){}
+ const files=['./','index.html','manifest.webmanifest','sw.js','img/icon-192.png','img/icon-512.png','img/apple-touch-icon.png','img/1-adres-dlya-taksista.png','img/2-ya-poteryalsya.png','img/3-ekstrennye-nomera.png','img/4-karta-kamala.png','img/kz-flag.svg'];
+ const cache=await caches.open(SWV);let done=0,bytes=0,fail=0;const fonts=[...document.querySelectorAll('link[rel=stylesheet][href*="fonts.googleapis"]')].map(l=>l.href);
+ let fontFiles=[];for(const f of fonts){try{const r=await fetch(f,{cache:'reload'});const css=await r.clone().text();await cache.put(f,r);fontFiles.push(...(css.match(/https:\/\/fonts\.gstatic\.com[^)]+/g)||[]))}catch(e){fail++}}
+ const all=files.concat(fontFiles);
+ for(const u of all){try{const r=await fetch(u,{cache:'reload'});if(!r.ok)throw 0;const b=await r.clone().blob();bytes+=b.size;await cache.put(u,r)}catch(e){fail++}done++;bar.style.width=Math.round(done/all.length*100)+'%';txt.textContent=`Скачиваю… ${done} из ${all.length}`}
+ LS.set('off_at',Date.now());btn.disabled=false;
+ txt.innerHTML=fail?`⚠️ Скачано ${done-fail} из ${all.length}. Нажмите ещё раз при хорошем интернете.`:`✅ Готово! ${all.length} файлов · ${(bytes/1048576).toFixed(1)} МБ. Карта, SOS, номера, разговорник, намаз, игры и раскраска работают без интернета.`;
+ offStat()}
+function offStat(){const s=document.getElementById('offst');if(!s)return;const at=LS.get('off_at',null);s.textContent=at?'Скачано '+new Date(at).toLocaleDateString('ru-RU',{day:'numeric',month:'long'})+' — можно без интернета':'Нажмите один раз, пока есть Wi‑Fi'}
+document.addEventListener('click',e=>{const b=e.target.closest('#offbtn');if(b)offlineAll(b)});
+
+/* ---------- Красивые места: картинки рисуются прямо в телефоне ---------- */
+function scene(o){const id='s'+Math.random().toString(36).slice(2,7);const sky=o.sunset?['#ff9a5a','#ffcf7a','#ffe9c2']:['#55b6e8','#9fd9f2','#dff3fb'];const sea=o.sea||'#1fa6b8';
+ let s=`<svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="${id}k" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky[0]}"/><stop offset=".6" stop-color="${sky[1]}"/><stop offset="1" stop-color="${sky[2]}"/></linearGradient><linearGradient id="${id}w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sea}"/><stop offset="1" stop-color="#3fd0d4"/></linearGradient></defs>
+ <rect width="320" height="180" fill="url(#${id}k)"/>`;
+ s+=o.sunset?`<circle cx="${o.sx||200}" cy="92" r="24" fill="#fff3c4" opacity=".95"/>`:`<circle cx="${o.sx||260}" cy="34" r="16" fill="#fffbe0"/>`;
+ s+=`<path d="M0 30 q14-8 28 0 q10-6 22 0z" fill="#fff" opacity=".8"/><path d="M190 22 q12-7 24 0 q9-5 18 0z" fill="#fff" opacity=".7"/>`;
+ if(o.isl)s+=`<path d="M${o.isl} 100 q12-26 26-18 q10-12 22 2 q8 4 10 16z" fill="#4c8c6a" opacity=".85"/>`;
+ if(o.isl2)s+=`<path d="M${o.isl2} 101 q8-14 16-8 q6-6 12 8z" fill="#5f9e7c" opacity=".75"/>`;
+ s+=`<rect y="100" width="320" height="80" fill="url(#${id}w)"/>`;
+ if(o.sunset)s+=`<path d="M${(o.sx||200)-30} 106h60M${(o.sx||200)-20} 114h40M${(o.sx||200)-10} 122h20" stroke="#ffe6a8" stroke-width="3" stroke-linecap="round" opacity=".8"/>`;
+ s+=`<path d="M0 112 q20-5 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="#fff" stroke-width="2" fill="none" opacity=".5"/>`;
+ if(o.cliff)s+=`<path d="M0 60 q30-20 70 6 q20 10 30 40 v74H0z" fill="#4f7a55"/><path d="M0 70 q30-14 60 4 q22 14 34 40 v66H0z" fill="#6a9a62"/>`;
+ if(o.sand!==false)s+=`<path d="M${o.cliff?60:0} 180 V150 q80-26 170-12 q50 8 90 4 V180z" fill="#f2dca6"/><path d="M${o.cliff?80:20} 152 q90-22 200-8" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/>`;
+ if(o.rocks)s+=`<ellipse cx="250" cy="146" rx="22" ry="12" fill="#7d7469"/><ellipse cx="275" cy="150" rx="14" ry="8" fill="#968c7f"/>`;
+ if(o.light)s+=`<path d="M60 40 h10 l3 60 h-16z" fill="#fff"/><path d="M58 36 h14 v6 h-14z" fill="#d6453d"/>`;
+ if(o.buddha)s+=`<path d="M0 100 q60-50 120-20 q60-40 200 10 v90H0z" fill="#5f8e66"/><g transform="translate(160 26)" fill="#fbfbf7"><circle cx="0" cy="8" r="8"/><path d="M-6 0 q6-12 12 0z"/><path d="M-20 52 q0-30 20-36 q20 6 20 36z"/><ellipse cx="0" cy="52" rx="26" ry="7"/></g>`;
+ if(o.boat)s+=`<g transform="translate(${o.boat} 118)"><path d="M0 8 h46 q-6 9-16 9 h-22z" fill="#8a4b2a"/><path d="M40 8 q8-10 14-12" stroke="#8a4b2a" stroke-width="3" fill="none"/><path d="M10 8 v-8 h20 v8" fill="#e85d5d" opacity=".9"/><path d="M38 6 l6-8" stroke="#ffd23d" stroke-width="3"/></g>`;
+ if(o.palm!==false){const px=o.px||290;s+=`<g transform="translate(${px} 0)"><path d="M0 170 q-6-50 6-104" stroke="#7a5230" stroke-width="7" fill="none" stroke-linecap="round"/><g fill="#2f8f4e"><path d="M6 66 q-34-14-52 6 q30-10 52-6z"/><path d="M6 66 q-24-30-48-24 q30 2 48 24z"/><path d="M6 66 q8-34 34-34 q-24 10-34 34z"/><path d="M6 66 q34-6 46 16 q-24-16-46-16z"/></g></g>`}
+ if(o.kids)s+=`<g transform="translate(120 150)"><path d="M0 0 h26 l-4 -10 h-18z" fill="#ff8fb1"/><circle cx="40" cy="-4" r="6" fill="#ffd23d"/></g>`;
+ return s+'</svg>'}
+const PRETTY=[
+ {id:'pk1',n:'Пляж Камала',en:'Kamala Beach',s:'5 мин пешком · у отеля',lat:7.96,lng:98.2836,ref:'kb',o:{sunset:1,boat:150,isl:220},d:'Широкий спокойный пляж с мягким песком. Здесь самые красивые закаты — солнце садится прямо в море. Детям хорошо: мелко у берега.',kid:'🧒 удобно с малышами',best:'закат ≈ 18:00'},
+ {id:'pk2',n:'Лаем Синг',en:'Laem Singh Beach',s:'≈ 1,5 км · бухта между скал',lat:7.9693,lng:98.2780,o:{cliff:1,rocks:1,isl:240},d:'Маленькая бухта, спрятанная между скалами и пальмами. Вода бирюзовая и прозрачная. Спуск по лестнице, сверху — смотровая площадка.',kid:'👀 спуск по ступенькам',best:'утром, пока мало людей'},
+ {id:'pk3',n:'Смотровая Лаем Синг',en:'Laem Singh Viewpoint',s:'≈ 5 мин на машине',lat:7.97006,lng:98.27939,ref:'ls',o:{cliff:1,sand:false,sunset:1,sx:240,palm:false,isl:150,isl2:200},d:'Самый известный вид на западном берегу: бухта, скалы и закат. Отличное место для общего фото трёх семей.',kid:'📸 фото всей семьёй',best:'на закате'},
+ {id:'pk4',n:'Пляж Сурин',en:'Surin Beach',s:'≈ 3 км · шаттл отеля',lat:7.97509,lng:98.28079,ref:'surin',o:{rocks:1,px:40,isl:200},d:'Светлый песок, сосны казуарины в тени и бирюзовая вода. Рядом кафе и уличная еда.',kid:'🌳 есть тень',best:'днём'},
+ {id:'pk5',n:'Пляж Банг Тао',en:'Bang Tao Beach',s:'≈ 10 мин на машине',lat:7.9990,lng:98.2930,o:{px:60,boat:200},d:'Длинный пляж на 6 км, тихий и широкий. Много места для игр, рядом мечеть Мукаррам и халяльные кафе.',kid:'⚽ много места',best:'утром'},
+ {id:'pk6',n:'Пляж Лаян',en:'Layan Beach',s:'≈ 15 мин на машине',lat:8.0300,lng:98.2830,o:{rocks:1,isl:230,px:270},d:'Дикий и очень красивый пляж в национальном парке: почти нет людей, мелкая чистая вода.',kid:'🐚 ракушки и крабики',best:'утром и днём'},
+ {id:'pk7',n:'Пляж Най Янг',en:'Nai Yang Beach',s:'≈ 35 мин · у аэропорта',lat:8.0880,lng:98.2950,o:{px:40,sunset:1,sx:150},d:'Спокойный пляж в национальном парке, тень от деревьев и самолёты, которые садятся прямо над морем — дети в восторге.',kid:'✈️ смотреть самолёты',best:'в день прилёта или отлёта'},
+ {id:'pk8',n:'Freedom Beach',en:'Freedom Beach Phuket',s:'≈ 20 мин + лодка из Патонга',lat:7.8737,lng:98.2737,o:{cliff:1,isl:230},d:'«Райский» пляж с белым песком и прозрачной водой. Добраться — на лодке‑лонгтейле из Патонга (≈ 15 минут).',kid:'🚤 поездка на лодке',best:'утром, пока море спокойное'},
+ {id:'pk9',n:'Пляж Патонг',en:'Patong Beach',s:'≈ 20 мин на машине',lat:7.8960,lng:98.2950,o:{boat:60,px:280},d:'Самый оживлённый пляж острова: аттракционы, водные развлечения, рядом магазины и халяльные рестораны.',kid:'🎢 шумно и весело',best:'днём'},
+ {id:'pk10',n:'Ката Ной',en:'Kata Noi Beach',s:'≈ 40 мин на машине · юг',lat:7.8125,lng:98.2970,o:{cliff:1,isl:220},d:'Уютная бухта с мягким песком и прозрачной водой, одна из самых красивых на юге.',kid:'🏊 хорошо купаться',best:'утром'},
+ {id:'pk11',n:'Смотровая Карон',en:'Karon Viewpoint (Kata Noi)',s:'≈ 45 мин на машине · юг',lat:7.7953,lng:98.3027,o:{sand:false,cliff:1,isl:120,isl2:190,palm:false},d:'Вид сразу на три бухты — Ката Ной, Ката и Карон. Одно из самых известных фото Пхукета.',kid:'📸 главное фото поездки',best:'днём, при солнце'},
+ {id:'pk12',n:'Большой Будда',en:'Big Buddha Phuket',s:'≈ 45 мин · на горе',lat:7.8275,lng:98.3127,o:{buddha:1,sand:false,palm:false},d:'Огромная белая статуя на вершине горы и вид на весь остров. Плечи и колени нужно закрыть — платки дают на входе.',kid:'🐒 по дороге бывают обезьяны',best:'утром, пока не жарко'},
+ {id:'pk13',n:'Мыс Промтеп',en:'Promthep Cape',s:'≈ 50 мин · южный край',lat:7.7620,lng:98.3058,o:{sunset:1,sx:250,cliff:1,light:1,sand:false,palm:false},d:'Самая южная точка Пхукета и самый знаменитый закат острова. Маяк и тысячи людей, которые встречают солнце.',kid:'🌅 приезжайте за час до заката',best:'закат'},
+ {id:'pk14',n:'Пляж Най Харн',en:'Nai Harn Beach',s:'≈ 50 мин на машине · юг',lat:7.7787,lng:98.3036,o:{px:50,isl:230,boat:180},d:'Широкая красивая бухта, рядом озеро с дорожкой для прогулок и детской площадкой.',kid:'🛝 площадка у озера',best:'днём'}];
+function prettyCard(p){const d=hav(HOTEL,p);const near=inMap(p);return `<button class="pcard" data-pretty="${p.id}"><div class="pimg">${scene(p.o)}</div><div class="pt"><b>${p.n}</b><small>${p.s}</small><span>${p.kid}</span></div></button>`}
+function openPretty(id){const p=PRETTY.find(x=>x.id===id);if(!p)return;
+ sheet.innerHTML=`<div class="grab"></div><div class="pbig">${scene(p.o)}</div><div class="sh-head" style="margin-top:12px"><div class="sh-t"><h2>${p.n}</h2><p>${p.s}</p></div></div>
+ <div class="meta"><span class="tag">${p.kid}</span><span class="tag">🕒 лучше: ${p.best}</span></div><p class="desc">${p.d}</p>
+ <div class="acts">${inMap(p)?`<button class="act pri" data-rto="${p.id}">🧭 Маршрут на карте</button>`:`<button class="act pri" data-ptaxi="${p.id}">🚕 Показать таксисту</button>`}<button class="act" data-say="pretty:${p.id}">🔊 Послушать</button></div>
+ <p class="phone-line">Картинка — рисунок, чтобы было понятно детям. По прямой от отеля ≈ ${(hav(HOTEL,p)/1000).toFixed(1)} км.</p>`;sheet.classList.add('on');scrim.classList.add('on')}
+document.addEventListener('click',e=>{let b=e.target.closest('[data-pretty]');if(b){openPretty(b.dataset.pretty);return}
+ b=e.target.closest('[data-rto]');if(b){const p=PRETTY.find(x=>x.id===b.dataset.rto)||P.find(x=>x.id===b.dataset.rto)||MOS.concat(...HAL.map(h=>h[2])).find(x=>x.id===b.dataset.rto);if(p)routeTo(p,p.n||p.name);return}
+ b=e.target.closest('[data-ptaxi]');if(b){const p=PRETTY.find(x=>x.id===b.dataset.ptaxi)||MOS.concat(...HAL.map(h=>h[2])).find(x=>(x.id||x.n)===b.dataset.ptaxi);if(p){closeSheet();taxiCard({...p,en:p.en||p.q||p.n})}return}
+ b=e.target.closest('[data-rhome]');if(b){routeTo(HOTEL,'Наш отель The Marin',{toHotel:true});return}
+ b=e.target.closest('[data-rplace]');if(b){const p=P.find(x=>x.id===b.dataset.rplace);if(p)routeTo(p,p.name);return}
+ b=e.target.closest('[data-cloc]');if(b){const[la,ln,nm]=b.dataset.cloc.split('|');const p={lat:+la,lng:+ln,n:nm};routeTo(p,'К '+nm);return}});
+document.getElementById('prettyrow')&&(document.getElementById('prettyrow').innerHTML=PRETTY.map(prettyCard).join(''));
+
+document.addEventListener('click',e=>{let b=e.target.closest('[data-ftaxi]');if(b){const f=FUN.find(x=>x.id===b.dataset.ftaxi);closeSheet();taxiCard({n:f.n,en:f.q});return}
+ b=e.target.closest('[data-ktaxi]');if(b){const[q,n]=b.dataset.ktaxi.split('|').map(decodeURIComponent);taxiCard({n,en:q})}});
+renderHalal();offStat();halTick();
+
+/* ---------- Каннабис: закон и районы (18+) ---------- */
+const LEAF='<svg viewBox="0 0 64 64"><g fill="#7cc66a" stroke="#2f6b2a" stroke-width="1.2" stroke-linejoin="round"><path d="M32 6c4 9 4 22 0 34-4-12-4-25 0-34z"/><path d="M32 40c-6-8-15-14-26-16 6 10 14 15 26 16z"/><path d="M32 40c6-8 15-14 26-16-6 10-14 15-26 16z"/><path d="M32 40c-8-3-16-2-24 3 8 3 16 2 24-3z"/><path d="M32 40c8-3 16-2 24 3-8 3-16 2-24-3z"/><path d="M32 40c-4 4-7 9-8 15 5-3 8-8 8-15z" opacity=".9"/><path d="M32 40c4 4 7 9 8 15-5-3-8-8-8-15z" opacity=".9"/></g><path d="M32 40v18" stroke="#2f6b2a" stroke-width="2.5" stroke-linecap="round"/></svg>';
+const WZ=[
+ {n:'Камала · главная дорога и Pa Chak Rd',s:'Рядом с отелем · 5–15 мин пешком',lat:7.9505,lng:98.2835,d:'Несколько магазинов на главной улице Камалы и на Pa Chak Road, ближе к рынку. От пляжа — через дорогу.'},
+ {n:'Сурин и Банг Тао (Чернг Талай)',s:'≈ 10–15 мин на машине',q:'Cherng Talay Bang Tao Phuket',d:'Магазины вдоль главной дороги Чернг Талай и у Boat Avenue.'},
+ {n:'Патонг · Bangla Road и Nanai Road',s:'≈ 20 мин на машине · больше всего магазинов',q:'Bangla Road Patong Phuket',d:'Самое большое скопление на острове: улица Бангла, Nanai Road и вокруг торговых центров.'},
+ {n:'Ката и Карон',s:'≈ 40 мин на машине',q:'Kata Beach Phuket',d:'Магазины вдоль пляжных улиц Каты и Карона.'},
+ {n:'Пхукет‑таун и Раваи',s:'≈ 40–50 мин на машине',q:'Phuket Old Town',d:'В старом городе и в районе Раваи.'}];
+function renderWeed(){const el=document.getElementById('weedbody');if(!el)return;
+ el.innerHTML=`<div class="sec">⚖️ Что важно знать — коротко</div>
+ <div class="wrule"><span>📋</span><div><b>Только по рецепту.</b> С июня 2025 года туристам можно покупать, иметь при себе и употреблять каннабис только с рецептом, выписанным в Таиланде лицензированным специалистом (тайская или китайская медицина, стоматология). Количество — не больше чем на 30 дней.</div></div>
+ <div class="wrule"><span>🚫</span><div><b>Для удовольствия — нельзя.</b> Рекреационное употребление в Таиланде запрещено. Магазины, которые продают «для курения» всем подряд, могут работать незаконно.</div></div>
+ <div class="wrule"><span>🛕</span><div><b>Нельзя в общественных местах:</b> храмы, парки, пляжи, детские места. Курение рядом с детьми — недопустимо.</div></div>
+ <div class="wrule"><span>🇰🇿</span><div><b>Домой — ни грамма!</b> В Казахстане каннабис — наркотик. Даже следы в багаже, в одежде или в продуктах (конфеты, печенье, масло) — это уголовное дело и долгий срок. В аэропорту Алматы рейсы из Пхукета проверяют особенно тщательно.</div></div>
+ <div class="wrule"><span>🍪</span><div><b>Осторожно с едой:</b> печенье, конфеты, напитки с листиком на упаковке содержат каннабис. Детям — ни в коем случае. Если ребёнок что‑то съел — сразу скорая 1669 или +66 76 254 425.</div></div>
+ <div class="wrule"><span>🚭</span><div><b>Вейпы запрещены отдельно и полностью</b> — даже если в магазине каннабиса их продают.</div></div>
+ <div class="sec">🗺️ Районы, где такие магазины есть</div>
+ ${WZ.map((z,i)=>`<div class="wz"><b>${z.n}</b><small>${z.s}</small><p>${z.d}</p><div class="hl-a">${z.lat?`<button class="act" data-wzmap="${i}">🗺️ Показать на нашей карте</button>`:`<button class="act" data-wztaxi="${i}">🚕 Показать таксисту</button>`}</div></div>`).join('')}
+ <p class="foot">Мы показываем районы, а не конкретные магазины: после новых правил многие закрылись или работают без лицензии, и список быстро устаревает. Это справка, а не юридическая консультация.</p>`}
+document.addEventListener('click',e=>{let b=e.target.closest('[data-wzmap]');if(b){const z=WZ[+b.dataset.wzmap];go('map');setTimeout(()=>{resize();flyTo(z)},250);return}
+ b=e.target.closest('[data-wztaxi]');if(b){const z=WZ[+b.dataset.wztaxi];taxiCard({n:z.n,en:z.q})}});
+document.getElementById('wleaf').innerHTML=LEAF;document.getElementById('wleaf2').innerHTML=LEAF;renderWeed();
 /* ---------- init ---------- */
 renderChips();applyFilter();renderList();renderWeek();todayStrip();tick();
 

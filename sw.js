@@ -1,4 +1,4 @@
-const V='kamala-v9';
+const V='kamala-v10';
 const CORE=['./','index.html','manifest.webmanifest','img/icon-192.png','img/icon-512.png','img/apple-touch-icon.png','img/1-adres-dlya-taksista.png','img/2-ya-poteryalsya.png','img/3-ekstrennye-nomera.png','img/4-karta-kamala.png','img/kz-flag.svg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});

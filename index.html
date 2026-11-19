@@ -645,6 +645,8 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
 .wshop{background:#fff;border-radius:20px;overflow:hidden;margin-bottom:12px;box-shadow:0 6px 18px rgba(15,27,45,.1)}.wpic svg{display:block;width:100%;height:auto}.wsb{padding:12px 14px 14px}.wsb b{font-size:17px;display:block}.wsb small{display:block;color:#56627a;font-size:13.5px}.wsb p{font-size:15px;margin:8px 0 4px}.wsb em{font-style:normal;font-weight:700;color:#2f7a3a;font-size:14px;display:block;margin-bottom:10px}
 .pinfull .pind{display:flex;gap:14px;justify-content:center;margin:18px 0}.pind i{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;display:block}.pind i.on{background:currentColor}.pind.bad{animation:shake .4s}@keyframes shake{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
 .pinpad{display:grid;grid-template-columns:repeat(3,72px);gap:14px;justify-content:center}.pinpad button{height:72px;border-radius:50%;background:rgba(127,127,127,.15);font-size:28px;font-weight:800;color:inherit}.pinpad button:active{background:rgba(127,127,127,.35)}
+.callb{flex:none;width:44px;height:44px;border-radius:14px;background:#e8f6ef;display:flex;align-items:center;justify-content:center;font-size:20px}
+#fullnums .it,#conslist .it{min-width:0}#fullnums .it b,#conslist .it b{white-space:normal;line-height:1.25}
 </style>
 </head>
 <body>
@@ -843,8 +845,8 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
         <div class="row2"><a class="act" href="tel:1669" data-copy="1669">Позвонить 1669</a></div>
       </div>
       <div class="grid2" id="sosnums"></div>
-      <div class="sec">📵 Номер не проходит? Звоните на полный</div>
-      <div class="warn">С казахстанской SIM‑картой в роуминге короткие номера (1669, 191, 1155) <b>часто не соединяются</b>. Эти номера — полные, с +66, они работают с любого телефона.</div>
+      <div class="sec">📵 Не дозвонились? Жмите сюда</div>
+      <div class="warn">С казахстанской SIM короткие номера могут <b>не работать</b>. Эти работают всегда — просто нажмите.</div>
       <div class="list fulln" id="fullnums"></div>
       <div class="sec">Как дойти до отеля</div>
 <div class="way">
@@ -1231,12 +1233,12 @@ document.getElementById('listchips').addEventListener('click',e=>{const b=e.targ
 function fill(id,f){document.getElementById(id).innerHTML=P.filter(f).sort(byDist).map(item).join('')}
 
 /* ---------- SOS ---------- */
-const NUMS=[['191','Полиция','Общий экстренный номер','#22356b'],['1155','Туристическая полиция','English · 24/7 · помогут с переводом','#2f6fde'],['199','Пожарные','Пожар и спасатели','#e9822e'],['1719','Bangkok Hospital','Скорая частной сети · 24/7','#d6453d'],['+66 80 532 5695','Ресепшен отеля','The Marin Phuket','#b8935a'],['1193','Дорожная полиция','ДТП на трассах','#5d6b82']];
+const NUMS=[['191','Полиция','общий номер','#22356b'],['1155','Турполиция','по‑английски','#2f6fde'],['199','Пожарные','пожар','#e9822e'],['1719','Скорая','частная · 24/7','#d6453d'],['1193','ДТП','дорожная полиция','#5d6b82'],['1669','Скорая','бесплатно · 24/7','#d6453d']];
 document.getElementById('sosnums').innerHTML=NUMS.map(([n,l,d,c])=>`<a class="num" href="${telHref(n)}" data-copy="${n}" style="--c:${c};text-decoration:none"><span class="n" style="${n.length>6?'font-size:18px;line-height:1.9':''}">${n}</span><span class="l">${l}</span><span class="d">${d}</span></a>`).join('');
-const FULLN=[['🚑','Скорая · Bangkok Hospital Phuket','Приёмный покой 24/7, свои машины скорой','+66 76 254 425','#d6453d'],['🚑','Скорая · Bangkok Hospital Siriroj','Скорая помощь 24/7','+66 76 210 935','#d6453d'],['🏥','Больница Патонга · экстренное','Ближайшая государственная больница','+66 76 340 444','#d6453d'],['🏥','Больница Вачира (государственная)','Пхукет‑таун, справочная','+66 76 361 234','#d6453d'],['👮','Туристическая полиция Пхукета','Говорят по‑английски','+66 76 223 891','#2f6fde'],['👮','Полиция Камалы','Участок у пляжа','+66 76 279 058','#22356b'],['🆘','Центр помощи туристам Пхукета','Спасатели, Чалонг','+66 76 383 907','#e9822e'],['⚓','Морская полиция','Беда на воде, лодки','+66 76 211 883','#119aa6'],['🏨','Ресепшен отеля The Marin','Круглосуточно','+66 80 532 5695','#b8935a'],['<img src="img/kz-flag.svg" class="icflag" alt="">','Консульство Казахстана, Пхукет','Пн–Пт 9:00–17:30','+66 76 608 829','#00AFCA']];
-document.getElementById('fullnums').innerHTML=FULLN.map(([e,n,d,t,c])=>`<a class="item" href="${telHref(t)}" data-copy="${t}"><div class="ic" style="--c:${c};font-size:20px">${e}</div><div class="it"><b>${n}</b><span>${d}</span></div><div class="dist">${t}<small>позвонить</small></div></a>`).join('');
-const CONS=[['Консульство Казахстана · Пхукет','88/7 Chao Fah Tawan Tok Rd, Chalong · Пн–Пт 9:00–17:30','+66 76 608 829'],['Посольство Казахстана · Бангкок','P23 Building, Soi Sukhumvit 23','+66 2 254 3043']];
-document.getElementById('conslist').innerHTML=CONS.map(([n,a,t])=>`<a class="item" href="${telHref(t)}" data-copy="${t}" style="text-decoration:none"><div class="ic" style="--c:#22356b">${ic('flag')}</div><div class="it"><b>${n}</b><span>${a}</span></div><div class="dist">${t}<small>позвонить</small></div></a>`).join('');
+const FULLN=[['🚑','Скорая помощь','частная · 24/7','+66 76 254 425','#d6453d'],['🚑','Скорая Siriroj','24/7','+66 76 210 935','#d6453d'],['🏥','Больница Патонга','ближе всех','+66 76 340 444','#d6453d'],['🏥','Больница Вачира','городская','+66 76 361 234','#d6453d'],['👮','Туристическая полиция','говорят по‑английски','+66 76 223 891','#2f6fde'],['👮','Полиция Камалы','у пляжа','+66 76 279 058','#22356b'],['🆘','Спасатели','помощь туристам','+66 76 383 907','#e9822e'],['⚓','Морская полиция','беда на воде','+66 76 211 883','#119aa6'],['🏨','Наш отель','ресепшен 24/7','+66 80 532 5695','#b8935a'],['<img src="img/kz-flag.svg" class="icflag" alt="">','Консульство РК','Пн–Пт 9:00–17:30','+66 76 608 829','#00AFCA']];
+document.getElementById('fullnums').innerHTML=FULLN.map(([e,n,d,t,c])=>`<a class="item" href="${telHref(t)}" data-copy="${t}"><div class="ic" style="--c:${c};font-size:20px">${e}</div><div class="it"><b>${n}</b><span>${d}</span></div><div class="callb">📞</div></a>`).join('');
+const CONS=[['Консульство РК · Пхукет','Чалонг · Пн–Пт 9:00–17:30','+66 76 608 829'],['Посольство РК · Бангкок','Sukhumvit 23','+66 2 254 3043']];
+document.getElementById('conslist').innerHTML=CONS.map(([n,a,t])=>`<a class="item" href="${telHref(t)}" data-copy="${t}" style="text-decoration:none"><div class="ic" style="--c:#22356b">${ic('flag')}</div><div class="it"><b>${n}</b><span>${a}</span></div><div class="callb">📞</div></a>`).join('');
 
 /* ---------- week ---------- */
 function renderWeek(){const t=bkk().getDay();const ev=[['fs','#7a52d1'],['cm','#e0567f'],['mkt','#e9822e']];
@@ -2120,7 +2122,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v9';
+const SWV='kamala-v10';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}

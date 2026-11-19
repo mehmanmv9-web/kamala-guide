@@ -702,6 +702,21 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
 .chhero{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 60%,#ffb84d));color:#fff;border-radius:24px;padding:18px;box-shadow:0 12px 26px rgba(0,0,0,.18);margin-top:6px}.chhero span{font-size:52px}.chhero h2{margin:0;font-size:26px}.chhero p{margin:4px 0 0;font-size:14px;opacity:.95}
 .apx{color:#c2410c;font-weight:700;font-size:13px}
 .rtbar{flex-wrap:wrap}.rtbar .navbtn{width:auto!important;height:40px!important;padding:0 12px;border-radius:12px!important;background:#1fa36b!important;color:#fff;font-weight:900;font-size:14px!important}.rtbar .navbtn.on{background:#d6453d!important}
+.act.look{background:#fff3d6!important;color:#7a4a00!important}
+.lookph{position:relative;border-radius:16px;overflow:hidden;margin-bottom:10px;max-height:240px}.lookph img{display:block;width:100%;max-height:240px;object-fit:cover}
+.lookmap{border-radius:16px;overflow:hidden;height:46vh;background:#e9eef5}.lookmap iframe{width:100%;height:100%;border:0}
+.lookbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.lookbtns .act{text-align:center;text-decoration:none}
+.hl-a .act,.acts .act{min-width:0}
+@media (display-mode: standalone){
+ .tabs{bottom:calc(var(--safe-b) * .5 + 2px)!important}
+ .fsos{bottom:calc(84px + var(--safe-b) * .5)!important}
+ .toast{bottom:calc(96px + var(--safe-b) * .5)!important}
+ .listbtn{bottom:calc(126px + var(--safe-b) * .5)!important}
+ .mapbtns{bottom:calc(162px + var(--safe-b) * .5)!important}
+ .scale{bottom:calc(94px + var(--safe-b) * .5)!important}.attrib{bottom:calc(92px + var(--safe-b) * .5)!important}
+}
+html{background:var(--ivory,#f7f3ec);height:100%}
+.app{height:var(--apph,100%)!important;bottom:auto!important}
 </style>
 </head>
 <body>
@@ -1124,7 +1139,7 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
 /* ---------- icons ---------- */
 /* ---------- настоящие фото мест (свободные, Wikimedia Commons) ---------- */
 const PHOTO={"pk1": ["Kamala Beach.jpg", "Jules Antonio"], "pk2": ["Laem Sing beach - panoramio.jpg", "Panoramio"], "pk3": ["Sunset at Laem Sing Beach.jpg", "Wikimedia"], "pk4": ["Surin Beach.JPG", "Jpatokal"], "pk5": ["Bang Tao Beach of Sheraton Grande Laguna Phuket - panoramio (1).jpg", "Tiger@西北"], "pk7": ["Nai Yang Beach, Phuket (4448621322).jpg", "Andy Mitchell"], "pk9": ["Patong Beach in Phuket.jpg", "Ewong17"], "pk10": ["KataNoiBeach.jpg", "PHG"], "pk11": ["Phuket Viewpoint.jpg", "Oberpepe"], "pk12": ["Big Buddha - Phuket.jpg", "Mussi Katz"], "pk13": ["Phuket Promthep Cape.jpg", "Ahoerstemeier"], "pk14": ["Phuket - Nai Harn Beach 008.jpg", "ADwarf"]};
-const FPHOTO={"f_kb": "pk1", "f_ls": "pk3", "f_surin": "pk4", "f_bb": "pk12", "f_fs": ["Phuket fantasea.jpg", "Lerdsuwa"], "f_wc": ["Wat Chalong - Phuket.jpg", "Valeria Bolotova"], "f_ot": ["Thalang Road, Old Phuket Town.jpg", "Christophe95"]};
+const FPHOTO={"f_pp": ["Maya Bay, Koh Phi Phi, Krabi, Thailand.jpg", "Wikimedia"], "f_jb": ["Khao Phing Kan and Koh Tapu (James Bond Island).jpg", "Kemal Kaya"], "Phuket International Airport": ["PhuketAirport02.jpg", "ADwarf"], "b2": ["Jungceylon Patong Thajsko 2018 1.jpg", "Karelj"], "f_kz": ["Jungceylon Patong Thajsko 2018 1.jpg", "Karelj"], "b1": ["“mini BIG C” Phuket, Thailand.jpg", "Sharon Hahn Darlin"],"f_kb": "pk1", "f_ls": "pk3", "f_surin": "pk4", "f_bb": "pk12", "f_fs": ["Phuket fantasea.jpg", "Lerdsuwa"], "f_wc": ["Wat Chalong - Phuket.jpg", "Valeria Bolotova"], "f_ot": ["Thalang Road, Old Phuket Town.jpg", "Christophe95"]};
 const phUrl=f=>'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(f.replace(/ /g,'_'))+'?width=640';
 function photoOf(id){let v=PHOTO[id]||FPHOTO[id];if(typeof v==='string')v=PHOTO[v];return v||null}
 function photoTag(id,cls=''){const v=photoOf(id);if(!v)return'';return `<img class="realph ${cls}" src="${phUrl(v[0])}" alt="" loading="lazy" onerror="this.nextElementSibling&&this.nextElementSibling.remove();this.remove()"><span class="phcred">📷 ${v[1]} · Wikimedia</span>`}
@@ -1135,7 +1150,7 @@ const APX={f_iron:[7.89,98.37],f_sn:[7.912,98.379],f_circ:[7.85,98.34],f_splash:
  hl4:[7.946,98.283],hl5:[7.95,98.283],hl6:[7.947,98.284],mq4:[8.0,98.301],w2:[7.95,98.283],w3:[7.9495,98.2835],w4:[7.951,98.2845],w5:[7.888,98.302],w6:[7.8935,98.2985],w7:[7.889,98.301],w8:[8.085,98.31],w9:[8.0005,98.3045],w10:[8.0005,98.3043],w11:[8.004,98.304],w12:[7.997,98.297],w13:[7.996,98.296],w14:[8.002,98.31],w15:[8.003,98.32],w16:[7.892,98.299],w17:[7.8935,98.2965],w18:[7.894,98.295],w19:[7.892,98.298],w20:[7.846,98.301],w21:[7.840,98.295],w22:[7.822,98.299],w23:[7.845,98.302],w24:[7.826,98.301],w25:[7.821,98.296],w26:[7.822,98.3],w27:[7.775,98.325],w28:[7.79,98.33],w29:[7.775,98.326],w30:[8.035,98.335]};
 function placeBtns(key,o){let lat=o.lat,lng=o.lng,ap=false;if(lat==null&&APX[key]){[lat,lng]=APX[key];ap=true}
  PLX[key]={n:o.n||o.name,en:o.en||o.q||o.name||o.n,th:o.th,addr:o.addr,lat,lng,ap};
- return `<button class="act pri" data-pmap="${key}">🗺️ На карте</button><button class="act" data-ptx="${key}">🚕 Таксисту</button>`}
+ return `<button class="act pri" data-pmap="${key}">🗺️ На карте</button><button class="act" data-ptx="${key}">🚕 Таксисту</button><button class="act look" data-look="${key}">📷 Как выглядит</button>`}
 const I={
  leaf:'<path d="M12 3c1.6 3.6 1.6 8.4 0 12.6-1.6-4.2-1.6-9 0-12.6z"/><path d="M12 15.6C9.6 12.6 6.3 10.5 2.5 9.8c2.2 3.6 5.4 5.4 9.5 5.8z"/><path d="M12 15.6c2.4-3 5.7-5.1 9.5-5.8-2.2 3.6-5.4 5.4-9.5 5.8z"/><path d="M12 15.6c-2.8-1-5.6-.7-8.4 1 2.8 1 5.6.7 8.4-1zM12 15.6c2.8-1 5.6-.7 8.4 1-2.8 1-5.6.7-8.4-1z"/><path d="M12 15.6V21"/>',
  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/><path d="M17 3l.7 1.6L19.3 5l-1.6.7L17 7.3l-.7-1.6L14.7 5l1.6-.4z"/>',
@@ -2386,7 +2401,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v18';
+const SWV='kamala-v19';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2774,6 +2789,19 @@ function navTick(me){if(!NAV.on)return;
  navBar(`<b>${tTxt}</b><small>Осталось ${rem<1000?Math.round(rem/10)*10+' м':(rem/1000).toFixed(1)+' км'} · ${rem<2500?'🚶 ≈ '+Math.max(1,Math.round(rem/75))+' мин':'🚕 ≈ '+Math.max(2,Math.round(rem/400))+' мин'}</small>`);
  if(turn&&turn.d<45&&!NAV.spoken[turn.i]){NAV.spoken[turn.i]=1;sayKid(`Через ${Math.max(10,Math.round(turn.d/10)*10)} метров поверните ${turn.right?'направо':'налево'}`)}
  if(document.getElementById('v-map').classList.contains('on'))animTo(P[0],P[1],Math.max(k,Wd/220))}
+
+/* ---------- 📷 Как выглядит: настоящие фото места ---------- */
+function lookPlace(key){const p=PLX[key];if(!p)return;closeSheet();const ph=photoOf(key);
+ if(navigator.onLine===false&&!ph){toast('Нужен интернет, чтобы посмотреть фото места 📶');return}
+ const q=encodeURIComponent((p.en||p.n)+(/phuket|пхукет/i.test(p.en||'')?'':', Phuket'));
+ const ll=p.lat!=null&&!p.ap?`${p.lat},${p.lng}`:'';
+ showFull(`<div style="font-size:15px;opacity:.85;margin-bottom:6px">📷 Как выглядит</div><div class="big" style="font-size:22px;margin-bottom:10px">${p.n}</div>
+ ${ph?`<div class="lookph"><img src="${phUrl(ph[0])}" alt=""><span class="phcred">📷 ${ph[1]} · Wikimedia</span></div>`:''}
+ <div class="lookmap"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${q}${ll?'&ll='+ll:''}&z=17&hl=ru&output=embed"></iframe></div>
+ <div class="lookbtns"><button class="act" id="lk-sat">🛰️ Вид со спутника</button><a class="act" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${q}">🖼️ Все фото ↗</a></div>
+ <p class="ru" style="font-size:13px;opacity:.75;margin-top:8px">Фото и карта — Google. «Все фото» откроет Google Карты в новой вкладке, сайт останется открытым.</p>`,'lookfull');
+ let sat=false;document.getElementById('lk-sat').onclick=e=>{sat=!sat;const f=full.querySelector('iframe');f.src=`https://maps.google.com/maps?q=${q}${ll?'&ll='+ll:''}&z=${sat?18:17}&t=${sat?'k':'m'}&hl=ru&output=embed`;e.target.textContent=sat?'🗺️ Обычная карта':'🛰️ Вид со спутника'}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-look]');if(b)lookPlace(b.dataset.look)});
 /* ---------- init ---------- */
 renderChips();applyFilter();renderList();renderWeek();todayStrip();tick();
 
@@ -2782,5 +2810,6 @@ setInterval(()=>{tick();todayStrip()},30000);
 if(!chCheckJoin())go(location.hash.slice(1)||'home',false);
 requestAnimationFrame(resize);setTimeout(resize,300);
 </script>
+<script>(function(){function fit(){var st=window.navigator.standalone||matchMedia('(display-mode: standalone)').matches;var h=window.innerHeight;if(st){var sh=(screen.width>screen.height)===(innerWidth>innerHeight)?screen.height:screen.width;if(sh>h&&sh-h<120)h=sh}document.documentElement.style.setProperty('--apph',h+'px')}fit();addEventListener('resize',fit);addEventListener('orientationchange',function(){setTimeout(fit,300)});document.addEventListener('visibilitychange',fit)})();</script>
 </body>
 </html>

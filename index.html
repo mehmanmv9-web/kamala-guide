@@ -655,6 +655,24 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
 .pimg .realph~.phcred{display:none}.fphoto{height:180px;margin-bottom:6px}.fe span{position:relative}.fe .realph~span{display:none}
 .talkg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.talkg button{border-radius:22px;padding:14px 6px;background:color-mix(in srgb,var(--c) 22%,#fff);border:3px solid color-mix(in srgb,var(--c) 50%,#fff);display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 5px 0 color-mix(in srgb,var(--c) 55%,#fff)}
 .talkg button:active{transform:translateY(3px);box-shadow:0 2px 0 color-mix(in srgb,var(--c) 55%,#fff)}.talkg span{font-size:46px;line-height:1}.talkg b{font-size:14px;font-weight:900;color:#2b2140;text-align:center;line-height:1.15}
+.fmk{position:absolute;left:0;top:0;z-index:6;display:flex;flex-direction:column;align-items:center;margin:-22px 0 0 -22px;pointer-events:auto}
+.fav{width:44px;height:44px;border-radius:50%;background:#fff;border:3px solid #2f6fde;display:grid;place-items:center;font-size:24px;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.fmk.kid .fav{border-color:#ff7aa8}.fmk.me .fav{border-color:#1fa36b;animation:pulse 2s infinite}.fmk.old{opacity:.5;filter:grayscale(1)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,163,107,.5)}100%{box-shadow:0 0 0 16px rgba(31,163,107,0)}}
+.fnm{margin-top:3px;background:#0f1b2d;color:#fff;font-size:12px;font-weight:800;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.famsw{background:#fff;border-radius:18px;padding:12px 14px;display:grid;gap:10px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.fitem{display:flex;align-items:center;gap:12px;background:#fff;border-radius:18px;padding:10px 12px;margin-bottom:8px;box-shadow:0 2px 10px rgba(0,0,0,.05)}.fitem.old{opacity:.6}.fitem .fav.big{width:50px;height:50px;font-size:28px;flex:none}.fitem .it{flex:1;min-width:0}.fitem b{display:block;font-size:17px}.fitem span{font-size:13.5px;color:#56627a}
+.warn.red{background:#ffe9e7;border-color:#f3b3ab;color:#8a1f16}.warn.red .act{margin-top:8px;width:100%}
+.seacard{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border-radius:22px;padding:14px 16px;margin:12px 0;background:#fff;box-shadow:0 8px 22px rgba(15,27,45,.12);border-left:8px solid #9aa6b8}
+.seacard.g{border-left-color:#1fa36b;background:linear-gradient(120deg,#e9fbf2,#fff)}.seacard.y{border-left-color:#f2c12e;background:linear-gradient(120deg,#fff8dc,#fff)}.seacard.r{border-left-color:#d6453d;background:linear-gradient(120deg,#ffe9e7,#fff)}
+.sea-big{font-size:42px;line-height:1}.sea-l{flex:1;min-width:0}.sea-l b{display:block;font-size:19px}.sea-l small{display:block;font-size:13.5px;color:#3a4a66;margin-top:2px}.seacard .ar{font-size:24px;color:#9aa6b8}
+.seahead{display:flex;gap:12px;align-items:center;border-radius:20px;padding:14px;margin:6px 0 10px}.seahead.g{background:#e9fbf2}.seahead.y{background:#fff8dc}.seahead.r{background:#ffe9e7}.seahead h2{margin:0;font-size:22px}.seahead p{margin:4px 0 0;font-size:15px}
+.seagrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0}.seagrid div,.tides div,.flags div{background:#f4f7fb;border-radius:14px;padding:10px 6px;text-align:center}.seagrid span{font-size:22px}.seagrid b{display:block;font-size:19px}.seagrid small,.tides small,.flags small{font-size:12px;color:#56627a;display:block}
+.tides{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.tides b{display:block;font-size:20px}
+.hours{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;touch-action:pan-x}.hours div{flex:none;width:58px;background:#f4f7fb;border-radius:14px;padding:8px 4px;text-align:center;display:flex;flex-direction:column;gap:2px}.hours span{font-size:22px}.hours i{font-style:normal;font-size:11px;color:#119aa6}
+.flags{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:10px}.flags i{display:block;width:40px;height:26px;margin:0 auto 6px;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.2)}.flags b{font-size:13px;display:block}
+.seacard{box-sizing:border-box;width:calc(100% - 28px)!important;margin:12px 14px!important;display:flex!important}
+.kzban[data-go="fam"] .kbe,.kzban[data-go="halal"] .kbe,#talkbtn .kbe{font-size:30px;flex:none;width:58px;text-align:center}
 </style>
 </head>
 <body>
@@ -727,6 +745,8 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
         </div>
         <p class="wx-note">Конец ноября — переход к сухому сезону: обычно солнечно, бывают короткие сильные ливни на 1–2 часа. В декабре дождливых дней примерно 8. УФ‑индекс очень высокий с 11:00 до 15:00.</p>
       </div>
+      <button class="seacard" id="seacard"></button>
+      <button class="kzban" data-go="fam" style="background:linear-gradient(120deg,#2f6fde,#6a4bc4)"><span class="kbe">👨‍👩‍👧</span><span class="kt"><b>Где все наши</b><small id="famcount">Видеть друг друга на карте</small></span><span class="ar">›</span></button>
 
       <button class="kzban" id="instbtn" style="display:none;background:linear-gradient(120deg,#0f1b2d,#2a3f63);box-shadow:0 12px 26px rgba(15,27,45,.3)"><span style="font-size:26px;flex:none">📲</span><span class="kt"><b>Установить приложение</b><small>Иконка на экране и работа без интернета</small></span><span class="ar">›</span></button>
       <button class="kzban kidsban" data-go="kids"><span class="kbe">🧸</span><span class="kt"><b>Детская зона</b><small>Игры · раскраски · мультики · рация</small></span><span class="ar">›</span></button>
@@ -762,6 +782,7 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
         <svg id="svg" preserveAspectRatio="none"></svg>
         <div class="layer" id="lbls"></div>
         <div class="layer" id="mks"></div>
+        <div class="layer" id="famlay"></div>
       </div>
       <div class="chips" id="mapchips"></div>
       <div class="scale" id="scale"><span>200 м</span><div></div></div>
@@ -824,6 +845,11 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
     </section>
 
     <!-- KIDS -->
+    <section class="view" id="v-fam">
+      <h2 class="h">👨‍👩‍👧 Где все наши</h2><p class="sub">Все члены семьи на карте. Тревога, если ребёнок отошёл от взрослых</p>
+      <div id="fambody"></div>
+    </section>
+
     <section class="view" id="v-halal">
       <h2 class="h">🕌 Халяль и намаз</h2><p class="sub">Время азана, мечети и халяльная еда — с дорогой прямо на нашей карте</p>
       <div id="halbody"></div>
@@ -1191,9 +1217,9 @@ const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок'
 
 /* ---------- tabs / router ---------- */
 const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
-const EXTRA=['near','kz','tr','kids','halal','weed'];
+const EXTRA=['near','kz','tr','kids','halal','weed','fam'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
-function go(k,push=true){if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
+function go(k,push=true){if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
  if(push){try{if(history.state&&history.state.ov)history.replaceState({v:k},'','#'+k);else if(location.hash.slice(1)!==k)history.pushState({v:k},'','#'+k)}catch(e){try{location.hash=k}catch(_){}}}
@@ -1380,7 +1406,7 @@ function clamp(){k=Math.max(KMIN(),Math.min(KMAX(),k));cx=Math.max(0,Math.min(10
 function render(){clamp();const vw=Wd/k,vh=Hd/k,vx=cx-vw/2,vy=cy-vh/2;svgEl.setAttribute('viewBox',`${vx} ${vy} ${vw} ${vh}`);
  for(const m of mkEls){const p=P.find(x=>x.id===m.dataset.id);const[x,y]=prj(p.lat,p.lng);m.style.transform=`translate(${(x-vx)*k}px,${(y-vy)*k}px)`}
  document.querySelectorAll('.lbl').forEach(l=>{const[t,x,y]=LBL[+l.dataset.i];l.style.left=(x-vx)*k+'px';l.style.top=(y-vy)*k+'px'});
- mapEl.classList.toggle('zoomed',k>Wd/300);
+ mapEl.classList.toggle('zoomed',k>Wd/300);if(typeof famPlace==='function')famPlace(vx,vy);
  // scale bar
  const opts=[50,100,200,500,1000,2000];let best=opts[0];for(const o of opts){if(o/UNIT_M*k<=110)best=o}
  const sc=document.getElementById('scale');sc.querySelector('span').textContent=best>=1000?best/1000+' км':best+' м';sc.querySelector('div').style.width=best/UNIT_M*k+'px'}
@@ -1878,7 +1904,7 @@ function chSettings(){const link=chInvite();const wa='https://wa.me/?text='+enco
 async function chStart(){if(!CH.code||!CH.me)return;await setupCrypto(CH.code);if(CH.es)CH.es.close();
  const since=CH.msgs.length?Math.max(0,CH.msgs[CH.msgs.length-1].ts-60):'all';
  try{CH.es=new EventSource(`https://ntfy.sh/${CH.topic}/sse?since=${since}`);
-  CH.es.onopen=()=>{chStat();chFlush()};CH.es.onerror=()=>chStat(navigator.onLine===false?null:'🟡 переподключаюсь…');
+  CH.es.onopen=()=>{chStat();chFlush();if(typeof famConnect==='function'&&!FAM.es)famConnect()};CH.es.onerror=()=>chStat(navigator.onLine===false?null:'🟡 переподключаюсь…');
   CH.es.onmessage=async ev=>{try{const d=JSON.parse(ev.data);if(d.event!=='message'||!d.message)return;if(CH.msgs.some(m=>m.id===d.id))return;
    const m=await open_(d.message);if(!m)return;m.id=d.id;m.ts=d.time;if(m.k==='voice'){if(!d.attachment)return;m.url=d.attachment.url}
    CH.queue=CH.queue.filter(q=>q.m.cid!==m.cid);LS.set('ch_q',CH.queue);
@@ -2145,7 +2171,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v11';
+const SWV='kamala-v12';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
@@ -2315,6 +2341,99 @@ document.getElementById('wleaf').innerHTML=LEAF;renderWeed();
  addEventListener('popstate',()=>{if(!pushed){const v=location.hash.slice(1)||'home';if(!v.startsWith('join-'))go(v,false);return}pushed=false;if(full.classList.contains('on'))full.classList.remove('on');else if(sheet.classList.contains('on'))closeSheet();else if(KST.classList.contains('on'))kClose()});
  addEventListener('keydown',e=>{if(e.key==='Escape'){closeSheet();full.classList.remove('on')}})})();
 document.getElementById('talkbtn').onclick=()=>kTalk();
+/* ---------- 👨‍👩‍👧 Где все наши: семейный радар ---------- */
+const FAM={on:LS.get('fam_on',false),kid:LS.get('fam_kid',false),pos:LS.get('fam_pos',{}),es:null,watch:null,me:null,lastSent:0,alerted:{},hb:null};
+const famTopic=()=>CH.topic+'-g';
+const FRESH=10*60;
+async function famConnect(){if(!CH.code||!CH.me)return;if(!CH.key)await setupCrypto(CH.code);if(FAM.es)FAM.es.close();
+ try{FAM.es=new EventSource(`https://ntfy.sh/${famTopic()}/sse?since=20m`);
+  FAM.es.onmessage=async ev=>{try{const d=JSON.parse(ev.data);if(d.event!=='message'||!d.message)return;const m=await open_(d.message);if(!m||!m.uid)return;m.ts=d.time;
+   if(m.off){delete FAM.pos[m.uid]}else{const old=FAM.pos[m.uid];if(old&&old.ts>m.ts)return;FAM.pos[m.uid]=m}
+   LS.set('fam_pos',FAM.pos);famUpdate()}catch(e){}}}catch(e){}}
+async function famSend(extra){if(!CH.code||!CH.me||!CH.key)return;const p=FAM.me;if(!p&&!extra)return;
+ const m={uid:CH.me.uid,n:CH.me.n,a:CH.me.a,kid:FAM.kid,...(p||{}),...(extra||{})};
+ try{await fetch('https://ntfy.sh/'+famTopic(),{method:'POST',body:await seal(m)});FAM.lastSent=Date.now()}catch(e){}}
+function famShare(on){FAM.on=on;LS.set('fam_on',on);
+ if(on){if(!navigator.geolocation){toast('Телефон не даёт местоположение');return}
+  FAM.watch=navigator.geolocation.watchPosition(g=>{const p={lat:+g.coords.latitude.toFixed(6),lng:+g.coords.longitude.toFixed(6),acc:Math.round(g.coords.accuracy)};
+   const moved=FAM.me?hav(FAM.me,p):1e9;FAM.me=p;FAM.pos[CH.me.uid]={...p,uid:CH.me.uid,n:CH.me.n,a:CH.me.a,kid:FAM.kid,ts:Math.floor(Date.now()/1000)};
+   if(moved>25||Date.now()-FAM.lastSent>60000)famSend();famUpdate()},e=>{if(e.code===1){toast('Разрешите доступ к геопозиции в настройках браузера');famShare(false);famRender()}},{enableHighAccuracy:true,maximumAge:15000,timeout:20000});
+  clearInterval(FAM.hb);FAM.hb=setInterval(()=>{if(FAM.me&&Date.now()-FAM.lastSent>60000&&document.visibilityState==='visible')famSend()},20000)}
+ else{if(FAM.watch!=null)navigator.geolocation.clearWatch(FAM.watch);FAM.watch=null;clearInterval(FAM.hb);famSend({off:1});if(CH.me)delete FAM.pos[CH.me.uid];FAM.me=null;LS.set('fam_pos',FAM.pos);famUpdate()}}
+function famList(){const now=Date.now()/1000;return Object.values(FAM.pos).filter(m=>now-m.ts<3*3600).map(m=>({...m,fresh:now-m.ts<FRESH,ago:now-m.ts}))}
+const agoTxt=s=>s<60?'только что':s<3600?Math.round(s/60)+' мин назад':Math.round(s/3600)+' ч назад';
+function famCheck(){const L=famList().filter(m=>m.fresh),ad=L.filter(m=>!m.kid);if(!ad.length)return;
+ for(const k of L.filter(m=>m.kid)){const d=Math.min(...ad.map(a=>hav(a,k)));const key=k.uid;
+  if(d>300){if(!FAM.alerted[key]||Date.now()-FAM.alerted[key]>5*60000){FAM.alerted[key]=Date.now();
+    [0,350,700].forEach(t=>setTimeout(()=>beep(880,.2,'square'),t));try{navigator.vibrate&&navigator.vibrate([400,200,400,200,400])}catch(e){}
+    toast(`⚠️ ${k.a} ${k.n} отошёл(а) на ${Math.round(d)} м от взрослых!`)}}
+  else if(FAM.alerted[key])delete FAM.alerted[key]}}
+function famFar(){const L=famList().filter(m=>m.fresh),ad=L.filter(m=>!m.kid);if(!ad.length)return[];return L.filter(m=>m.kid).map(k=>({k,d:Math.min(...ad.map(a=>hav(a,k)))})).filter(x=>x.d>300)}
+let famVX=0,famVY=0;
+function famPlace(vx,vy){famVX=vx;famVY=vy;const lay=document.getElementById('famlay');if(!lay)return;
+ lay.querySelectorAll('.fmk').forEach(el=>{const m=FAM.pos[el.dataset.uid];if(!m)return;const[x,y]=prj(m.lat,m.lng);el.style.transform=`translate(${(x-vx)*k}px,${(y-vy)*k}px)`})}
+function famUpdate(){const lay=document.getElementById('famlay');const L=famList();
+ if(lay){lay.innerHTML=L.map(m=>`<div class="fmk ${m.fresh?'':'old'} ${m.kid?'kid':''} ${CH.me&&m.uid===CH.me.uid?'me':''}" data-uid="${m.uid}"><div class="fav">${m.a||'🙂'}</div><div class="fnm">${esc(m.n)}${m.fresh?'':' · '+agoTxt(m.ago)}</div></div>`).join('');famPlace(famVX,famVY)}
+ famCheck();famRender();const c=document.getElementById('famcount');if(c){const n=L.filter(m=>m.fresh).length;c.textContent=n?`Сейчас видно: ${n}`:'Включите, чтобы видеть друг друга'}}
+function famRender(){const el=document.getElementById('fambody');if(!el)return;
+ if(!CH.code||!CH.me){el.innerHTML=`<div class="warn">Сначала войдите в общий чат семьи: имя + код комнаты. Радар работает в той же закрытой комнате.</div><button class="act pri" style="width:100%;margin-top:12px;padding:16px" data-go="chat">💬 Войти в чат</button>`;return}
+ const L=famList().sort((a,b)=>(b.fresh-a.fresh)||a.n.localeCompare(b.n));const me=FAM.me;
+ el.innerHTML=`<div class="famsw"><label class="wauto"><input type="checkbox" id="famon" ${FAM.on?'checked':''}> 📍 <b>Показывать меня остальным</b></label>
+ <label class="wauto"><input type="checkbox" id="famkid" ${FAM.kid?'checked':''}> 🧒 Это телефон ребёнка (будет тревога, если он отойдёт дальше 300 м от взрослых)</label></div>
+ ${famFar().map(({k,d})=>`<div class="warn red">⚠️ <b>${k.a} ${esc(k.n)}</b> далеко от взрослых — ${Math.round(d)} м.<button class="act pri" data-famgo="${k.uid}">🧭 Дорога к нему</button></div>`).join('')}
+ <button class="act pri" id="famall" style="width:100%;padding:16px;margin:10px 0">🗺️ Показать всех на карте</button>
+ ${L.length?L.map(m=>{const d=me&&CH.me&&m.uid!==CH.me.uid?hav(me,m):null;const dh=hav(HOTEL,m);
+  return `<div class="fitem ${m.fresh?'':'old'}"><div class="fav big">${m.a||'🙂'}</div><div class="it"><b>${esc(m.n)}${CH.me&&m.uid===CH.me.uid?' (вы)':''}${m.kid?' · 🧒':''}</b><span>${m.fresh?'🟢 ':'⚪ '}${agoTxt(m.ago)} · ${d!=null?(d<1000?Math.round(d)+' м от вас':(d/1000).toFixed(1)+' км от вас'):(dh<1000?Math.round(dh)+' м от отеля':(dh/1000).toFixed(1)+' км от отеля')}</span></div>
+  ${CH.me&&m.uid===CH.me.uid?'':`<button class="callb" data-famgo="${m.uid}" aria-label="Дорога">🧭</button>`}</div>`}).join(''):'<p class="phone-line">Пока никто не включил «Показывать меня». Попросите всех открыть этот экран и включить.</p>'}
+ <p class="phone-line">Работает, пока сайт открыт и есть интернет. Место видят только те, кто в вашей комнате, оно зашифровано и хранится на сервере 20 минут. На iPhone при выключенном экране место не обновляется — точка станет серой.</p>`;
+ document.getElementById('famon').onchange=e=>famShare(e.target.checked);
+ document.getElementById('famkid').onchange=e=>{FAM.kid=e.target.checked;LS.set('fam_kid',FAM.kid);if(FAM.on)famSend()};
+ document.getElementById('famall').onclick=()=>{const L2=famList().filter(m=>m.fresh);go('map');setTimeout(()=>{resize();if(L2.length)fitTo(L2.concat([HOTEL]));else toast('Пока никого не видно')},250)}}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-famgo]');if(!b)return;const m=FAM.pos[b.dataset.famgo];if(m)routeTo({lat:m.lat,lng:m.lng,n:m.n},'К '+m.a+' '+m.n)});
+document.getElementById('famlay')&&document.getElementById('famlay').addEventListener('click',e=>{const f=e.target.closest('.fmk');if(!f)return;const m=FAM.pos[f.dataset.uid];if(m&&(!CH.me||m.uid!==CH.me.uid))routeTo({lat:m.lat,lng:m.lng,n:m.n},'К '+m.a+' '+m.n)});
+setInterval(famUpdate,30000);
+if(CH.code&&CH.me){famConnect();if(FAM.on)famShare(true)}
+/* ---------- 🌊 Можно ли сегодня купаться? (Open‑Meteo, бесплатно) ---------- */
+const SEA_URL='https://api.open-meteo.com/v1/forecast?latitude=7.9606&longitude=98.2860&hourly=temperature_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_gusts_10m,uv_index&daily=uv_index_max&timezone=Asia%2FBangkok&forecast_days=2&wind_speed_unit=kmh';
+const MAR_URL='https://marine-api.open-meteo.com/v1/marine?latitude=7.96&longitude=98.25&hourly=wave_height,wave_period,sea_level_height_msl,sea_surface_temperature&timezone=Asia%2FBangkok&forecast_days=2';
+let SEA=LS.get('sea',null);
+async function seaFetch(){if(navigator.onLine===false)return;try{const[a,b]=await Promise.all([fetch(SEA_URL).then(r=>r.json()),fetch(MAR_URL).then(r=>r.json()).catch(()=>null)]);if(!a||!a.hourly)return;SEA={w:a,m:b,at:Date.now()};LS.set('sea',SEA);seaRender()}catch(e){}}
+function seaNowIdx(times){const t=bkk();const key=`${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}T${pad(t.getHours())}:00`;const i=times.indexOf(key);return i<0?0:i}
+function seaEval(){if(!SEA)return null;const w=SEA.w.hourly,m=SEA.m&&SEA.m.hourly;const i=seaNowIdx(w.time);const r=n=>[...Array(n).keys()].map(j=>i+j).filter(j=>j<w.time.length);
+ const next3=r(4);const wave=m?Math.max(...next3.map(j=>m.wave_height[seaNowIdx(m.time)+j-i]??0)):null;const gust=Math.max(...next3.map(j=>w.wind_gusts_10m[j]||0));
+ const storm=next3.some(j=>[95,96,99].includes(w.weather_code[j]));const rainHeavy=next3.some(j=>(w.precipitation[j]||0)>=4);
+ let lvl='g',why=[];
+ if(storm){lvl='r';why.push('⛈️ гроза')}
+ if(wave!=null&&wave>=1.5){lvl='r';why.push(`🌊 волны ${wave.toFixed(1)} м`)}else if(wave!=null&&wave>=0.8){if(lvl!=='r')lvl='y';why.push(`🌊 волны ${wave.toFixed(1)} м`)}
+ if(gust>=45){lvl='r';why.push(`💨 порывы ${Math.round(gust)} км/ч`)}else if(gust>=30){if(lvl!=='r')lvl='y';why.push(`💨 ветер до ${Math.round(gust)} км/ч`)}
+ if(rainHeavy&&lvl==='g'){lvl='y';why.push('🌧️ сильный дождь')}
+ const uvNow=w.uv_index[i]||0;const today=w.time[i].slice(0,10);const uvHrs=w.time.map((t,j)=>[t,w.uv_index[j]]).filter(([t,u])=>t.startsWith(today)&&u>=8).map(([t])=>+t.slice(11,13));
+ const sst=m&&m.sea_surface_temperature?m.sea_surface_temperature[seaNowIdx(m.time)]:null;
+ // приливы: локальные экстремумы уровня моря на ближайшие 24 ч
+ let tides=[];if(m&&m.sea_level_height_msl){const mi=seaNowIdx(m.time),h=m.sea_level_height_msl;for(let j=Math.max(1,mi);j<Math.min(h.length-1,mi+24);j++){if(h[j]==null)continue;if(h[j]>h[j-1]&&h[j]>=h[j+1])tides.push(['high',m.time[j]]);if(h[j]<h[j-1]&&h[j]<=h[j+1])tides.push(['low',m.time[j]])}}
+ return{lvl,why,wave,gust,uvNow,uvHrs,sst,tides,temp:w.temperature_2m[i],rainP:w.precipitation_probability[i],code:w.weather_code[i],at:SEA.at,i}}
+const SEA_T={g:['🟢','Можно купаться','Море спокойное. Купайтесь у спасателей, рядом с детьми.'],y:['🟡','Осторожно','Детям — только у берега, по пояс, и рядом со взрослым.'],r:['🔴','Сегодня купаться опасно','В воду не заходить. Можно играть на песке и в бассейне.']};
+function seaRender(){const el=document.getElementById('seacard');if(!el)return;const e=seaEval();
+ if(!e){el.innerHTML=`<div class="sea-l">🌊 <b>Можно ли сегодня купаться?</b><small>Откройте сайт с интернетом — покажем море и погоду</small></div>`;el.className='seacard';return}
+ const [ic,t,d]=SEA_T[e.lvl];const old=(Date.now()-e.at)/3600000;
+ el.className='seacard '+e.lvl;el.innerHTML=`<div class="sea-big">${ic}</div><div class="sea-l"><b>${t}</b><small>${e.why.length?e.why.join(' · '):'волны '+(e.wave!=null?e.wave.toFixed(1)+' м':'—')+' · ветер слабый'}</small><small>☀️ УФ ${Math.round(e.uvNow)}${e.uvHrs.length?` · в тень ${Math.min(...e.uvHrs)}:00–${Math.max(...e.uvHrs)+1}:00`:''}${e.sst?` · вода ${Math.round(e.sst)}°`:''}${old>3?` · данные ${Math.round(old)} ч назад`:''}</small></div><span class="ar">›</span>`}
+function seaSheet(){const e=seaEval();if(!e){toast('Нужен интернет, чтобы узнать погоду на море');seaFetch();return}const[ic,t,d]=SEA_T[e.lvl];const w=SEA.w.hourly,m=SEA.m&&SEA.m.hourly;
+ const hrs=[...Array(12).keys()].map(j=>e.i+j).filter(j=>j<w.time.length);const mi=m?seaNowIdx(m.time)-e.i:0;
+ const wic=c=>c>=95?'⛈️':c>=80?'🌦️':c>=61?'🌧️':c>=51?'🌦️':c>=45?'🌫️':c>=3?'☁️':c>=1?'⛅':'☀️';
+ sheet.innerHTML=`<div class="grab"></div><div class="seahead ${e.lvl}"><div style="font-size:54px">${ic}</div><div><h2>${t}</h2><p>${d}</p></div></div>
+ ${e.why.length?`<div class="warn ${e.lvl==='r'?'red':''}">${e.why.join(' · ')}</div>`:''}
+ <div class="seagrid"><div><span>🌊</span><b>${e.wave!=null?e.wave.toFixed(1)+' м':'—'}</b><small>волны</small></div><div><span>💨</span><b>${Math.round(e.gust)}</b><small>км/ч порывы</small></div><div><span>🌡️</span><b>${Math.round(e.temp)}°</b><small>воздух</small></div><div><span>🏊</span><b>${e.sst?Math.round(e.sst)+'°':'—'}</b><small>вода</small></div><div><span>☀️</span><b>${Math.round(e.uvNow)}</b><small>УФ сейчас</small></div><div><span>☔</span><b>${e.rainP??0}%</b><small>дождь</small></div></div>
+ ${e.uvHrs.length?`<div class="warn">🧴 Солнце очень сильное с <b>${Math.min(...e.uvHrs)}:00 до ${Math.max(...e.uvHrs)+1}:00</b>. Детям — крем SPF 50 каждые 2 часа, панамка, футболка в воде, в это время лучше в тень.</div>`:''}
+ ${e.tides.length?`<div class="sec">🌙 Прилив и отлив</div><div class="tides">${e.tides.slice(0,4).map(([k,t])=>`<div><span>${k==='high'?'⬆️':'⬇️'}</span><b>${t.slice(11,16)}</b><small>${k==='high'?'прилив — вода у берега выше':'отлив — берег шире, ракушки'}</small></div>`).join('')}</div>`:''}
+ <div class="sec">🕒 По часам</div><div class="hours">${hrs.map(j=>`<div><small>${w.time[j].slice(11,13)}:00</small><span>${wic(w.weather_code[j])}</span><b>${Math.round(w.temperature_2m[j])}°</b><i>${m&&m.wave_height[j+mi]!=null?'🌊'+m.wave_height[j+mi].toFixed(1):''}</i></div>`).join('')}</div>
+ <div class="sec">🚩 Флаги на пляже — смотрите всегда</div>
+ <div class="flags"><div><i style="background:#d6453d"></i><b>Красный</b><small>купаться нельзя</small></div><div><i style="background:#f2c12e"></i><b>Жёлтый</b><small>осторожно, течения</small></div><div><i style="background:linear-gradient(180deg,#d6453d 50%,#f2c12e 50%)"></i><b>Красно‑жёлтый</b><small>зона спасателей — купаться здесь</small></div></div>
+ <div class="warn">🌀 <b>Если затянуло течением</b>: не плыть против него к берегу. Плыть вдоль берега, пока течение не отпустит, потом к берегу. Поднять руку и звать на помощь.</div>
+ <p class="foot">Прогноз: Open‑Meteo · обновлено ${new Date(e.at).toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}. Решение всегда за взрослыми и флагами на пляже.</p>`;
+ sheet.classList.add('on');scrim.classList.add('on')}
+document.addEventListener('click',e=>{if(e.target.closest('#seacard'))seaSheet()});
+seaRender();seaFetch();setInterval(()=>{seaRender();if(!SEA||Date.now()-SEA.at>30*60000)seaFetch()},5*60000);
+addEventListener('online',()=>{if(!SEA||Date.now()-SEA.at>30*60000)seaFetch()});
 /* ---------- init ---------- */
 renderChips();applyFilter();renderList();renderWeek();todayStrip();tick();
 

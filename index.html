@@ -861,7 +861,7 @@ body{background:linear-gradient(180deg,#fff8ec 0%,#f2fbfb 100%)}
     </section>
 
     <section class="view" id="v-weed">
-      <div class="weedhero"><div class="wleaf" id="wleaf"></div><div><h2>Магазины каннабиса</h2><p>Ближайшие к отелю · только для взрослых</p></div></div>
+      <div class="weedhero"><div class="wleaf" id="wleaf"></div><div><h2>Мари Ванна</h2><p>Магазины рядом с отелем · только для взрослых</p></div></div>
       <div id="weedbody"></div>
     </section>
 
@@ -1233,7 +1233,7 @@ const short=p=>({fs:'FantaSea',cm:'Carnival Magic',mkt:'Ночной рынок'
 const TABS=[['home','Главная','home'],['map','Карта','map'],['chat','Чат','chat'],['fun','Развлечения','fun'],['sos','SOS','sos'],['guide','Гид','info']];
 const EXTRA=['near','kz','tr','kids','halal','weed','fam'];
 document.getElementById('tabs').innerHTML=TABS.map(([k,n,i])=>`<button class="tab ${k==='sos'?'sos':''}" data-tab="${k}">${ic(i)}<span>${n}</span></button>`).join('');
-function go(k,push=true){if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
+function go(k,push=true){try{if(sheet.classList.contains('on'))closeSheet();if(full.classList.contains('on'))full.classList.remove('on');if(KST.classList.contains('on')&&k!=='kids')kClose()}catch(e){}if(k==='fam'&&typeof famRender==='function')setTimeout(famRender,0);if(k==='weed'&&!weedOK){pinPad();return}if(k==='halal')setTimeout(renderHalal,0);if(k!=='map'&&typeof clearRoute==='function'){}if(!TABS.some(t=>t[0]===k)&&!EXTRA.includes(k))k='home';document.getElementById('app').classList.toggle('home',k==='home');document.getElementById('app').classList.toggle('inchat',k==='chat');document.querySelector('.views').scrollTop=0;
  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+k));
  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
  if(push){try{if(history.state&&history.state.ov)history.replaceState({v:k},'','#'+k);else if(location.hash.slice(1)!==k)history.pushState({v:k},'','#'+k)}catch(e){try{location.hash=k}catch(_){}}}
@@ -1568,7 +1568,7 @@ function renderHome(){const t=bkk();const hr=t.getHours()+t.getMinutes()/60;cons
   const s=td?(on?'Открыто сейчас':'Сегодня '+p.h.f+'–'+p.h.t):'Сегодня выходной · '+nextOpen(p,t);
   return `<button class="ev" data-open="${id}" style="background:${bg};${td?'':'opacity:.72'}"><small>${CAT[p.cat].n}</small><b>${short(p)==='Клиника'?'Клиника Bangkok':p.name}</b><span>${p.days||p.sub}</span><span class="st2">${s}</span></button>`}).join('');
 }
-const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Каннабис','leaf','#3d7a3a']];
+const TILES=[['map','Карта','map','#0f1b2d'],['kz','Казахстан','flag','#00AFCA'],['tr','Перевод','tr','#e0567f'],['fun','Развле\u00adчения','fun','#7a52d1'],['guide:kit','Аптечка','kit','#1f9d6b'],['guide:phr','Фразы','chat','#e9822e'],['guide:rules','Важно','info','#d6453d'],['kids','Дети','kids','#e0567f'],['halal','Халяль','moon','#0e8a5f'],['chat','Чат','chat','#2f6fde'],['fun:beach','Пляжи','beach','#119aa6'],['weed','Мари Ванна','leaf','#3d7a3a']];
 document.getElementById('tiles').innerHTML=TILES.map(([g,n,i,c])=>`<button class="tile" data-go="${g}"><span class="ti" style="--c:${c};--bg:color-mix(in srgb,${c} 11%,#fff)">${g==='kz'?'<img src="img/kz-flag.svg" class="tflag" alt="Флаг Казахстана">':ic(i)}</span>${n}</button>`).join('');
 document.getElementById('tiles').style.gridTemplateColumns='repeat(4,minmax(0,1fr))';
 const near=[['ph1','Аптека'],['s711a','7‑Eleven'],['bpc','Клиника'],['kb','Пляж']];
@@ -2185,7 +2185,7 @@ function prayTimes(y,m,d,lat,lng,tz=7){const R=Math.PI/180,dsin=x=>Math.sin(x*R)
  let t={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
  for(let i=0;i<2;i++){const h=t;t={fajr:ang(18,h.fajr,1),sunrise:ang(.833,h.sunrise,1),dhuhr:noon(h.dhuhr),asr:asr(h.asr),maghrib:ang(.833,h.maghrib,0),isha:ang(17,h.isha,0)}}
  const adj=tz-lng/15;const o={};for(const k in t)o[k]=t[k]+adj;return o}
-const SWV='kamala-v14';
+const SWV='kamala-v15';
 const PRN=[['fajr','Фаджр','Таң','🌅'],['sunrise','Восход','Күн шығуы','☀️'],['dhuhr','Зухр','Бесін','🕛'],['asr','Аср','Екінді','🌤️'],['maghrib','Магриб','Ақшам','🌇'],['isha','Иша','Құптан','🌙']];
 const hm=h=>{const mm=Math.round(h*60)%1440;return pad(Math.floor(mm/60))+':'+pad(mm%60)};
 function todayPT(off=0){const t=bkk();t.setDate(t.getDate()+off);return prayTimes(t.getFullYear(),t.getMonth()+1,t.getDate(),HOTEL.lat,HOTEL.lng)}
